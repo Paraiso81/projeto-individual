@@ -1,48 +1,27 @@
-# ⚽ Fechou Time
+# ⚽ Minha Temporada
 
-**Projeto Individual — São Paulo Tech School | 2026**
+Diário de temporada para jogadores de futebol: crie temporadas, registre gols e assistências por partida e acompanhe sua evolução em um dashboard.
 
-## 📌 Sobre o projeto
+Projeto Individual (CCOK, 2026) de **Pedro Ramos Paraiso**.
 
-O **Fechou Time** é uma aplicação web desenvolvida para facilitar a organização de partidas de futebol entre amigos. O projeto surgiu da dificuldade de controlar confirmações de presença e pagamentos da quadra por meio de listas compartilhadas em grupos de WhatsApp.
+## Sobre
 
-A plataforma centraliza as informações de cada partida, permitindo que o organizador acompanhe os jogadores confirmados, controle os pagamentos e sorteie times mais equilibrados de acordo com o nível dos participantes.
+Jogo futebol desde os 8 anos e percebi que, apesar de jogar toda semana, não tinha números sobre o meu desempenho. O Minha Temporada nasceu para resolver isso: registrar as partidas e transformar os dados em indicadores e gráficos.
 
-## 🎯 Objetivo
 
-Desenvolver uma plataforma simples e intuitiva que torne a organização das partidas de futebol mais prática, organizada e transparente.
+## Tecnologias
 
-## 🚀 Funcionalidades
+HTML, CSS, JavaScript, Node.js e MySQL.
 
-- **Cadastro de jogadores:** registro de nome, posição e nível de habilidade de 1 a 5.
-- **Confirmação de presença:** controle dos jogadores que participarão de cada partida.
-- **Controle de pagamentos:** acompanhamento de quem já pagou e de quem ainda deve sua parte da quadra.
-- **Dashboard:** visualização das informações das partidas, participação dos jogadores e valores pendentes.
-- **Sorteio de times:** distribuição dos jogadores em equipes com níveis de habilidade equilibrados.
-- **Cálculos matemáticos:** cálculo da média de habilidade por time e divisão do valor da quadra entre os participantes.
+## Como executar
 
-## 🧮 Conceitos aplicados
+```bash
+git clone https://github.com/paraiso81/projeto-individual.git
+cd projeto-individual
+npm install
+npm start
+```
 
-O desenvolvimento do projeto permite aplicar conceitos fundamentais de programação e matemática, como:
+## Autor
 
-- Variáveis, condicionais e estruturas de repetição.
-- Vetores e laços de repetição (`for`).
-- Manipulação e organização de dados.
-- Cálculo de médias e divisão de valores.
-- Algoritmos para sorteio e balanceamento de equipes.
-
-## 💡 Justificativa
-
-A utilização de listas de presença em grupos de WhatsApp pode gerar informações desatualizadas, dúvidas sobre pagamentos e dificuldades na formação das equipes.
-
-O Fechou Time busca solucionar esses problemas centralizando as informações em um único ambiente, facilitando o gerenciamento das partidas e proporcionando uma experiência melhor para todos os participantes.
-
-## 👨‍💻 Autor
-
-**Pedro Ramos Paraiso**
-
-Projeto individual desenvolvido para a São Paulo Tech School, em 2026.
-
----
-
-*Fechou Time — Confirmou, pagou, jogou!* ⚽
+Pedro Ramos Paraiso, RA 04262029
