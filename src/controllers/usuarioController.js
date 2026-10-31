@@ -42,8 +42,35 @@ async function cadastrar(req, res) {
     });
 }
 
+async function login(req, res) {
+  const data = req.body;
+
+  const email = data.email;
+  const senha = data.senha;
+
+  if (email == undefined || senha == undefined)
+    return res
+      .status(400)
+      .send("Dados undefined, revise os dados preenchidos!");
+
+  if (!email.includes("@")) return res.status(400).send("email inválido.");
+
+  await usuarioModel.login(email, senha).then(function (response) {
+    if (response.length > 0) {
+      const data = response[0];
+      let usuarioId = data.id;
+      let nome = data.nome;
+      let email = data.email;
+      return res.status(200).json({ id: usuarioId, nome, email });
+    } else {
+      return res.status(403).send("Email ou senha inválido.");
+    }
+  });
+}
+
 module.exports = {
   cadastrar,
+  login,
   senhaValida,
 };
 

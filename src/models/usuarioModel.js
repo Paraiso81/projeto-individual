@@ -14,7 +14,14 @@ function consultarUsuario(email) {
   return database.executar(sql, [email]);
 }
 
+function login(email, senha) {
+  var sql = `SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?`;
+
+  return database.executar(sql, [email, senha]);
+}
+
 module.exports = {
   cadastrar,
+  login,
   consultarUsuario,
 };
