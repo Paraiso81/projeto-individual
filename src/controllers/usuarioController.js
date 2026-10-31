@@ -1,4 +1,3 @@
-const { response } = require("express");
 var usuarioModel = require("../models/usuarioModel.js");
 
 async function cadastrar(req, res) {
@@ -74,6 +73,11 @@ async function atualizarUsuario(req, res) {
   const usuarioId = req.params.usuarioId;
   const nome = data.nome;
   const email = data.email;
+  // adicionar uma verificação se o usuário existe antes de fazer o update;
+  const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
+  console.log(usuarioExiste, "user existe");
+  if (usuarioExiste.length <= 0)
+    return res.status(404).send("Erro ao atualizar usuário.");
 
   if (usuarioId == undefined)
     return res.status(400).send("Erro ao identificar usuário.");

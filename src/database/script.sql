@@ -36,3 +36,5 @@ fk_temporada INT NOT NULL,
 CONSTRAINT ck_fk_temporada 
 	FOREIGN KEY (fk_temporada) REFERENCES temporada (id)
 );
+
+SELECT * FROM usuario;
