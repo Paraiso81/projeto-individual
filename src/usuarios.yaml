@@ -1,0 +1,108 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: usuarios
+meta:
+  id: wrk_237ee40dcc8448d3b6265f770aed54cc
+  created: 1793401719803
+  modified: 1793401719803
+  description: ""
+collection:
+  - url: "{{ _.LOCAL_URL }}/usuarios/cadastrar"
+    name: cadastrar
+    meta:
+      id: req_0b6b6ab7ac47490e9c99294437c9653e
+      created: 1793401727279
+      modified: 1793407643184
+      isPrivate: false
+      description: ""
+      sortKey: -1793401727279
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "Pedro Paraiso",
+        	"email": "pedro04@gmail.com",
+        	"senha": "PEdro123@"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/usuarios/login"
+    name: login
+    meta:
+      id: req_cc666461f9c142d6bddf30a3f121a2dc
+      created: 1793408873760
+      modified: 1793408950466
+      isPrivate: false
+      description: ""
+      sortKey: -1793408873760
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "pedro04@gmail.com",
+        	"senha": "PEdro123@"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/usuarios/3"
+    name: atualizar
+    meta:
+      id: req_b2a7dffc19a7457eb2d96c5f481a073d
+      created: 1793411046499
+      modified: 1793452254610
+      isPrivate: false
+      description: ""
+      sortKey: -1793411046499
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "Pedro Ramos Paraiso"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_cc57a43c3c184054881a648ea50139f83d05d4e0
+    created: 1793401719807
+    modified: 1793401719807
+environments:
+  name: Base Environment
+  meta:
+    id: env_cc57a43c3c184054881a648ea50139f83d05d4e0
+    created: 1793401719806
+    modified: 1793405982070
+    isPrivate: false
+  data:
+    LOCAL_URL: http://localhost:3333

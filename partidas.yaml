@@ -1,0 +1,72 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: partidas
+meta:
+  id: wrk_2bcefe959d6945009e7d6417f26e3088
+  created: 1793472747040
+  modified: 1793472747040
+  description: ""
+collection:
+  - url: "{{ _.LOCAL_URL }}/partidas"
+    name: createPartida
+    meta:
+      id: req_269024fd45c34c6f8032ea20d8227dc2
+      created: 1793472750016
+      modified: 1793472864868
+      isPrivate: false
+      description: ""
+      sortKey: -1793472750016
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"usuarioId": 3,
+        	"temporadaId": 1,
+        	"dt_partida": "2026-10-10",
+        	"adversario": "Camisa 10 FC"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/partidas/temporada/1/1/3"
+    name: buscarPartida
+    meta:
+      id: req_42e36178839f4b29833d2430daa9fd8e
+      created: 1793477482114
+      modified: 1793477885058
+      isPrivate: false
+      description: ""
+      sortKey: -1793477482114
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_b3c3f80f03c9d468ad6980ecb9a139efd3d21804
+    created: 1793472747045
+    modified: 1793472747045
+environments:
+  name: Base Environment
+  meta:
+    id: env_b3c3f80f03c9d468ad6980ecb9a139efd3d21804
+    created: 1793472747044
+    modified: 1793472769516
+    isPrivate: false
+  data:
+    LOCAL_URL: http://localhost:3333
