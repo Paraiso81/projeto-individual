@@ -16,6 +16,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var temporadaRouter = require("./src/routes/temporadas");
+var partidasRouter = require("./src/routes/partidas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +27,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/temporadas", temporadaRouter);
+app.use("/partidas", partidasRouter);
 
 app.listen(PORTA_APP, function () {
   console.log(`
