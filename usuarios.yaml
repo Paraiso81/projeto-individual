@@ -14,7 +14,7 @@ collection:
       created: 1793401727279
       modified: 1793407643184
       isPrivate: false
-      description: ""
+      description: POST /usuarios/cadastrar
       sortKey: -1793401727279
     method: POST
     body:
@@ -43,7 +43,7 @@ collection:
       created: 1793408873760
       modified: 1793408950466
       isPrivate: false
-      description: ""
+      description: POST /usuarios/login
       sortKey: -1793408873760
     method: POST
     body:
@@ -65,13 +65,13 @@ collection:
         store: true
       rebuildPath: true
   - url: "{{ _.LOCAL_URL }}/usuarios/3"
-    name: atualizar
+    name: atualizarUsuario
     meta:
       id: req_b2a7dffc19a7457eb2d96c5f481a073d
       created: 1793411046499
-      modified: 1793452254610
+      modified: 1793483580000
       isPrivate: false
-      description: ""
+      description: PATCH /usuarios/<usuarioId>
       sortKey: -1793411046499
     method: PATCH
     body:
@@ -83,6 +83,24 @@ collection:
     headers:
       - name: Content-Type
         value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/usuarios/"
+    name: deletarUsuario
+    meta:
+      id: req_1e2d3c4b5a6f7e8d9c0b1a2f3e4d5c6b
+      created: 1793483950000
+      modified: 1793484386797
+      isPrivate: false
+      description: DELETE /usuarios/<usuarioId>
+      sortKey: -1793483950000
+    method: DELETE
     settings:
       renderRequestBody: true
       encodeUrl: true
