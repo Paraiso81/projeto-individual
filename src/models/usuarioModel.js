@@ -7,14 +7,59 @@ function cadastrar(nome, email, senha) {
   return database.executar(sql, [nome, email, senha]);
 }
 
-function consultarUsuario(email) {
-  console.log("consultando email", email);
-  var sql = `SELECT email FROM usuario WHERE email = ?`;
+function login(email, senha) {
+  var sql = `SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?`;
 
-  return database.executar(sql, [email]);
+  return database.executar(sql, [email, senha]);
+}
+
+function consultarUsuario(id, email) {
+  const campos = [];
+  const valores = [];
+
+  if (id !== undefined) {
+    campos.push("id = ?");
+    valores.push(id);
+    console.log("consultando por id", id);
+  } else {
+    campos.push("email = ?");
+    valores.push(email);
+    console.log("consultando email", email);
+  }
+  var sql = `SELECT id, email FROM usuario WHERE ${campos.join(",")}`;
+
+  return database.executar(sql, valores);
+}
+
+async function atualizarUsuario(usuarioId, { nome, email }) {
+  const campos = [];
+  const valores = [];
+
+  if (nome !== undefined) {
+    campos.push("nome = ?");
+    valores.push(nome);
+  }
+
+  if (email !== undefined) {
+    campos.push("email = ?");
+    valores.push(email);
+  }
+  valores.push(usuarioId);
+  var sqlUpdate = `UPDATE usuario SET ${campos.join(",")} WHERE id = ?`;
+  var sqlSelect = `SELECT id, nome, email FROM usuario WHERE id = ?`;
+
+  const update = await database.executar(sqlUpdate, valores);
+
+  if (update) {
+    return database.executar(sqlSelect, [usuarioId]);
+  }
+
+  return;
 }
 
 module.exports = {
   cadastrar,
+  login,
+  atualizarUsuario,
   consultarUsuario,
 };

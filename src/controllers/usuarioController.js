@@ -42,8 +42,70 @@ async function cadastrar(req, res) {
     });
 }
 
+async function login(req, res) {
+  const data = req.body;
+
+  const email = data.email;
+  const senha = data.senha;
+
+  if (email == undefined || senha == undefined)
+    return res
+      .status(400)
+      .send("Dados undefined, revise os dados preenchidos!");
+
+  if (!email.includes("@")) return res.status(400).send("email inválido.");
+
+  await usuarioModel.login(email, senha).then(function (response) {
+    if (response.length > 0) {
+      const data = response[0];
+      let usuarioId = data.id;
+      let nome = data.nome;
+      let email = data.email;
+      return res.status(200).json({ id: usuarioId, nome, email });
+    } else {
+      return res.status(403).send("Email ou senha inválido.");
+    }
+  });
+}
+
+async function atualizarUsuario(req, res) {
+  const data = req.body;
+  const usuarioId = req.params.usuarioId;
+  const nome = data.nome;
+  const email = data.email;
+  // adicionar uma verificação se o usuário existe antes de fazer o update;
+  const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
+  console.log(usuarioExiste, "user existe");
+  if (usuarioExiste.length <= 0)
+    return res.status(404).send("Erro ao atualizar usuário.");
+
+  if (usuarioId == undefined)
+    return res.status(400).send("Erro ao identificar usuário.");
+
+  if (nome.length < 3) return res.status(400).send("Nome muito curto.");
+
+  if (email !== undefined && !email.includes("@"))
+    return res.status(400).send("email inválido.");
+
+  usuarioModel
+    .atualizarUsuario(usuarioId, { nome, email })
+    .then(function (response) {
+      if (response.length > 0) {
+        const data = response[0];
+        console.log("response data", data);
+        const usuarioId = data.id;
+        const nome = data.nome;
+        const email = data.email;
+
+        return res.status(200).json({ id: usuarioId, nome, email });
+      }
+    });
+}
+
 module.exports = {
   cadastrar,
+  login,
+  atualizarUsuario,
   senhaValida,
 };
 
