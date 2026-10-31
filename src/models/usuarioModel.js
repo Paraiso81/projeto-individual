@@ -2,10 +2,19 @@ var database = require("../database/config.js");
 
 function cadastrar(nome, email, senha) {
   console.log("acessado o model user", nome, email, senha);
-  var sql = `
-    INSERT INTO (nome, email, senha) VALUES (?, ?, ?)
-    [${nome}, ${email}, ${senha}]
-    `;
+  var sql = `INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)`;
 
-  return database.executar(sql);
+  return database.executar(sql, [nome, email, senha]);
 }
+
+function consultarUsuario(email) {
+  console.log("consultando email", email);
+  var sql = `SELECT email FROM usuario WHERE email = ?`;
+
+  return database.executar(sql, [email]);
+}
+
+module.exports = {
+  cadastrar,
+  consultarUsuario,
+};
