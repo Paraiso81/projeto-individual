@@ -11,4 +11,7 @@ router.post("/login", function (req, res) {
   usuariosController.login(req, res);
 });
 
+router.patch("/:usuarioId", function (req, res) {
+  usuariosController.atualizarUsuario(req, res);
+});
 module.exports = router;

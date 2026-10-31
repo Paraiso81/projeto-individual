@@ -1,3 +1,4 @@
+const { response } = require("express");
 var usuarioModel = require("../models/usuarioModel.js");
 
 async function cadastrar(req, res) {
@@ -68,9 +69,39 @@ async function login(req, res) {
   });
 }
 
+async function atualizarUsuario(req, res) {
+  const data = req.body;
+  const usuarioId = req.params.usuarioId;
+  const nome = data.nome;
+  const email = data.email;
+
+  if (usuarioId == undefined)
+    return res.status(400).send("Erro ao identificar usuário.");
+
+  if (nome.length < 3) return res.status(400).send("Nome muito curto.");
+
+  if (email !== undefined && !email.includes("@"))
+    return res.status(400).send("email inválido.");
+
+  usuarioModel
+    .atualizarUsuario(usuarioId, { nome, email })
+    .then(function (response) {
+      if (response.length > 0) {
+        const data = response[0];
+        console.log("response data", data);
+        const usuarioId = data.id;
+        const nome = data.nome;
+        const email = data.email;
+
+        return res.status(200).json({ id: usuarioId, nome, email });
+      }
+    });
+}
+
 module.exports = {
   cadastrar,
   login,
+  atualizarUsuario,
   senhaValida,
 };
 
