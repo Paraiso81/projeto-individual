@@ -1,0 +1,70 @@
+.section-hero {
+  height: 90vh;
+  width: 100%;
+  background-image:
+    linear-gradient(rgba(13, 19, 33, 0.8), rgba(13, 19, 33, 0.8)),
+    url("../assets/bg-main.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.kicker-hero {
+  color: var(--cor-turf-green);
+  text-align: center;
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.hero-titulo {
+  color: var(--cor-branco);
+  text-align: center;
+  font-size: var(--fs-h1);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 62px;
+  max-width: 790px;
+}
+
+.hero-subtitulo {
+  color: var(--cor-texto-claro-apoio);
+  text-align: center;
+  font-size: var(--fs-lead);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 29px;
+  max-width: 570px;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
+.btn-comecar-temporada {
+  border-radius: var(--raio-botao);
+  padding: 15px 26px;
+  background-color: var(--cor-turf-green);
+  color: var(--cor-branco);
+  font-style: normal;
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: normal;
+}
+
+.btn-tenho-conta {
+  border-radius: var(--raio-botao);
+  padding: 15px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--cor-branco);
+}
