@@ -57,9 +57,21 @@ async function atualizarUsuario(usuarioId, { nome, email }) {
   return;
 }
 
+async function deletarUsuario(usuarioId) {
+  var sqlPartidas = `DELETE p FROM partida p JOIN temporada t ON t.id = p.fk_temporada WHERE t.fk_usuario = ?`;
+  await database.executar(sqlPartidas, [usuarioId]);
+
+  var sqlTemporadas = `DELETE FROM temporada WHERE fk_usuario = ?`;
+  await database.executar(sqlTemporadas, [usuarioId]);
+
+  var sqlUsuario = `DELETE FROM usuario WHERE id = ?`;
+  return database.executar(sqlUsuario, [usuarioId]);
+}
+
 module.exports = {
   cadastrar,
   login,
   atualizarUsuario,
   consultarUsuario,
+  deletarUsuario,
 };

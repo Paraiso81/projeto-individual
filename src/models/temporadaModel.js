@@ -1,4 +1,5 @@
 var database = require("../database/config");
+var partidaModel = require("./partidasModel");
 
 function createTemporada(nome, ano, usuarioId) {
   console.log(nome, ano, usuarioId, "dados model");
@@ -42,7 +43,21 @@ async function buscarTemporada(temporadaId, usuarioId) {
     WHERE t.id = ? AND t.fk_usuario = ?;
     `;
 
-  return database.executar(sql, [temporadaId, usuarioId]);
+  const temporada = await database.executar(sql, [temporadaId, usuarioId]);
+
+  if (temporada.length === 0) {
+    return [];
+  }
+
+  const partidasTemporada = await partidaModel.partidasPorTemporada(
+    temporadaId,
+    usuarioId,
+  );
+  const id = temporada[0].id;
+  const nome = temporada[0].nome;
+  const ano = temporada[0].ano;
+
+  return [{ id: id, nome: nome, ano: ano, partidas: [partidasTemporada] }];
 }
 
 async function atualizarTemporada(usuarioId, temporadaId, nome, ano) {
@@ -68,7 +83,10 @@ async function atualizarTemporada(usuarioId, temporadaId, nome, ano) {
   const update = await database.executar(sql, valores);
 
   if (update.affectedRows > 0) {
-    const dadosTemporadaAtualizado = await buscarTemporada(temporadaId, usuarioId);
+    const dadosTemporadaAtualizado = await buscarTemporada(
+      temporadaId,
+      usuarioId,
+    );
 
     return dadosTemporadaAtualizado;
   }
@@ -76,8 +94,12 @@ async function atualizarTemporada(usuarioId, temporadaId, nome, ano) {
   return;
 }
 
-async function deletarTemporada(temporadaId) {
-    
+async function deletarTemporada(temporadaId, usuarioId) {
+  await partidaModel.deletarPartidasPorTemporada(temporadaId);
+
+  var sql = `DELETE FROM temporada WHERE id = ? AND fk_usuario = ?`;
+
+  return database.executar(sql, [temporadaId, usuarioId]);
 }
 
 module.exports = {
@@ -86,4 +108,5 @@ module.exports = {
   consultarTemporadasUsuario,
   buscarTemporada,
   atualizarTemporada,
+  deletarTemporada,
 };

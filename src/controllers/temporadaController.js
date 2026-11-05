@@ -43,7 +43,7 @@ async function todasTemporadaUsuario(req, res) {
 
   const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
 
-  if (usuarioExiste <= 0)
+  if (usuarioExiste.length <= 0)
     return res.status(404).send("Usuário não encontrado.");
 
   temporadaModel
@@ -62,8 +62,7 @@ async function todasTemporadaUsuario(req, res) {
 }
 
 async function buscarTemporada(req, res) {
-  const temporadaId = req.params.temporadaId;
-  const usuarioId = req.body.usuarioId;
+  const { usuarioId, temporadaId } = req.params;
 
   const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
 
@@ -74,18 +73,20 @@ async function buscarTemporada(req, res) {
     .buscarTemporada(temporadaId, usuarioId)
     .then(function (response) {
       if (response.length > 0) {
-        const { id, nome, ano } = response;
-        // atualizar aqui para puxar os dados da partidas com 2 selects
-        res.status(200).json(id, nome, ano);
+        res.status(200).json(response);
       } else {
-        res.status(200).send("Erro ao buscar dados da temporada.");
+        res.status(404).send("Temporada não encontrada.");
       }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res.status(500).send("Erro no servidor, tente novamente mais tarde.");
     });
 }
 
 async function atualizarTemporada(req, res) {
-  const temporadaId = req.params.temporadaId;
-  const { nome, ano, usuarioId } = req.body;
+  const { usuarioId, temporadaId } = req.params;
+  const { nome, ano } = req.body;
 
   const temporadaExiste = await temporadaModel.buscarTemporada(
     temporadaId,
@@ -104,17 +105,16 @@ async function atualizarTemporada(req, res) {
       console.log(erro);
       res
         .status(500)
-        .send("Erro dá parte servidor, tente novamente mais tarde.");
+        .send("Erro da parte do servidor, tente novamente mais tarde.");
     });
 }
 
 async function deletarTemporada(req, res) {
-  const usuarioId = req.params.usuarioId;
-  const temporadaId = req.params.temporadaId;
+  const { usuarioId, temporadaId } = req.params;
 
   const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
 
-  if (usuarioExiste.length == 0)
+  if (usuarioExiste.length <= 0)
     return res.status(404).send("Usuário não encontrado.");
 
   const temporadaExiste = await temporadaModel.buscarTemporada(
@@ -122,10 +122,20 @@ async function deletarTemporada(req, res) {
     usuarioId,
   );
 
-  if (temporadaExiste == 0)
-    return res(400).send("Não possível deletar a temporada.");
+  if (temporadaExiste.length <= 0)
+    return res.status(404).send("Não foi possível deletar a temporada.");
 
-//   após ter as rotas de partidas, teminar aqui a rota de delete;
+  temporadaModel
+    .deletarTemporada(temporadaId, usuarioId)
+    .then(function () {
+      res.status(200).send("Temporada deletada com sucesso.");
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res
+        .status(500)
+        .send("Erro da parte do servidor, tente novamente mais tarde.");
+    });
 }
 
 module.exports = {

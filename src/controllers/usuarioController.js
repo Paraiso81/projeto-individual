@@ -102,10 +102,32 @@ async function atualizarUsuario(req, res) {
     });
 }
 
+async function deletarUsuario(req, res) {
+  const usuarioId = req.params.usuarioId;
+
+  const usuarioExiste = await usuarioModel.consultarUsuario(usuarioId);
+
+  if (usuarioExiste.length <= 0)
+    return res.status(404).send("Usuário não encontrado.");
+
+  usuarioModel
+    .deletarUsuario(usuarioId)
+    .then(function () {
+      res.status(200).send("Usuário deletado com sucesso.");
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res
+        .status(500)
+        .send("Erro da parte do servidor, tente novamente mais tarde.");
+    });
+}
+
 module.exports = {
   cadastrar,
   login,
   atualizarUsuario,
+  deletarUsuario,
   senhaValida,
 };
 
