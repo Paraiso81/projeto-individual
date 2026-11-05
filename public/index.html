@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/hero.css" />
     <link rel="stylesheet" href="./css/minha-historia.css" />
     <link rel="stylesheet" href="./css/como-funciona.css" />
+    <link rel="stylesheet" href="./css/previa.css" />
     <title>Minha Temorada</title>
   </head>
   <body>
@@ -139,6 +140,184 @@
               entender seu ritmo ao longo da temporada.
             </p>
           </article>
+        </div>
+      </section>
+
+      <section class="section-previa">
+        <div class="previa-header">
+          <div class="previa-container-titulo">
+            <span class="kicker">Visão de desempenho</span>
+            <h5 class="previa-titulo">
+              Seus números reunidos em um painel direto
+            </h5>
+          </div>
+          <p>
+            Cada partida registrada atualiza automaticamente seus indicadores
+            gerais e o comparativo entre temporadas.
+          </p>
+        </div>
+
+        <div class="previa-painel">
+          <div class="previa-kpis">
+            <div class="kpi-item">
+              <span class="kpi-rotulo">Partidas registradas</span>
+              <strong class="kpi-valor">86</strong>
+              <span class="kpi-apoio">Total nas temporadas</span>
+            </div>
+
+            <div class="kpi-divisor"></div>
+
+            <div class="kpi-item">
+              <span class="kpi-rotulo">Gols marcados</span>
+              <strong class="kpi-valor">24</strong>
+              <span class="kpi-apoio">Acumulado geral</span>
+            </div>
+
+            <div class="kpi-divisor"></div>
+
+            <div class="kpi-item">
+              <span class="kpi-rotulo">Assistências</span>
+              <strong class="kpi-valor">31</strong>
+              <span class="kpi-apoio">Passes para gol</span>
+            </div>
+
+            <div class="kpi-divisor"></div>
+
+            <div class="kpi-item">
+              <span class="kpi-rotulo">Média de gols</span>
+              <strong class="kpi-valor">0,28</strong>
+              <span class="kpi-apoio">Gols por partida</span>
+            </div>
+          </div>
+
+          <div class="previa-graficos">
+            <div class="grafico-card">
+              <div class="grafico-topo">
+                <h3 class="grafico-titulo">
+                  Gols e assistências por temporada
+                </h3>
+                <div class="grafico-legenda">
+                  <span class="legenda-item">
+                    <span class="bolinha bolinha-gols"></span> Gols
+                  </span>
+                  <span class="legenda-item">
+                    <span class="bolinha bolinha-assist"></span> Assistências
+                  </span>
+                </div>
+              </div>
+
+              <div class="barras-area">
+                <div class="barra-grupo">
+                  <div class="barra-par">
+                    <div class="barra barra-gols" style="height: 38px"></div>
+                    <div class="barra barra-assist" style="height: 62px"></div>
+                  </div>
+                  <span class="grafico-ano">2023</span>
+                </div>
+
+                <div class="barra-grupo">
+                  <div class="barra-par">
+                    <div class="barra barra-gols" style="height: 62px"></div>
+                    <div class="barra barra-assist" style="height: 88px"></div>
+                  </div>
+                  <span class="grafico-ano">2024</span>
+                </div>
+
+                <div class="barra-grupo">
+                  <div class="barra-par">
+                    <div class="barra barra-gols" style="height: 112px"></div>
+                    <div class="barra barra-assist" style="height: 124px"></div>
+                  </div>
+                  <span class="grafico-ano">2025</span>
+                </div>
+
+                <div class="barra-grupo">
+                  <div class="barra-par">
+                    <div class="barra barra-gols" style="height: 88px"></div>
+                    <div class="barra barra-assist" style="height: 112px"></div>
+                  </div>
+                  <span class="grafico-ano">2026</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grafico-card">
+              <div class="grafico-topo">
+                <h3 class="grafico-titulo">Média de gols por temporada</h3>
+                <span class="grafico-unidade">Gols / jogo</span>
+              </div>
+
+              <svg
+                class="curva-media"
+                viewBox="0 0 460 126"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="16"
+                  y1="24"
+                  x2="444"
+                  y2="24"
+                  stroke="#1E293B"
+                  stroke-width="1"
+                />
+                <line
+                  x1="16"
+                  y1="66"
+                  x2="444"
+                  y2="66"
+                  stroke="#1E293B"
+                  stroke-width="1"
+                />
+                <line
+                  x1="16"
+                  y1="108"
+                  x2="444"
+                  y2="108"
+                  stroke="#1E293B"
+                  stroke-width="1"
+                />
+                <path
+                  d="M44 96 C115 90, 145 78, 188 72 C235 65, 275 45, 316 38 C355 32, 395 26, 420 22"
+                  stroke="#34D399"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+                <circle
+                  cx="44"
+                  cy="96"
+                  r="4"
+                  fill="#0D1321"
+                  stroke="#34D399"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="188"
+                  cy="72"
+                  r="4"
+                  fill="#0D1321"
+                  stroke="#34D399"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="316"
+                  cy="38"
+                  r="4"
+                  fill="#0D1321"
+                  stroke="#34D399"
+                  stroke-width="2"
+                />
+                <circle cx="420" cy="22" r="4.5" fill="#34D399" />
+              </svg>
+
+              <div class="eixo-medias">
+                <span>2023 (0,18)</span>
+                <span>2024 (0,24)</span>
+                <span>2025 (0,31)</span>
+                <span>2026 (0,36)</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
