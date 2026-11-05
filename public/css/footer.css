@@ -1,0 +1,13 @@
+footer {
+  margin: 48px 150px;
+  padding-top: 24px;
+  border-top: 1px solid var(--cor-borda-clara);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
