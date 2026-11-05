@@ -1,0 +1,134 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: temporadas
+meta:
+  id: wrk_2d1b477ea596457bae2ad5063dfc4ccb
+  created: 1793454734425
+  modified: 1793454734425
+  description: ""
+collection:
+  - url: "{{ _.LOCAL_URL }}/temporadas"
+    name: criarTemporada
+    meta:
+      id: req_37fe92aa2e4748769e35b9e1d66241be
+      created: 1793454746591
+      modified: 1793483580000
+      isPrivate: false
+      description: POST /temporadas
+      sortKey: -1793454746591
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"usuarioId": 3,
+        	"nome": "Temporada 2026",
+        	"ano": 2028
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/temporadas/usuario/3"
+    name: consultarPorUsuario
+    meta:
+      id: req_44efadbd5bbd4918a09cb5feea50959f
+      created: 1793461474445
+      modified: 1793461526919
+      isPrivate: false
+      description: GET /temporadas/usuario/<usuarioId>
+      sortKey: -1793461474445
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/temporadas/3/1"
+    name: buscarTemporada
+    meta:
+      id: req_592b04271c41435bb2553dacae0aeb9d
+      created: 1793462863847
+      modified: 1793483580000
+      isPrivate: false
+      description: GET /temporadas/<usuarioId>/<temporadaId>
+      sortKey: -1793462863847
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/temporadas/3/1"
+    name: atualizarTemporada
+    meta:
+      id: req_a5eb1e94fd3249869c7b24747bb0c6ed
+      created: 1793466393969
+      modified: 1793483580000
+      isPrivate: false
+      description: PATCH /temporadas/<usuarioId>/<temporadaId>
+      sortKey: -1793466393969
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "Nome atualizado temp 3"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.LOCAL_URL }}/temporadas/3/2"
+    name: deletarTemporada
+    meta:
+      id: req_7d8c9e102a3b4c5d8e9f0a1b2c3d4e5f
+      created: 1793483580000
+      modified: 1793484366074
+      isPrivate: false
+      description: DELETE /temporadas/<usuarioId>/<temporadaId>
+      sortKey: -1793483580000
+    method: DELETE
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_06f9e23c8579469e4f7529a0deedbee691e1a75c
+    created: 1793454734433
+    modified: 1793454734433
+environments:
+  name: Base Environment
+  meta:
+    id: env_06f9e23c8579469e4f7529a0deedbee691e1a75c
+    created: 1793454734431
+    modified: 1793454869369
+    isPrivate: false
+  data:
+    LOCAL_URL: http://localhost:3333
