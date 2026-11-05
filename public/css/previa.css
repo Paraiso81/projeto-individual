@@ -1,0 +1,197 @@
+.section-previa {
+  padding: 104px 150px;
+  background: var(--cor-ink-black);
+}
+
+.previa-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.previa-container-titulo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.previa-titulo {
+  color: var(--cor-branco);
+  font-size: var(--fs-h2);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: -0.648px;
+  max-width: 580px;
+}
+
+.previa-header p {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-card);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  max-width: 420px;
+}
+
+.previa-painel {
+  margin-top: 44px;
+  padding: 32px;
+  background-color: var(--cor-painel-escuro);
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: var(--raio-painel);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.previa-kpis {
+  padding: 24px 28px;
+  background-color: var(--cor-ink-black);
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: var(--raio-card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.kpi-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.kpi-rotulo {
+  font-size: var(--fs-kicker);
+  color: var(--cor-texto-claro-apoio);
+}
+
+.kpi-valor {
+  font-family: var(--fonte-titulos);
+  font-size: var(--fs-kpi);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--cor-branco);
+}
+
+.kpi-apoio {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+}
+
+.kpi-divisor {
+  width: 1px;
+  height: 56px;
+  background-color: var(--cor-borda-escura);
+}
+
+.previa-graficos {
+  display: flex;
+  gap: 24px;
+}
+
+.grafico-card {
+  flex: 1; 
+  padding: 24px;
+  background-color: var(--cor-ink-black);
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: var(--raio-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.grafico-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.grafico-titulo {
+  font-family: var(--fonte-texto);
+  font-size: var(--fs-card);
+  font-weight: 600;
+  color: var(--cor-branco);
+  letter-spacing: normal;
+}
+
+.grafico-legenda {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-claro-apoio);
+}
+
+.bolinha {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.bolinha-gols,
+.barra-gols {
+  background-color: var(--cor-turf-green);
+}
+
+.bolinha-assist,
+.barra-assist {
+  background-color: var(--cor-ocean-deep);
+}
+
+.barras-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 12px 16px 0;
+  min-height: 165px;
+}
+
+.barra-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra-par {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.barra {
+  width: 20px;
+  border-radius: 4px 4px 0 0;
+}
+
+.grafico-ano,
+.grafico-unidade,
+.eixo-medias {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+}
+
+
+.curva-media {
+  width: 100%;
+  height: auto;
+}
+
+.eixo-medias {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
