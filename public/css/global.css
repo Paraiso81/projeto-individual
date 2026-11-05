@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap");
+
+:root {
+  --cor-ink-black: #0d1321;
+  --cor-turf-green: #04724d;
+  --cor-ocean-deep: #1768ac;
+  --cor-alabaster-grey: #e2e2e2;
+  --cor-taupe-grey: #7a6563;
+
+  --cor-branco: #ffffff;
+  --cor-fundo-suave: #f7f8fa;
+  --cor-painel-escuro: #121b2e;
+  --cor-verde-claro: #5ed39b;
+
+  --cor-texto-escuro: #374151;
+  --cor-texto-apoio: #6b7280;
+  --cor-texto-claro-apoio: #94a3b8;
+
+  --cor-borda-clara: #e5e7eb;
+  --cor-borda-escura: #1e293b;
+
+  --fonte-titulos: "Plus Jakarta Sans", sans-serif;
+  --fonte-texto: "Inter", sans-serif;
+
+  --fs-h1: 54px; /* Título Hero */
+  --fs-h2: 36px; /* Títulos de seção */
+  --fs-kpi: 34px; /* Números de destaque da Dashboard */
+  --fs-h3: 30px; /* Título da Chamada Final (CTA) */
+  --fs-h4: 20px; /* Títulos dos cards (Passos 01-03) */
+  --fs-lead: 18px; /* Subtítulo do Hero */
+  --fs-marca: 17px; /* Logotipo e marcos da trajetória */
+  --fs-corpo: 16px; /* Parágrafos principais */
+  --fs-card: 15px; /* Texto de cards, gráficos e botões principais */
+  --fs-nav: 14px; /* Menu de navegação e numeração */
+  --fs-kicker: 13px; /* Kickers de seção, legendas e rodapé */
+  --fs-grafico: 12px; /* Sublegendas de KPI e eixos */
+
+  --raio-botao: 8px;
+  --raio-card: 12px;
+  --raio-painel: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-texto);
+  font-size: var(--fs-corpo);
+  line-height: 1.6;
+  color: var(--cor-ink-black);
+  background-color: var(--cor-branco);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--fonte-titulos);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: var(--fonte-texto);
+  cursor: pointer;
+  border: none;
+}
+
+.kicker {
+  color: var(--cor-turf-green);
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+hr {
+  color: var(--cor-borda-clara);
+}

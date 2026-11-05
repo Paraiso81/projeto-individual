@@ -1,0 +1,65 @@
+.section-historia {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 104px 150px;
+  gap: 64px;
+}
+
+.historia-narrativa {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 550px;
+}
+
+.narrativa-titulo {
+  color: var(--cor-ink-black);
+  font-size: var(--fs-h2);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.narrativa-descricao {
+  color: var(--cor-texto-escuro);
+  font-size: var(--fs-corpo);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.container-trajetoria {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  color: var(--cor-ink-black);
+}
+
+.trajetoria-titulo {
+  font-size: var(--fs-marca);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.trajetoria-descricao {
+  color: var(--cor-ink-black);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  max-width: 169px;
+}
+
+.container-foto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legenda {
+  max-width: 100%;
+}
