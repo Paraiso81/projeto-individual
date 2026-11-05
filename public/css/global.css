@@ -88,6 +88,12 @@ button {
   border: none;
 }
 
+.btn-verde {
+  border-radius: var(--raio-botao);
+  background: var(--cor-turf-green);
+  color: var(--cor-branco);
+}
+
 .kicker {
   color: var(--cor-turf-green);
   font-size: var(--fs-nav);
@@ -98,4 +104,11 @@ button {
 
 hr {
   color: var(--cor-borda-clara);
+}
+
+.input {
+  border-radius: var(--raio-botao);
+  border: 1px solid var(--cor-borda-clara);
+  padding: 13px 14px;
+  color: var(--cor-painel-escuro);
 }
