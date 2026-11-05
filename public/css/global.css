@@ -87,3 +87,15 @@ button {
   cursor: pointer;
   border: none;
 }
+
+.kicker {
+  color: var(--cor-turf-green);
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+hr {
+  color: var(--cor-borda-clara);
+}

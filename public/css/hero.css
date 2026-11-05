@@ -15,15 +15,6 @@
   gap: 20px;
 }
 
-.kicker-hero {
-  color: var(--cor-turf-green);
-  text-align: center;
-  font-size: var(--fs-nav);
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
 .hero-titulo {
   color: var(--cor-branco);
   text-align: center;
