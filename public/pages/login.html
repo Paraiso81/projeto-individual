@@ -11,13 +11,15 @@
       src="https://kit.fontawesome.com/79924d81b1.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="../js/page/login.js" defer></script>
     <title>Login - Minha Temporada</title>
   </head>
   <body>
     <aside>
       <header>
         <h1 class="logo">Minha temporada</h1>
-        <a class="btn-voltar">
+        <a class="btn-voltar" href="../index.html">
           <i class="fa-solid fa-arrow-left"></i>
           Voltar ao início</a
         >
@@ -50,18 +52,21 @@
             id="iptEmail"
             placeholder="seuemail@exemplo.com"
           />
+          <div id="msgEmail" class="msgErro"></div>
         </div>
         <div class="container-input">
-          <label for="iptEmail">Senha</label>
+          <label for="iptSenha">Senha</label>
           <input
             class="input"
             type="password"
-            id="iptEmail"
+            id="iptSenha"
             placeholder="Digite sua senha"
           />
+          <div id="msgSenha" class="msgErro"></div>
         </div>
 
-        <button class="btn-verde btn-entrar">Entrar</button>
+        <div id="msgLogin" class="erroGeral"></div>
+        <button onclick="login()" class="btn-verde btn-entrar">Entrar</button>
 
         <hr />
 
