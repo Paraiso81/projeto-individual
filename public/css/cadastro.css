@@ -1,0 +1,132 @@
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+aside {
+  background-image:
+    linear-gradient(rgba(13, 19, 33, 0.8), rgba(13, 19, 33, 0.8)),
+    url("../assets/bg-main.webp");
+
+  height: 100vh;
+  width: 45%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--cor-branco);
+  padding: 52px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+aside header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: var(--fs-marca);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.255px;
+}
+
+.btn-voltar {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+footer h2 {
+  font-size: var(--fs-kpi);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: -0.612px;
+}
+
+footer p {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-card);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+footer hr {
+  color: var(--cor-texto-apoio);
+}
+
+.text-rodape {
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: var(--cor-ink-black);
+}
+
+.container-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: left;
+}
+
+.titulo {
+  font-size: var(--fs-h3);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: -0.45px;
+}
+
+.descricao {
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-card);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 23px;
+  max-width: 420px;
+}
+
+.container-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-cadastrar {
+  width: 100%;
+  padding: 14px 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-rodape a {
+  color: var(--cor-turf-green);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}

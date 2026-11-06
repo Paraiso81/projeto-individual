@@ -64,7 +64,9 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   font-family: var(--fonte-titulos);
   font-weight: 700;
   letter-spacing: -0.02em;
