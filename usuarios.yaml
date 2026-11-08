@@ -12,7 +12,7 @@ collection:
     meta:
       id: req_0b6b6ab7ac47490e9c99294437c9653e
       created: 1793401727279
-      modified: 1793407643184
+      modified: 1794160432295
       isPrivate: false
       description: POST /usuarios/cadastrar
       sortKey: -1793401727279
@@ -22,7 +22,7 @@ collection:
       text: |-
         {
         	"nome": "Pedro Paraiso",
-        	"email": "pedro04@gmail.com",
+        	"email": "pedro05@gmail.com",
         	"senha": "PEdro123@"
         }
     headers:
