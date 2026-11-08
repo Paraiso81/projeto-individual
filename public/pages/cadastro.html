@@ -6,13 +6,18 @@
 
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/cadastro.css" />
+    <link rel="stylesheet" href="../css/components/notificacao.css" />
 
     <script
       src="https://kit.fontawesome.com/79924d81b1.js"
       crossorigin="anonymous"
     ></script>
 
-    <script src="../js/page/login.js" defer></script>
+    <script src="../js/notificacao.js" defer></script>
+    <script src="../js/validacao/nome.js" defer></script>
+    <script src="../js/validacao/email.js" defer></script>
+    <script src="../js/validacao/senha.js" defer></script>
+    <script src="../js/page/cadastro.js" defer></script>
     <title>Cadastro - Minha Temporada</title>
   </head>
   <body>
@@ -37,6 +42,7 @@
       </footer>
     </aside>
     <main>
+      <div id="notificacao"></div>
       <div class="container-forms">
         <div>
           <h1 class="titulo">Criar sua conta</h1>
@@ -45,7 +51,7 @@
           </p>
         </div>
         <div class="container-input">
-          <label for="iptEmail">Nome</label>
+          <label for="iptNome">Nome</label>
           <input
             class="input"
             type="text"
@@ -86,7 +92,11 @@
         </div>
 
         <div id="msgLogin" class="erroGeral"></div>
-        <button onclick="cadastrar()" class="btn-verde btn-cadastrar">
+        <button
+          onclick="cadastrar()"
+          id="btn-cadastrar"
+          class="btn-verde btn-cadastrar"
+        >
           Criar conta
         </button>
 
