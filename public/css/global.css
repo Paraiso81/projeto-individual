@@ -19,6 +19,10 @@
   --cor-borda-clara: #e5e7eb;
   --cor-borda-escura: #1e293b;
 
+  --cor-error: #b91c1c;
+  --cor-borda-alerta: #feea86;
+  --cor-texto-alerta: #deba02;
+
   --fonte-titulos: "Plus Jakarta Sans", sans-serif;
   --fonte-texto: "Inter", sans-serif;
 
@@ -62,7 +66,9 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   font-family: var(--fonte-titulos);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -71,6 +77,7 @@ h4 {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 ul {
@@ -88,6 +95,12 @@ button {
   border: none;
 }
 
+.btn-verde {
+  border-radius: var(--raio-botao);
+  background: var(--cor-turf-green);
+  color: var(--cor-branco);
+}
+
 .kicker {
   color: var(--cor-turf-green);
   font-size: var(--fs-nav);
@@ -98,4 +111,32 @@ button {
 
 hr {
   color: var(--cor-borda-clara);
+}
+
+.input {
+  border-radius: var(--raio-botao);
+  border: 1px solid var(--cor-borda-clara);
+  padding: 13px 14px;
+  color: var(--cor-painel-escuro);
+}
+
+.msgErro {
+  display: none;
+  color: var(--cor-error);
+  font-size: var(--fs-kicker);
+  padding-top: 5px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.erroGeral {
+  display: none;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--cor-error);
+  font-size: var(--fs-kicker);
+  padding: 10px 14px;
+  border-radius: var(--raio-botao, 8px);
+  line-height: 1.4;
+  text-align: left;
 }

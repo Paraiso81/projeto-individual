@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+
+    <script
+      src="https://kit.fontawesome.com/79924d81b1.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../js/page/login.js" defer></script>
+    <title>Login - Minha Temporada</title>
+  </head>
+  <body>
+    <aside>
+      <header>
+        <h1 class="logo">Minha temporada</h1>
+        <a class="btn-voltar" href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i>
+          Voltar ao início</a
+        >
+      </header>
+
+      <footer>
+        <span class="kicker">Diário de temporada</span>
+        <h2>Continue acompanhando seus números em campo.</h2>
+        <p>
+          Entre na sua conta para acessar suas temporadas, registrar novas
+          partidas e consultar seus gols e assistências.
+        </p>
+        <hr />
+        <p class="text-rodape">Projeto Individual SPTech 2026</p>
+      </footer>
+    </aside>
+    <main>
+      <div class="container-forms">
+        <div>
+          <h1 class="titulo">Entrar na sua conta</h1>
+          <p class="descricao">
+            Informe seu e-mail e sua senha cadastrados para acessar o painel.
+          </p>
+        </div>
+        <div class="container-input">
+          <label for="iptEmail">E-mail</label>
+          <input
+            class="input"
+            type="text"
+            id="iptEmail"
+            placeholder="seuemail@exemplo.com"
+          />
+          <div id="msgEmail" class="msgErro"></div>
+        </div>
+        <div class="container-input">
+          <label for="iptSenha">Senha</label>
+          <input
+            class="input"
+            type="password"
+            id="iptSenha"
+            placeholder="Digite sua senha"
+          />
+          <div id="msgSenha" class="msgErro"></div>
+        </div>
+
+        <div id="msgLogin" class="erroGeral"></div>
+        <button onclick="login()" class="btn-verde btn-entrar">Entrar</button>
+
+        <hr />
+
+        <p class="text-rodape text-center">
+          Ainda não tem uma conta? <a href="./cadastro.html">Criar conta</a>
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
