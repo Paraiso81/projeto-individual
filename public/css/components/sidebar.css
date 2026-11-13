@@ -1,0 +1,116 @@
+.sidebar {
+  position: fixed;
+  width: 260px;
+  height: 100%;
+  padding: 30px 24px;
+  background-color: var(--cor-painel-escuro);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.text-sidebar {
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.btn-visao-geral {
+  padding: 12px;
+  background-color: rgba(30, 41, 59, 1);
+  border: 1px solid var(--cor-texto-escuro);
+  border-radius: var(--raio-botao);
+
+  color: var(--cor-branco);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-size: var(--fs-nav);
+}
+
+.btn-visao-geral::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  width: 3px;
+  height: 22px;
+
+  background-color: var(--cor-verde-claro);
+  border-radius: 0 4px 4px 0;
+  opacity: 1;
+}
+
+.container-temporada {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 100%;
+}
+.linha-temporada {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-nav);
+  padding: 12px 0;
+}
+.text-nome-temporada {
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}
+
+.dot-verde {
+  background-color: var(--cor-verde-claro);
+}
+
+.dot-azul {
+  background-color: var(--cor-ocean-deep);
+}
+
+.badge-ativa {
+  padding: 4px 8px;
+  border-radius: var(--raio-painel);
+  background-color: var(--cor-turf-green);
+  color: var(--cor-verde-claro);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--cor-texto-claro-apoio);
+}
+
+.foto-perfil {
+  padding: 10px;
+  background-color: var(--cor-ocean-deep);
+  border-radius: 100%;
+  font-size: var(--fs-kicker);
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+}
+.nome-usuario {
+  color: var(--cor-branco);
+  font-size: var(--fs-nav);
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+}
+
+.btn-logout {
+  background-color: transparent;
+  color: var(--cor-texto-apoio);
+}

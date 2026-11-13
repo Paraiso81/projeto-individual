@@ -95,6 +95,15 @@ button {
   border: none;
 }
 
+.logo {
+  color: var(--cor-branco);
+  font-family: var(--fonte-titulos);
+  font-size: var(--fs-marca);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 .btn-verde {
   border-radius: var(--raio-botao);
   background: var(--cor-turf-green);
