@@ -54,7 +54,7 @@ async function login() {
         sessionStorage.EMAIL = json.email;
       });
 
-      window.location = "../../pages/dashboard-teste.html";
+      window.location = "../../pages/dashboard-visao-geral.html";
     } else {
       console.log("Houve um erro ao tentar realizar o login!");
       erroLogin.style.display = "block";
