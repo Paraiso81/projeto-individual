@@ -24,7 +24,7 @@ window.logout = async () => {
   sessionStorage.removeItem("EMAIL");
 
   setTimeout(() => {
-    window.location.href = "index.html";
+    window.location.href = "../../index.html";
   }, 3000);
 };
 

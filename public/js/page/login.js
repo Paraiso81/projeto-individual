@@ -42,9 +42,10 @@ async function login() {
       email: email,
       senha: senha,
     }),
-  }).then(function (response) {
+  }).then(async function (response) {
     console.log("Fiz o fetch");
     if (response.ok) {
+      let msgSucesso = "Login efetuado com sucesso.";
       console.log(response);
 
       response.json().then((json) => {
@@ -53,13 +54,17 @@ async function login() {
         sessionStorage.NOME = json.nome;
         sessionStorage.EMAIL = json.email;
       });
-
-      window.location = "../../pages/dashboard-visao-geral.html";
+      await notificao("sucesso", msgSucesso);
+      setTimeout(() => {
+        window.location = "../../pages/dashboard-visao-geral.html";
+      }, 3000);
     } else {
+      let msgErro = "Erro ao fazer login.";
+      
       console.log("Houve um erro ao tentar realizar o login!");
       erroLogin.style.display = "block";
       erroLogin.innerText = "Email ou senha inválido";
-
+      await notificao("alerta", msgErro);
       setTimeout(() => {
         erroLogin.style.display = "none";
       }, 5000);
