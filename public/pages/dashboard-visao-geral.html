@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
     <title>Visão Geral - Minha temporada</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard/visao-geral.js" defer></script>
   </head>
   <body>
     <aside class="sidebar">
@@ -39,6 +43,86 @@
         <button class="btn-logout">Sair</button>
       </footer>
     </aside>
-    <main></main>
+    <main class="dashboard">
+      <header class="header-dashboard">
+        <div class="titulo-pagina">
+          <span class="kicker">VISÃO DE DESEMPENHO • TODAS AS TEMPORADAS</span>
+          <h1>Visão geral das suas temporadas</h1>
+        </div>
+        <button class="btn-verde btn-nova-temporada">+ Nova temporada</button>
+      </header>
+
+      <div class="conteudo-dashboard">
+        <section class="section-kpis">
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Partidas registradas</span>
+              <span class="badge-kpi" id="kpiQtdTemporadas">4 temp.</span>
+            </div>
+            <strong class="valor-kpi" id="kpiPartidas">86</strong>
+            <p class="apoio-kpi">Total acumulado nas temporadas</p>
+          </article>
+
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Gols marcados</span>
+              <span class="dot dot-verde-escuro"></span>
+            </div>
+            <strong class="valor-kpi" id="kpiGols">24</strong>
+            <p class="apoio-kpi apoio-verde" id="apoioKpiGols">
+              +7 gols na temporada 2026
+            </p>
+          </article>
+
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Assistências</span>
+              <span class="dot dot-azul"></span>
+            </div>
+            <strong class="valor-kpi" id="kpiAssistencias">31</strong>
+            <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias">
+              +5 na temporada 2026
+            </p>
+          </article>
+
+          <article class="card-kpi card-kpi-escuro">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Média de gols / partida</span>
+            </div>
+            <strong class="valor-kpi" id="kpiMediaGols">0,28</strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia">
+              Média G+A: 0,64 por jogo
+            </p>
+          </article>
+        </section>
+
+        <section class="section-grafico">
+          <div class="header-grafico">
+            <h2 class="titulo-grafico">Gols e assistências por temporada</h2>
+            <div class="legenda-grafico">
+              <div class="dot dot-verde-escuro"></div>
+              <p class="text-sidebar">Gols</p>
+              <div class="dot dot-azul"></div>
+              <p class="text-sidebar">Assistências</p>
+            </div>
+          </div>
+          <div class="container-canvas">
+            <canvas id="grafico-barras"></canvas>
+          </div>
+        </section>
+
+        <section class="section-grafico">
+          <div class="header-grafico">
+            <h2 class="titulo-grafico">Média de gols por temporada</h2>
+            <div class="legenda-grafico">
+              <p class="text-sidebar">Gols / jogo</p>
+            </div>
+          </div>
+          <div class="container-canvas">
+            <canvas id="grafico-linha"></canvas>
+          </div>
+        </section>
+      </div>
+    </main>
   </body>
 </html>
