@@ -42,6 +42,15 @@
   opacity: 1;
 }
 
+.link-visao-geral {
+  padding: 4px 12px;
+  color: var(--cor-texto-claro-apoio);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-size: var(--fs-nav);
+}
+
 .container-temporada {
   display: flex;
   flex-direction: column;
@@ -49,6 +58,7 @@
   max-width: 100%;
 }
 .linha-temporada {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -56,6 +66,30 @@
   color: var(--cor-texto-claro-apoio);
   font-size: var(--fs-nav);
   padding: 12px 0;
+}
+
+.linha-temporada-ativa {
+  padding: 10px 12px;
+  margin: 0 -8px;
+  background-color: rgba(30, 41, 59, 1);
+  border: 1px solid var(--cor-texto-escuro);
+  border-radius: var(--raio-botao);
+  color: var(--cor-branco);
+}
+
+.linha-temporada-ativa .text-nome-temporada {
+  font-weight: 700;
+  color: var(--cor-branco);
+}
+
+.linha-temporada-ativa::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 22px;
+  background-color: var(--cor-verde-claro);
+  border-radius: 0 4px 4px 0;
 }
 .text-nome-temporada {
   font-style: normal;

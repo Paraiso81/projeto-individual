@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
+    <link rel="stylesheet" href="../css/dashboard-temporada.css" />
+    <title>Temporada 2026 - Minha temporada</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard/temporada.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <header>
+        <h1 class="logo">Minha temporada</h1>
+      </header>
+      <hr />
+      <p class="text-sidebar">PAINEL DO JOGADOR</p>
+      <a href="./dashboard-visao-geral.html" class="link-visao-geral"
+        >Visão geral</a
+      >
+
+      <p class="text-sidebar">
+        MINHAS TEMPORADAS <span id="qtdTemporada">(4)</span>
+      </p>
+      <div class="container-temporada">
+        <a
+          href="./dashboard-temporada.html"
+          class="linha-temporada linha-temporada-ativa"
+        >
+          <span class="dot dot-verde"></span>
+          <p class="text-nome-temporada">Temporada 2026</p>
+          <span class="badge-ativa">Atual</span>
+        </a>
+
+        <a href="./dashboard-temporada.html" class="linha-temporada">
+          <span class="dot dot-azul"></span>
+          <p class="text-nome-temporada">Temporada 2025</p>
+          <span class="text-sidebar">29 jg</span>
+        </a>
+      </div>
+
+      <footer class="sidebar-footer">
+        <div class="foto-perfil">PP</div>
+        <h2 class="nome-usuario">Pedro Paraiso</h2>
+        <button class="btn-logout">Sair</button>
+      </footer>
+    </aside>
+
+    <main class="dashboard">
+      <header class="header-dashboard">
+        <div class="titulo-pagina">
+          <p class="breadcrumb-temporada">
+            <a href="./dashboard-visao-geral.html">Minhas temporadas</a> /
+            <span class="kicker" id="breadcrumbNomeTemporada"
+              >Temporada 2026</span
+            >
+          </p>
+          <div class="titulo-temporada-container">
+            <h1 id="nomeTemporadaTitulo">Temporada 2026</h1>
+            <span class="badge-kpi" id="anoTemporadaBadge">Ano: 2026</span>
+          </div>
+        </div>
+
+        <div class="acoes-temporada">
+          <button class="btn-editar-temporada">Editar temporada</button>
+          <button class="btn-verde btn-nova-temporada">
+            + Cadastrar partida
+          </button>
+        </div>
+      </header>
+
+      <div class="conteudo-dashboard">
+        <section class="section-kpis">
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Partidas na temporada</span>
+            </div>
+            <strong class="valor-kpi" id="kpiPartidasTemporada">20</strong>
+            <p class="apoio-kpi" id="apoioUltimaPartida">
+              Último jogo em 15/10/2026
+            </p>
+          </article>
+
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Gols na temporada</span>
+            </div>
+            <strong class="valor-kpi" id="kpiGolsTemporada">7</strong>
+            <p class="apoio-kpi apoio-verde" id="apoioRecordeGols">
+              Recorde: 3 gols vs Camisa 10 FC
+            </p>
+          </article>
+
+          <article class="card-kpi">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Assistências na temporada</span>
+            </div>
+            <strong class="valor-kpi" id="kpiAssistenciasTemporada">9</strong>
+            <p class="apoio-kpi apoio-azul" id="apoioMediaAssistencias">
+              Média de 0,45 assist. / partida
+            </p>
+          </article>
+
+          <article class="card-kpi card-kpi-escuro">
+            <div class="header-kpi">
+              <span class="rotulo-kpi">Média de gols na temporada</span>
+            </div>
+            <strong class="valor-kpi" id="kpiMediaGolsTemporada">0,35</strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioParticipacoes">
+              16 participações diretas (G+A)
+            </p>
+          </article>
+        </section>
+
+        <div class="section-analise-temporada">
+          <section class="section-grafico card-grafico-partidas">
+            <div class="header-grafico">
+              <h2 class="titulo-grafico">
+                Gols e assistências nas últimas 6 partidas
+              </h2>
+              <div class="legenda-grafico">
+                <div class="dot dot-verde-escuro"></div>
+                <p class="text-sidebar">Gols</p>
+                <div class="dot dot-azul"></div>
+                <p class="text-sidebar">Assistências</p>
+              </div>
+            </div>
+            <div class="container-canvas">
+              <canvas id="grafico-partidas"></canvas>
+            </div>
+          </section>
+
+          <article class="card-destaque-temporada">
+            <div class="topo-destaque">
+              <span class="kicker kicker-destaque"
+                >MELHOR PARTIDA DA TEMPORADA</span
+              >
+              <h3 class="adversario-destaque" id="destaqueAdversario">
+                vs Camisa 10 FC
+              </h3>
+              <p class="data-destaque" id="destaqueData">
+                Realizada em 15 de outubro de 2026
+              </p>
+            </div>
+
+            <div class="box-numeros-destaque">
+              <strong class="destaque-gols" id="destaqueGols">3 Gols</strong>
+              <div class="divisor-destaque"></div>
+              <strong class="destaque-assist" id="destaqueAssistencias"
+                >1 Assistência</strong
+              >
+            </div>
+
+            <p class="rodape-destaque" id="destaqueParticipacao">
+              Participação direta em 4 gols na partida
+            </p>
+          </article>
+        </div>
+
+        <section class="section-tabela-partidas">
+          <div class="header-tabela-partidas">
+            <h2>Partidas registradas na temporada</h2>
+          </div>
+
+          <div class="container-tabela">
+            <table class="tabela-partidas">
+              <thead>
+                <tr>
+                  <th>DATA DA PARTIDA</th>
+                  <th>ADVERSÁRIO</th>
+                  <th>GOLS MARCADOS</th>
+                  <th>ASSISTÊNCIAS</th>
+                  <th>PARTICIPAÇÃO</th>
+                  <th>AÇÕES</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaPartidasBody">
+                <tr>
+                  <td class="col-data">15/10/2026</td>
+                  <td class="col-adversario">Camisa 10 FC</td>
+                  <td>
+                    <span class="badge-tabela badge-gols">3 gols</span>
+                  </td>
+                  <td>
+                    <span class="badge-tabela badge-assist">1 assist.</span>
+                  </td>
+                  <td class="col-participacao">4 G+A</td>
+                  <td class="col-acoes">
+                    <button class="btn-acao-editar">Editar</button>
+                    <button class="btn-acao-excluir">Excluir</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="col-data">08/10/2026</td>
+                  <td class="col-adversario">Unidos da Vila</td>
+                  <td>
+                    <span class="badge-tabela badge-gols">1 gol</span>
+                  </td>
+                  <td>
+                    <span class="badge-tabela badge-assist">2 assist.</span>
+                  </td>
+                  <td class="col-participacao">3 G+A</td>
+                  <td class="col-acoes">
+                    <button class="btn-acao-editar">Editar</button>
+                    <button class="btn-acao-excluir">Excluir</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="col-data">29/09/2026</td>
+                  <td class="col-adversario">Artilheiros FC</td>
+                  <td>
+                    <span class="badge-tabela badge-neutro">0 gols</span>
+                  </td>
+                  <td>
+                    <span class="badge-tabela badge-assist">1 assist.</span>
+                  </td>
+                  <td class="col-participacao">1 G+A</td>
+                  <td class="col-acoes">
+                    <button class="btn-acao-editar">Editar</button>
+                    <button class="btn-acao-excluir">Excluir</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="col-data">21/09/2026</td>
+                  <td class="col-adversario">Lavínia Society</td>
+                  <td>
+                    <span class="badge-tabela badge-gols">2 gols</span>
+                  </td>
+                  <td>
+                    <span class="badge-tabela badge-assist">2 assist.</span>
+                  </td>
+                  <td class="col-participacao">4 G+A</td>
+                  <td class="col-acoes">
+                    <button class="btn-acao-editar">Editar</button>
+                    <button class="btn-acao-excluir">Excluir</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="col-data">14/09/2026</td>
+                  <td class="col-adversario">Real São Bernardo</td>
+                  <td>
+                    <span class="badge-tabela badge-gols">1 gol</span>
+                  </td>
+                  <td>
+                    <span class="badge-tabela badge-neutro">0 assist.</span>
+                  </td>
+                  <td class="col-participacao">1 G+A</td>
+                  <td class="col-acoes">
+                    <button class="btn-acao-editar">Editar</button>
+                    <button class="btn-acao-excluir">Excluir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
