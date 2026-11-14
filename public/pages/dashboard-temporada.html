@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
     <link rel="stylesheet" href="../css/dashboard-temporada.css" />
     <link rel="stylesheet" href="../css/components/modal.css" />
+    <link rel="stylesheet" href="../css/components/modalAlerta.css" />
     <title>Temporada 2026 - Minha temporada</title>
 
     <script
@@ -274,7 +275,12 @@
                     >
                       Editar
                     </button>
-                    <button class="btn-acao-excluir">Excluir</button>
+                    <button
+                      onclick="abrirModal('overlayDeletarPartida')"
+                      class="btn-acao-excluir"
+                    >
+                      Excluir
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -537,6 +543,50 @@
           <button class="btn-verde btn-criar-temporada">
             Salvar alterações
           </button>
+        </div>
+      </article>
+    </div>
+
+    <div id="overlayDeletarPartida" class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <span class="icon-alerta"
+            ><i class="fa-solid fa-triangle-exclamation"></i
+          ></span>
+          <button
+            onclick="closeModal('overlayDeletarPartida')"
+            class="btn-close"
+          >
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <h2>Excluir partida ?</h2>
+        <div>
+          <span class="text-sublinhado"
+            >Tem certeza que deseja excluir a partida contra</span
+          >
+          <p class="text-partida">
+            Camisa 10 FC (15/10/2026) - 3 gols e 1 assistência?
+          </p>
+        </div>
+        <div class="contaner-aviso">
+          <span class="text-partida text-vermelho text-bold"
+            >Atenção: esta ação não poderá ser desfeita.</span
+          >
+          <p class="text-vermelho text-descricao">
+            Os números deste jogo serão descontados da Temporada 2026.
+          </p>
+        </div>
+        <hr />
+
+        <div class="footer-modal">
+          <button
+            onclick="closeModal('overlayDeletarPartida')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button class="btn-excluir">Sim, excluir partida</button>
         </div>
       </article>
     </div>
