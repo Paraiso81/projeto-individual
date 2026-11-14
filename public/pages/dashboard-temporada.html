@@ -78,8 +78,11 @@
           >
             Editar temporada
           </button>
-          <button class="btn-verde btn-nova-temporada">
-            + Cadastrar partida
+          <button
+            onclick="abrirModal('overlayCriarPartida')"
+            class="btn-verde btn-nova-temporada"
+          >
+            <i class="fa-solid fa-plus"></i>Cadastrar partida
           </button>
         </div>
       </header>
@@ -265,7 +268,12 @@
                   </td>
                   <td class="col-participacao">1 G+A</td>
                   <td class="col-acoes">
-                    <button class="btn-acao-editar">Editar</button>
+                    <button
+                      onclick="abrirModal('overlayEditarPartida')"
+                      class="btn-acao-editar"
+                    >
+                      Editar
+                    </button>
                     <button class="btn-acao-excluir">Excluir</button>
                   </td>
                 </tr>
@@ -320,6 +328,212 @@
 
         <div class="footer-modal">
           <button class="btn-cancelar">Cancelar</button>
+          <button class="btn-verde btn-criar-temporada">
+            Salvar alterações
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <div id="overlayCriarPartida" class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <div>
+            <h1>Cadastrar nova partida</h1>
+            <p>Preencha as informações do jogo para cadastrar partida.</p>
+          </div>
+          <button onclick="closeModal('overlayCriarPartida')" class="btn-close">
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <hr />
+        <div class="container-input">
+          <label for="iptDataPartida">Data da partida *</label>
+          <input class="input input-date" id="iptDataPartida" type="date" />
+        </div>
+        <div class="container-input">
+          <label for="iptAdversarioPartida">Nome do adversário *</label>
+          <input
+            class="input"
+            id="iptAdversarioPartida"
+            type="text"
+            placeholder="Digite o nome do adversário."
+          />
+          <p class="text-descricao-modal">
+            Mínimo de 4 caracteres (ex: Camisa 10 FC, Unidos da Vila)
+          </p>
+        </div>
+
+        <div class="linha-inputs-modal">
+          <div class="container-input">
+            <label>Gols marcados na partida *</label>
+            <div class="box-contador">
+              <button
+                type="button"
+                onclick="alterarContador('qtdGolsPartida', -1)"
+                class="btn-contador btn-menos"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span id="qtdGolsPartida" class="valor-contador valor-gols"
+                >0</span
+              >
+              <button
+                type="button"
+                onclick="alterarContador('qtdGolsPartida', 1)"
+                class="btn-contador btn-mais-gols"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            <p class="text-descricao-modal">
+              Quantidade de gols que você marcou
+            </p>
+          </div>
+
+          <div class="container-input">
+            <label>Assistências realizadas *</label>
+            <div class="box-contador">
+              <button
+                type="button"
+                onclick="alterarContador('qtdAssistenciasPartida', -1)"
+                class="btn-contador btn-menos"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span
+                id="qtdAssistenciasPartida"
+                class="valor-contador valor-assist"
+                >0</span
+              >
+              <button
+                type="button"
+                onclick="alterarContador('qtdAssistenciasPartida', 1)"
+                class="btn-contador btn-mais-assist"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            <p class="text-descricao-modal">
+              Passes que resultaram em gol da equipe
+            </p>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="footer-modal">
+          <button
+            onclick="closeModal('overlayCriarPartida')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button class="btn-verde btn-criar-temporada">Salvar partida</button>
+        </div>
+      </article>
+    </div>
+
+    <div id="overlayEditarPartida" class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <div>
+            <h1>Editar partida</h1>
+            <p>
+              Altere a data, adversário, gols ou assistências registrados neste
+              jogo.
+            </p>
+          </div>
+          <button
+            onclick="closeModal('overlayEditarPartida')"
+            class="btn-close"
+          >
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <hr />
+        <div class="container-input">
+          <label for="iptDataPartida">Data da partida *</label>
+          <input class="input input-date" id="iptDataPartida" type="date" />
+        </div>
+        <div class="container-input">
+          <label for="iptAdversarioPartida">Nome do adversário *</label>
+          <input
+            class="input"
+            id="iptAdversarioPartida"
+            type="text"
+            placeholder="Digite o nome do adversário."
+          />
+          <p class="text-descricao-modal">
+            Mínimo de 4 caracteres (ex: Camisa 10 FC, Unidos da Vila)
+          </p>
+        </div>
+
+        <div class="linha-inputs-modal">
+          <div class="container-input">
+            <label>Gols marcados na partida *</label>
+            <div class="box-contador">
+              <button
+                type="button"
+                onclick="alterarContador('qtdGolsPartida', -1)"
+                class="btn-contador btn-menos"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span id="qtdGolsPartida" class="valor-contador valor-gols"
+                >0</span
+              >
+              <button
+                type="button"
+                onclick="alterarContador('qtdGolsPartida', 1)"
+                class="btn-contador btn-mais-gols"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            <p class="text-descricao-modal">
+              Quantidade de gols que você marcou
+            </p>
+          </div>
+
+          <div class="container-input">
+            <label>Assistências realizadas *</label>
+            <div class="box-contador">
+              <button
+                type="button"
+                onclick="alterarContador('qtdAssistenciasPartida', -1)"
+                class="btn-contador btn-menos"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span
+                id="qtdAssistenciasPartida"
+                class="valor-contador valor-assist"
+                >0</span
+              >
+              <button
+                type="button"
+                onclick="alterarContador('qtdAssistenciasPartida', 1)"
+                class="btn-contador btn-mais-assist"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            <p class="text-descricao-modal">
+              Passes que resultaram em gol da equipe
+            </p>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="footer-modal">
+          <button
+            onclick="closeModal('overlayEditarPartida')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
           <button class="btn-verde btn-criar-temporada">
             Salvar alterações
           </button>

@@ -143,6 +143,10 @@ hr {
   color: var(--cor-painel-escuro);
 }
 
+.input-date {
+  width: 45%;
+}
+
 .msgErro {
   display: none;
   color: var(--cor-error);
