@@ -1,5 +1,32 @@
 const graficoBarras = document.getElementById("grafico-barras");
 const graficoLinha = document.getElementById("grafico-linha");
+const userName = document.getElementById("userName");
+const fotoPerfil = document.getElementById("fotoPerfil");
+
+const sessionNome = sessionStorage.getItem("NOME");
+
+const nomeSobreNome = sessionNome.split(" ");
+const primeiroNome = nomeSobreNome[0];
+const ultimoNome =
+  nomeSobreNome[nomeSobreNome.length - 1] !== undefined
+    ? nomeSobreNome[nomeSobreNome.length - 1]
+    : "";
+
+userName.innerText = `${primeiroNome} ${ultimoNome}`;
+fotoPerfil.innerText = primeiroNome.charAt(0) + ultimoNome.charAt(0);
+
+window.logout = async () => {
+  let msgLogout = "Saindo da conta.";
+  await notificao("sucesso", msgLogout);
+
+  sessionStorage.removeItem("ID_USUARIO");
+  sessionStorage.removeItem("NOME");
+  sessionStorage.removeItem("EMAIL");
+
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 3000);
+};
 
 new Chart(graficoBarras, {
   type: "bar",
