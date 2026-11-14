@@ -43,9 +43,21 @@
   color: var(--cor-branco);
 }
 
+.btn-criar-chamada-final:hover {
+  background: var(--cor-turf-green-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(4, 114, 77, 0.22);
+}
+
 .btn-entrar-chamada-final {
   border-radius: var(--raio-botao);
   padding: 14px 22px;
   border: 1px solid var(--cor-borda-clara);
   background-color: var(--cor-branco);
+}
+
+.btn-entrar-chamada-final:hover {
+  background-color: var(--cor-fundo-suave);
+  border-color: var(--cor-texto-claro-apoio);
+  transform: translateY(-1px);
 }

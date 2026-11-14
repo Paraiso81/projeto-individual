@@ -43,12 +43,44 @@
 }
 
 .link-visao-geral {
-  padding: 4px 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid transparent;
   color: var(--cor-texto-claro-apoio);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   font-size: var(--fs-nav);
+  border-radius: var(--raio-botao);
+  transition:
+    color var(--transicao-padrao),
+    background-color var(--transicao-padrao),
+    border-color var(--transicao-padrao);
+}
+
+.link-visao-geral::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 22px;
+  background-color: var(--cor-verde-claro);
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: opacity var(--transicao-padrao);
+}
+
+.link-visao-geral:hover {
+  background-color: rgba(30, 41, 59, 1);
+  border-color: var(--cor-texto-escuro);
+  color: var(--cor-branco);
+  font-weight: 700;
+}
+
+.link-visao-geral:hover::before {
+  opacity: 1;
 }
 
 .container-temporada {
@@ -56,7 +88,9 @@
   flex-direction: column;
   flex-grow: 1;
   max-width: 100%;
+  gap: 4px;
 }
+
 .linha-temporada {
   position: relative;
   display: flex;
@@ -65,24 +99,17 @@
   align-items: center;
   color: var(--cor-texto-claro-apoio);
   font-size: var(--fs-nav);
-  padding: 12px 0;
-}
-
-.linha-temporada-ativa {
   padding: 10px 12px;
   margin: 0 -8px;
-  background-color: rgba(30, 41, 59, 1);
-  border: 1px solid var(--cor-texto-escuro);
+  border: 1px solid transparent;
   border-radius: var(--raio-botao);
-  color: var(--cor-branco);
+  transition:
+    color var(--transicao-padrao),
+    background-color var(--transicao-padrao),
+    border-color var(--transicao-padrao);
 }
 
-.linha-temporada-ativa .text-nome-temporada {
-  font-weight: 700;
-  color: var(--cor-branco);
-}
-
-.linha-temporada-ativa::before {
+.linha-temporada::before {
   content: "";
   position: absolute;
   left: 0;
@@ -90,6 +117,26 @@
   height: 22px;
   background-color: var(--cor-verde-claro);
   border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: opacity var(--transicao-padrao);
+}
+
+.linha-temporada:hover,
+.linha-temporada-ativa {
+  background-color: rgba(30, 41, 59, 1);
+  border-color: var(--cor-texto-escuro);
+  color: var(--cor-branco);
+}
+
+.linha-temporada:hover .text-nome-temporada,
+.linha-temporada-ativa .text-nome-temporada {
+  font-weight: 700;
+  color: var(--cor-branco);
+}
+
+.linha-temporada:hover::before,
+.linha-temporada-ativa::before {
+  opacity: 1;
 }
 .text-nome-temporada {
   font-style: normal;
@@ -148,4 +195,8 @@
 .btn-logout {
   background-color: transparent;
   color: var(--cor-texto-apoio);
+}
+
+.btn-logout:hover {
+  color: var(--cor-branco);
 }

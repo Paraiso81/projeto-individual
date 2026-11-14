@@ -3,7 +3,9 @@
 :root {
   --cor-ink-black: #0d1321;
   --cor-turf-green: #04724d;
+  --cor-turf-green-hover: #035c3e;
   --cor-ocean-deep: #1768ac;
+  --cor-ocean-deep-hover: #12538a;
   --cor-alabaster-grey: #e2e2e2;
   --cor-taupe-grey: #7a6563;
 
@@ -20,10 +22,13 @@
   --cor-borda-escura: #1e293b;
 
   --cor-error: #b91c1c;
+  --cor-error-hover: #991b1b;
   --cor-fundo-error: #fef2f2;
   --cor-borda-error: #fecaca;
   --cor-borda-alerta: #feea86;
   --cor-texto-alerta: #deba02;
+
+  --transicao-padrao: 0.2s ease;
 
   --fonte-titulos: "Plus Jakarta Sans", sans-serif;
   --fonte-texto: "Inter", sans-serif;
@@ -95,6 +100,16 @@ button {
   font-family: var(--fonte-texto);
   cursor: pointer;
   border: none;
+  transition:
+    background-color var(--transicao-padrao),
+    color var(--transicao-padrao),
+    border-color var(--transicao-padrao),
+    transform 0.15s ease,
+    box-shadow var(--transicao-padrao);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .logo {
@@ -110,6 +125,16 @@ button {
   border-radius: var(--raio-botao);
   background: var(--cor-turf-green);
   color: var(--cor-branco);
+}
+
+.btn-verde:hover {
+  background: var(--cor-turf-green-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(4, 114, 77, 0.22);
+}
+
+.btn-verde:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .kicker {
@@ -143,6 +168,20 @@ hr {
   border: 1px solid var(--cor-borda-clara);
   padding: 13px 14px;
   color: var(--cor-painel-escuro);
+  outline: none;
+  transition:
+    border-color var(--transicao-padrao),
+    box-shadow var(--transicao-padrao),
+    background-color var(--transicao-padrao);
+}
+
+.input:hover {
+  border-color: var(--cor-texto-claro-apoio);
+}
+
+.input:focus {
+  border-color: var(--cor-turf-green);
+  box-shadow: 0 0 0 3px rgba(4, 114, 77, 0.15);
 }
 
 .input-date {

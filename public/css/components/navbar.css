@@ -25,9 +25,30 @@
   padding: 0 24px;
 }
 
+.btn-entrar:hover {
+  color: var(--cor-branco);
+}
+
 .btn-criar {
   background-color: var(--cor-turf-green);
   color: var(--cor-alabaster-grey);
   padding: 10px 18px;
   border-radius: var(--raio-botao);
+  display: inline-block;
+  transition:
+    background-color var(--transicao-padrao),
+    color var(--transicao-padrao),
+    transform 0.15s ease,
+    box-shadow var(--transicao-padrao);
+}
+
+.btn-criar:hover {
+  background-color: var(--cor-turf-green-hover);
+  color: var(--cor-branco);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(4, 114, 77, 0.22);
+}
+
+.btn-criar:active {
+  transform: translateY(0) scale(0.98);
 }
