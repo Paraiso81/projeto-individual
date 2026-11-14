@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/components/sidebar.css" />
     <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
+    <link rel="stylesheet" href="../css/components/modal.css" />
+    <link rel="stylesheet" href="../css/components/criarTemporadaModal.css" />
     <title>Visão Geral - Minha temporada</title>
 
+    <script
+      src="https://kit.fontawesome.com/79924d81b1.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard/visao-geral.js" defer></script>
   </head>
@@ -18,7 +24,9 @@
       </header>
       <hr />
       <p class="text-sidebar">PAINEL DO JOGADOR</p>
-      <a href="./dashboard-visao-geral.html" class="btn-visao-geral">Visão geral</a>
+      <a href="./dashboard-visao-geral.html" class="btn-visao-geral"
+        >Visão geral</a
+      >
 
       <p class="text-sidebar">
         MINHAS TEMPORADAS <span id="qtdTemporada">(4)</span>
@@ -124,5 +132,49 @@
         </section>
       </div>
     </main>
+    <div class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <div>
+            <h1>Criar nova temporada</h1>
+            <p>Adicione um novo ano ou campeonato para separar seus jogos.</p>
+          </div>
+          <button class="btn-close">
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <hr />
+        <div class="container-input">
+          <label for="iptNomeTemporada">Nome da temporada *</label>
+          <input
+            class="input"
+            id="iptNomeTemporada"
+            type="text"
+            placeholder="Digite o nome da temporada."
+          />
+          <p class="text-descricao-modal">
+            Mínimo de 8 caracteres (ex: Temporada 2027)
+          </p>
+        </div>
+        <div class="container-input">
+          <label for="iptAnoTemporada">Ano de referência *</label>
+          <input
+            class="input"
+            id="iptAnoTemporada"
+            type="text"
+            placeholder="Digite o ano de referência."
+          />
+          <p class="text-descricao-modal">
+            Cada temporada deve possuir um ano único de referência
+          </p>
+        </div>
+        <hr />
+
+        <div class="footer-modal">
+          <button class="btn-cancelar">Cancelar</button>
+          <button class="btn-verde btn-criar-temporada"><i class="fa-solid fa-plus"></i>Criar temporada</button>
+        </div>
+      </article>
+    </div>
   </body>
 </html>
