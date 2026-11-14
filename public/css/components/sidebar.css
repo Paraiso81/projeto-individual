@@ -1,5 +1,5 @@
 .sidebar {
-  position: fixed;
+  position: sticky;
   width: 260px;
   height: 100%;
   padding: 30px 24px;
@@ -96,6 +96,7 @@
 .foto-perfil {
   padding: 10px;
   background-color: var(--cor-ocean-deep);
+  color: var(--cor-branco);
   border-radius: 100%;
   font-size: var(--fs-kicker);
   font-weight: 700;
