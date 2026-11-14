@@ -1,0 +1,151 @@
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(13, 19, 33, 0.65);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  height: fit-content;
+  max-height: 92vh;
+  overflow-y: auto;
+  width: 45%;
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-painel);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 36px;
+  gap: 20px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-header h1 {
+  color: var(--cor-ink-black);
+  font-family: var(--fonte-titulos);
+  font-size: var(--fs-h4);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.modal-header p {
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-kicker);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btn-close {
+  padding: 8px 11px;
+  border-radius: var(--raio-botao);
+}
+
+.icon-close {
+  color: var(--cor-texto-apoio);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.text-descricao-modal {
+  color: var(--cor-texto-apoio);
+  font-size: var(--fs-grafico);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer-modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-cancelar {
+  padding: 14px 21px;
+  border-radius: var(--raio-botao);
+  border: 1px solid var(--cor-borda-clara);
+  background-color: transparent;
+}
+
+.btn-criar-temporada {
+  padding: 14px 21px;
+}
+
+.linha-inputs-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.box-contador {
+  padding: 12px 14px;
+  background-color: var(--cor-fundo-suave);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-card);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-contador {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--raio-botao);
+  font-size: var(--fs-grafico);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-menos {
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  color: var(--cor-texto-escuro);
+}
+
+.btn-mais-gols {
+  background-color: var(--cor-turf-green);
+  color: var(--cor-branco);
+}
+
+.btn-mais-assist {
+  background-color: var(--cor-ocean-deep);
+  color: var(--cor-branco);
+}
+
+.valor-contador {
+  font-family: var(--fonte-titulos);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.valor-gols {
+  color: var(--cor-turf-green);
+}
+
+.valor-assist {
+  color: var(--cor-ocean-deep);
+}

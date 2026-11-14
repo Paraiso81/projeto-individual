@@ -1,0 +1,53 @@
+.icon-alerta {
+  padding: 12px;
+  background-color: var(--cor-fundo-error);
+  border: 1px solid var(--cor-borda-error);
+  border-radius: var(--raio-botao);
+  color: var(--cor-error);
+  font-size: var(--fs-lead);
+}
+
+.text-sublinhado {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.text-partida {
+  font-style: normal;
+  font-size: var(--fs-nav);
+  font-weight: 600;
+  line-height: normal;
+}
+
+.contaner-aviso {
+  background-color: var(--cor-fundo-error);
+  border: 1px solid var(--cor-borda-error);
+  padding: 18px 14px;
+  border-radius: var(--raio-card);
+}
+
+.text-vermelho {
+  color: var(--cor-error);
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-descricao {
+  font-size: var(--fs-kicker);
+}
+
+.btn-excluir {
+  padding: 15px 22px;
+  border-radius: var(--raio-botao);
+  background-color: var(--cor-error);
+  color: var(--cor-branco);
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

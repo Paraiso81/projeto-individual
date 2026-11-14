@@ -20,6 +20,8 @@
   --cor-borda-escura: #1e293b;
 
   --cor-error: #b91c1c;
+  --cor-fundo-error: #fef2f2;
+  --cor-borda-error: #fecaca;
   --cor-borda-alerta: #feea86;
   --cor-texto-alerta: #deba02;
 
@@ -95,6 +97,15 @@ button {
   border: none;
 }
 
+.logo {
+  color: var(--cor-branco);
+  font-family: var(--fonte-titulos);
+  font-size: var(--fs-marca);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 .btn-verde {
   border-radius: var(--raio-botao);
   background: var(--cor-turf-green);
@@ -113,11 +124,29 @@ hr {
   color: var(--cor-borda-clara);
 }
 
+.container-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.container-input label {
+  color: var(--cor-ink-black);
+  font-size: var(--fs-nav);
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
 .input {
   border-radius: var(--raio-botao);
   border: 1px solid var(--cor-borda-clara);
   padding: 13px 14px;
   color: var(--cor-painel-escuro);
+}
+
+.input-date {
+  width: 45%;
 }
 
 .msgErro {
@@ -131,8 +160,8 @@ hr {
 
 .erroGeral {
   display: none;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
+  background-color: var(--cor-fundo-error);
+  border: 1px solid var(--cor-borda-error);
   color: var(--cor-error);
   font-size: var(--fs-kicker);
   padding: 10px 14px;
