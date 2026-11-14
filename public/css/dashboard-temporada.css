@@ -1,0 +1,276 @@
+.breadcrumb-temporada {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+  line-height: normal;
+}
+
+.breadcrumb-temporada .kicker {
+  font-size: var(--fs-grafico);
+  font-weight: 700;
+}
+
+.titulo-temporada-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.acoes-temporada {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-editar-temporada {
+  padding: 10px 20px;
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-botao);
+  color: var(--cor-texto-escuro);
+  font-size: var(--fs-nav);
+  font-weight: 700;
+  line-height: normal;
+}
+
+.conteudo-dashboard {
+  padding: 12px 36px 16px;
+  gap: 12px;
+}
+
+.card-kpi {
+  padding: 12px 20px;
+  gap: 2px;
+}
+
+.valor-kpi {
+  font-size: var(--fs-h3);
+}
+
+.section-analise-temporada {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 2.1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.card-grafico-partidas {
+  height: 100%;
+  padding: 14px 24px;
+  gap: 8px;
+}
+
+.card-destaque-temporada {
+  height: 100%;
+  min-height: 0;
+  padding: 14px 20px;
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.topo-destaque {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kicker-destaque {
+  font-size: var(--fs-grafico);
+  font-weight: 700;
+}
+
+.adversario-destaque {
+  font-family: var(--fonte-titulos);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cor-ink-black);
+  line-height: 1.2;
+}
+
+.data-destaque {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+  line-height: normal;
+}
+
+.box-numeros-destaque {
+  padding: 10px 16px;
+  background-color: var(--cor-fundo-suave);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-botao);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.destaque-gols {
+  font-family: var(--fonte-titulos);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cor-turf-green);
+  white-space: nowrap;
+}
+
+.divisor-destaque {
+  width: 1px;
+  height: 24px;
+  background-color: var(--cor-borda-clara);
+  flex-shrink: 0;
+}
+
+.destaque-assist {
+  font-family: var(--fonte-titulos);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cor-ocean-deep);
+  white-space: nowrap;
+}
+
+.rodape-destaque {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+  line-height: normal;
+}
+
+.section-tabela-partidas {
+  flex: 1.25;
+  min-height: 0;
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header-tabela-partidas {
+  flex-shrink: 0;
+  padding: 12px 24px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-tabela-partidas h2 {
+  font-family: var(--fonte-titulos);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cor-ink-black);
+  line-height: 1.25;
+}
+
+.header-tabela-partidas p {
+  font-size: var(--fs-grafico);
+  color: var(--cor-texto-apoio);
+  line-height: normal;
+}
+
+.container-tabela {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.tabela-partidas {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabela-partidas thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--cor-fundo-suave);
+  border-top: 1px solid var(--cor-borda-clara);
+  border-bottom: 1px solid var(--cor-borda-clara);
+}
+
+.tabela-partidas th {
+  padding: 8px 24px;
+  font-size: var(--fs-grafico);
+  font-weight: 700;
+  color: var(--cor-texto-apoio);
+  line-height: normal;
+}
+
+.tabela-partidas td {
+  padding: 9px 24px;
+  border-bottom: 1px solid var(--cor-borda-clara);
+  font-size: var(--fs-nav);
+  line-height: normal;
+  vertical-align: middle;
+}
+
+.tabela-partidas tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.col-data {
+  color: var(--cor-texto-escuro);
+  font-weight: 400;
+}
+
+.col-adversario {
+  color: var(--cor-ink-black);
+  font-weight: 700;
+}
+
+.badge-tabela {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--raio-painel);
+  font-size: var(--fs-kicker);
+  font-weight: 700;
+}
+
+.badge-gols {
+  background-color: rgba(4, 114, 77, 0.12);
+  color: var(--cor-turf-green);
+}
+
+.badge-assist {
+  background-color: rgba(23, 104, 172, 0.12);
+  color: var(--cor-ocean-deep);
+}
+
+.badge-neutro {
+  background-color: var(--cor-fundo-suave);
+  color: var(--cor-texto-apoio);
+  font-weight: 400;
+}
+
+.col-participacao {
+  color: var(--cor-ink-black);
+  font-weight: 700;
+  font-size: var(--fs-kicker);
+}
+
+.col-acoes {
+  white-space: nowrap;
+}
+
+.btn-acao-editar {
+  margin-right: 14px;
+  background-color: transparent;
+  color: var(--cor-turf-green);
+  font-size: var(--fs-kicker);
+  font-weight: 700;
+}
+
+.btn-acao-excluir {
+  background-color: transparent;
+  color: var(--cor-error);
+  font-size: var(--fs-kicker);
+  font-weight: 400;
+}
