@@ -20,6 +20,8 @@
   --cor-borda-escura: #1e293b;
 
   --cor-error: #b91c1c;
+  --cor-fundo-error: #fef2f2;
+  --cor-borda-error: #fecaca;
   --cor-borda-alerta: #feea86;
   --cor-texto-alerta: #deba02;
 
@@ -158,8 +160,8 @@ hr {
 
 .erroGeral {
   display: none;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
+  background-color: var(--cor-fundo-error);
+  border: 1px solid var(--cor-borda-error);
   color: var(--cor-error);
   font-size: var(--fs-kicker);
   padding: 10px 14px;
