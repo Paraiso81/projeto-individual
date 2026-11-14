@@ -34,6 +34,11 @@
   line-height: normal;
 }
 
+.btn-editar-temporada:hover {
+  background-color: var(--cor-fundo-suave);
+  border-color: var(--cor-texto-claro-apoio);
+}
+
 .conteudo-dashboard {
   padding: 12px 36px 16px;
   gap: 12px;
@@ -268,9 +273,19 @@
   font-weight: 700;
 }
 
+.btn-acao-editar:hover {
+  color: var(--cor-turf-green-hover);
+  text-decoration: underline;
+}
+
 .btn-acao-excluir {
   background-color: transparent;
   color: var(--cor-error);
   font-size: var(--fs-kicker);
   font-weight: 400;
+}
+
+.btn-acao-excluir:hover {
+  color: var(--cor-error-hover);
+  text-decoration: underline;
 }
