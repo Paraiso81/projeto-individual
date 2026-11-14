@@ -15,7 +15,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  height: 75%;
+  height: fit-content;
+  max-height: 92vh;
+  overflow-y: auto;
   width: 45%;
   background-color: var(--cor-branco);
   border: 1px solid var(--cor-borda-clara);
@@ -23,7 +25,7 @@
   display: flex;
   flex-direction: column;
   padding: 28px 36px;
-  gap: 24px;
+  gap: 20px;
 }
 
 .modal-header {
@@ -87,4 +89,63 @@
 
 .btn-criar-temporada {
   padding: 14px 21px;
+}
+
+.linha-inputs-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.box-contador {
+  padding: 12px 14px;
+  background-color: var(--cor-fundo-suave);
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: var(--raio-card);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-contador {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--raio-botao);
+  font-size: var(--fs-grafico);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-menos {
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda-clara);
+  color: var(--cor-texto-escuro);
+}
+
+.btn-mais-gols {
+  background-color: var(--cor-turf-green);
+  color: var(--cor-branco);
+}
+
+.btn-mais-assist {
+  background-color: var(--cor-ocean-deep);
+  color: var(--cor-branco);
+}
+
+.valor-contador {
+  font-family: var(--fonte-titulos);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.valor-gols {
+  color: var(--cor-turf-green);
+}
+
+.valor-assist {
+  color: var(--cor-ocean-deep);
 }
