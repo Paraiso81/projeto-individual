@@ -184,8 +184,16 @@
         <hr />
 
         <div class="footer-modal">
-          <button class="btn-cancelar">Cancelar</button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="closeModal('overlayCriarTemporada')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button
+            onclick="criarTemporada()"
+            class="btn-verde btn-criar-temporada"
+          >
             <i class="fa-solid fa-plus"></i>Criar temporada
           </button>
         </div>

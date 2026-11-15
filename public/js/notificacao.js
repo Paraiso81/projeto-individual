@@ -1,25 +1,26 @@
-async function notificao(tipo, msg) {
+async function notificacao(tipo, msg) {
   console.log(tipo, msg);
-  let notificao = document.getElementById("notificacao");
-  notificao.classList.add("container-notificacao");
-  notificao.style.display = "flex";
+  let divNotificacao = document.getElementById("notificacao");
+  divNotificacao.classList.remove("alerta", "sucesso");
+  divNotificacao.classList.add("container-notificacao");
+  divNotificacao.style.display = "flex";
 
-  console.log(notificao);
+  console.log(divNotificacao);
   setTimeout(() => {
-    notificao.style.display = "none";
+    divNotificacao.style.display = "none";
   }, 6000);
 
   if (tipo === "alerta") {
-    notificao.classList.add("alerta");
-    return (notificao.innerHTML = `
+    divNotificacao.classList.add("alerta");
+    return (divNotificacao.innerHTML = `
         <span class="icon-notificacao icon-alerta"
           ><i class="fa-solid fa-circle-exclamation"></i
         ></span>
         <p class="descricao-notificacao">${msg}</p>
         `);
   } else if (tipo === "sucesso") {
-    notificao.classList.add("sucesso");
-    return (notificao.innerHTML = `
+    divNotificacao.classList.add("sucesso");
+    return (divNotificacao.innerHTML = `
         <span class="icon-notificacao icon-sucesso"
           ><i class="fa-solid fa-circle-check"></i
         ></span>

@@ -54,7 +54,7 @@ async function login() {
         sessionStorage.NOME = json.nome;
         sessionStorage.EMAIL = json.email;
       });
-      await notificao("sucesso", msgSucesso);
+      await notificacao("sucesso", msgSucesso);
       setTimeout(() => {
         window.location = "../../pages/dashboard-visao-geral.html";
       }, 3000);
@@ -64,7 +64,7 @@ async function login() {
       console.log("Houve um erro ao tentar realizar o login!");
       erroLogin.style.display = "block";
       erroLogin.innerText = "Email ou senha inválido";
-      await notificao("alerta", msgErro);
+      await notificacao("alerta", msgErro);
       setTimeout(() => {
         erroLogin.style.display = "none";
       }, 5000);

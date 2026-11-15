@@ -17,7 +17,7 @@ fotoPerfil.innerText = primeiroNome.charAt(0) + ultimoNome.charAt(0);
 
 window.logout = async () => {
   let msgLogout = "Saindo da conta.";
-  await notificao("sucesso", msgLogout);
+  await notificacao("sucesso", msgLogout);
 
   sessionStorage.removeItem("ID_USUARIO");
   sessionStorage.removeItem("NOME");
@@ -46,7 +46,7 @@ async function listarTemporadas() {
     })
     .catch(async function (erro) {
       console.log(erro);
-      await notificao("alerta", "Houve um problema ao carregar os dados.");
+      await notificacao("alerta", "Houve um problema ao carregar os dados.");
       listaTemporada.innerHTML = ``;
     });
 
