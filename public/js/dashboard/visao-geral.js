@@ -1,5 +1,4 @@
-const graficoBarras = document.getElementById("grafico-barras");
-const graficoLinha = document.getElementById("grafico-linha");
+const usuarioId = sessionStorage.getItem("ID_USUARIO");
 const userName = document.getElementById("userName");
 const fotoPerfil = document.getElementById("fotoPerfil");
 
@@ -27,6 +26,48 @@ window.logout = async () => {
     window.location.href = "../../index.html";
   }, 3000);
 };
+
+async function listarTemporadas() {
+  const listaTemporada = document.getElementById("listaTemporada");
+  const qtdTemporada = document.getElementById("qtdTemporada");
+
+  const data = await fetch(`/temporadas/usuario/${usuarioId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      if (response.ok) {
+        console.log(temporada, "temporadas");
+      }
+    })
+    .catch(async function (erro) {
+      console.log(erro);
+      await notificao("alerta", "Houve um problema ao carregar os dados.");
+      listaTemporada.innerHTML = ` `;
+    });
+
+  if (data == undefined) {
+    qtdTemporada.innerText = ""
+    listaTemporada.innerHTML = `
+        <div class="estado-vazio estado-vazio-escuro">
+          <div class="icone-estado-vazio">
+            <i class="fa-solid fa-info"></i>
+          </div>
+        <p class="titulo-estado-vazio">Nenhuma temporada cadastrada</p>
+      <span class="descricao-estado-vazio">
+        Crie sua primeira temporada para começar.
+      </span>
+    </div>
+      `;
+
+    return;
+  }
+}
+
+const graficoBarras = document.getElementById("grafico-barras");
+const graficoLinha = document.getElementById("grafico-linha");
 
 new Chart(graficoBarras, {
   type: "bar",
@@ -121,4 +162,8 @@ new Chart(graficoLinha, {
       },
     },
   },
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  listarTemporadas();
 });

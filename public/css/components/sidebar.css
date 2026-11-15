@@ -139,6 +139,8 @@
   opacity: 1;
 }
 .text-nome-temporada {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-nav);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
