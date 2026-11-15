@@ -49,6 +49,7 @@ async function todasTemporadaUsuario(req, res) {
   temporadaModel
     .consultarTemporadasUsuario(usuarioId)
     .then(function (response) {
+      console.log(response)
       if (response.length > 0) {
         res.status(200).json(response);
       } else {

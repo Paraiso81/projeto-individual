@@ -32,9 +32,44 @@ function consultarTemporada(id, nome, ano) {
   return database.executar(sql, valores);
 }
 
-function consultarTemporadasUsuario(usuarioId) {
-  var sql = `SELECT t.id, t.nome, t.ano FROM usuario u JOIN temporada t ON t.fk_usuario = u.id WHERE u.id = ?`;
-  return database.executar(sql, [usuarioId]);
+async function consultarTemporadasUsuario(usuarioId) {
+  var sql = `
+  SELECT 
+    t.id, t.nome, t.ano, 
+    p.id partidaId, p.adversario, p.gols, p.assistencias, p.dt_partida , p.fk_temporada 
+    FROM usuario u 
+  JOIN temporada t ON t.fk_usuario = u.id 
+  LEFT JOIN partida p ON p.fk_temporada = t.id 
+  WHERE u.id = ?`;
+  const data = await database.executar(sql, [usuarioId]);
+  const temporadas = [];
+
+  for (let i = 0; i < data.length; i++) {
+    let linha = data[i];
+
+    let temporada = temporadas.find((temporada) => temporada.id === linha.id);
+
+    if (!temporada) {
+      temporada = {
+        id: linha.id,
+        nome: linha.nome,
+        ano: linha.ano,
+        partidas: [],
+      };
+      temporadas.push(temporada);
+    }
+
+    if (linha.partidaId !== null) {
+      temporada.partidas.push({
+        id: linha.partidaId,
+        adversario: linha.adversario,
+        gols: linha.gols,
+        assistencias: linha.assistencias,
+        dt_partida: linha.dt_partida,
+      });
+    }
+  }
+  return temporadas;
 }
 
 async function buscarTemporada(temporadaId, usuarioId) {

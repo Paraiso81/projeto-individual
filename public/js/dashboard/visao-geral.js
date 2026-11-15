@@ -3,6 +3,7 @@ const userName = document.getElementById("userName");
 const fotoPerfil = document.getElementById("fotoPerfil");
 
 const sessionNome = sessionStorage.getItem("NOME");
+const anoAtual = new Date().getFullYear();
 
 const nomeSobreNome = sessionNome.split(" ");
 const primeiroNome = nomeSobreNome[0];
@@ -39,17 +40,41 @@ async function listarTemporadas() {
   })
     .then(function (response) {
       if (response.ok) {
-        console.log(temporada, "temporadas");
+        console.log(response, "temporadas");
       }
+      return response.json();
     })
     .catch(async function (erro) {
       console.log(erro);
       await notificao("alerta", "Houve um problema ao carregar os dados.");
-      listaTemporada.innerHTML = ` `;
+      listaTemporada.innerHTML = ``;
     });
 
-  if (data == undefined) {
-    qtdTemporada.innerText = ""
+  console.log(data);
+
+  if (data !== undefined) {
+    qtdTemporada.innerText = `(${data.length})`;
+    for (let i = 0; i < data.length; i++) {
+      if (Number(data[i].ano) === anoAtual) {
+        listaTemporada.innerHTML += `
+        <a href="./dashboard-temporada.html" id="temporada${data[i].id}" class="linha-temporada">
+          <span class="dot dot-verde"></span>
+          <p class="text-nome-temporada">${data[i].nome}</p>
+          <span class="badge-ativa">Atual</span>
+        </a>
+        `;
+      } else {
+        listaTemporada.innerHTML += `
+        <a href="./dashboard-temporada.html" id="temporada${data[i].id}" class="linha-temporada">
+        <span class="dot dot-azul"></span>
+        <p class="text-nome-temporada">${data[i].nome}</p>
+        <span class="text-sidebar">${data[i].partidas.length} jg</span>
+        </a>
+        `;
+      }
+    }
+  } else {
+    qtdTemporada.innerText = "";
     listaTemporada.innerHTML = `
         <div class="estado-vazio estado-vazio-escuro">
           <div class="icone-estado-vazio">
@@ -61,8 +86,6 @@ async function listarTemporadas() {
       </span>
     </div>
       `;
-
-    return;
   }
 }
 
