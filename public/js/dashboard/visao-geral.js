@@ -4,7 +4,6 @@ const anoTemporada = document.getElementById("iptAnoTemporada");
 async function criarTemporada() {
   let nome = nomeTemporada.value;
   let ano = anoTemporada.value;
-
   const response = await fetch("/temporadas/", {
     method: "POST",
     headers: {
@@ -17,6 +16,7 @@ async function criarTemporada() {
     }),
   })
     .then(async function (response) {
+      console.log(response, "response");
       if (response.ok) {
         await notificacao("sucesso", "Temporada criada com sucesso.");
         closeModal("overlayCriarTemporada");
@@ -30,6 +30,8 @@ async function criarTemporada() {
       console.log(erro);
       return notificacao("alerta", "Erro ao criar temporada.");
     });
+
+  console.log(response, "respotas da api");
 }
 
 const graficoBarras = document.getElementById("grafico-barras");

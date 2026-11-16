@@ -3,6 +3,7 @@ var usuarioModel = require("../models/usuarioModel");
 
 async function createTemporada(req, res) {
   const { usuarioId, nome, ano } = req.body;
+  console.log(usuarioId, nome, ano, "Dados da req");
 
   if (usuarioId == undefined || nome == undefined || ano == undefined)
     return res.status(400).send("Valores undefined.");
@@ -29,7 +30,8 @@ async function createTemporada(req, res) {
 
   temporadaModel
     .createTemporada(nome, ano, usuarioId)
-    .then(function () {
+    .then(function (response) {
+      console.log(response);
       res.status(201).json("Temporada criada com sucesso.");
     })
     .catch(function (erro) {
@@ -49,7 +51,7 @@ async function todasTemporadaUsuario(req, res) {
   temporadaModel
     .consultarTemporadasUsuario(usuarioId)
     .then(function (response) {
-      console.log(response)
+      console.log(response);
       if (response.length > 0) {
         res.status(200).json(response);
       } else {

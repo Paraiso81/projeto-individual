@@ -22,6 +22,7 @@ window.logout = async () => {
   sessionStorage.removeItem("ID_USUARIO");
   sessionStorage.removeItem("NOME");
   sessionStorage.removeItem("EMAIL");
+  sessionStorage.removeItem("TODAS_TEMPORADAS");
 
   setTimeout(() => {
     window.location.href = "../../index.html";
@@ -31,44 +32,30 @@ window.logout = async () => {
 async function listarTemporadas() {
   const listaTemporada = document.getElementById("listaTemporada");
   const qtdTemporada = document.getElementById("qtdTemporada");
+  listaTemporada.innerHTML = "";
 
-  const data = await fetch(`/temporadas/usuario/${usuarioId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(function (response) {
-      if (response.ok) {
-        console.log(response, "temporadas");
-      }
-      return response.json();
-    })
-    .catch(async function (erro) {
-      console.log(erro);
-      await notificacao("alerta", "Houve um problema ao carregar os dados.");
-      listaTemporada.innerHTML = ``;
-    });
+  await buscarTemporadas();
 
-  console.log(data);
+  const temporadas = JSON.parse(sessionStorage.getItem("TODAS_TEMPORADAS"));
 
-  if (data !== undefined) {
-    qtdTemporada.innerText = `(${data.length})`;
-    for (let i = 0; i < data.length; i++) {
-      if (Number(data[i].ano) === anoAtual) {
+  if (temporadas !== null && temporadas.length > 0) {
+    qtdTemporada.innerText = `(${temporadas.length})`;
+
+    for (let i = 0; i < temporadas.length; i++) {
+      if (Number(temporadas[i].ano) === anoAtual) {
         listaTemporada.innerHTML += `
-        <a href="./dashboard-temporada.html" id="temporada${data[i].id}" class="linha-temporada">
+        <a href="./dashboard-temporada.html?id=${temporadas[i].id}" id="temporada${temporadas[i].id}" class="linha-temporada">
           <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">${data[i].nome}</p>
+          <p class="text-nome-temporada">${temporadas[i].nome}</p>
           <span class="badge-ativa">Atual</span>
         </a>
         `;
       } else {
         listaTemporada.innerHTML += `
-        <a href="./dashboard-temporada.html" id="temporada${data[i].id}" class="linha-temporada">
-        <span class="dot dot-azul"></span>
-        <p class="text-nome-temporada">${data[i].nome}</p>
-        <span class="text-sidebar">${data[i].partidas.length} jg</span>
+        <a href="./dashboard-temporada.html?id=${temporadas[i].id}" id="temporada${temporadas[i].id}" class="linha-temporada">
+          <span class="dot dot-azul"></span>
+          <p class="text-nome-temporada">${temporadas[i].nome}</p>
+          <span class="text-sidebar">${temporadas[i].partidas.length} jg</span>
         </a>
         `;
       }
@@ -80,11 +67,11 @@ async function listarTemporadas() {
           <div class="icone-estado-vazio">
             <i class="fa-solid fa-info"></i>
           </div>
-        <p class="titulo-estado-vazio">Nenhuma temporada cadastrada</p>
-      <span class="descricao-estado-vazio">
-        Crie sua primeira temporada para começar.
-      </span>
-    </div>
+          <p class="titulo-estado-vazio">Nenhuma temporada cadastrada</p>
+          <span class="descricao-estado-vazio">
+            Crie sua primeira temporada para começar.
+          </span>
+        </div>
       `;
   }
 }

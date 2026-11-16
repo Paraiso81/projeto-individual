@@ -1,48 +1,25 @@
-const graficoPartidas = document.getElementById("grafico-partidas");
+async function buscarTemporadas() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
-new Chart(graficoPartidas, {
-  type: "bar",
-  data: {
-    labels: ["07/09", "14/09", "21/09", "29/09", "08/10", "15/10"],
-    datasets: [
-      {
-        label: "Gols",
-        data: [0, 1, 2, 0, 1, 3],
-        borderWidth: 1,
-        backgroundColor: "#04724D",
-        borderRadius: 4,
-        barThickness: 18,
-      },
-      {
-        label: "Assistências",
-        data: [3, 0, 2, 1, 2, 1],
-        borderWidth: 1,
-        backgroundColor: "#1768AC",
-        borderRadius: 4,
-        barThickness: 18,
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-        },
-      },
-      x: {
-        grid: {
-          display: false,
-        },
-      },
+  const data = await fetch(`/temporadas/usuario/${idUsuario}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     },
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  },
-});
+  })
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .catch(async function (erro) {
+      console.log(erro);
+      await notificacao("alerta", "Houve um problema ao carregar os dados.");
+    });
+
+  if (data !== undefined) {
+    sessionStorage.setItem("TODAS_TEMPORADAS", JSON.stringify(data));
+  } else {
+    sessionStorage.removeItem("TODAS_TEMPORADAS");
+  }
+}

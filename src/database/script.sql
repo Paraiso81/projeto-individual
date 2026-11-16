@@ -5,7 +5,7 @@ CREATE TABLE usuario (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100),
 email VARCHAR(100) UNIQUE,
-senha VARCHAR(45),
+senha VARCHAR(100),
 dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
 dt_atualizacao DATETIME
 );
@@ -38,3 +38,5 @@ CONSTRAINT ck_fk_temporada
 );
 
 SELECT * FROM usuario;
+SELECT * FROM partida;
+SELECT * FROM temporada;
