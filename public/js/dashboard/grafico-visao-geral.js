@@ -1,55 +1,41 @@
-const nomeTemporada = document.getElementById("iptNomeTemporada");
-const anoTemporada = document.getElementById("iptAnoTemporada");
-
-async function criarTemporada() {
-  let nome = nomeTemporada.value;
-  let ano = anoTemporada.value;
-  const response = await fetch("/temporadas/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      usuarioId: usuarioId,
-      nome: nome,
-      ano: ano,
-    }),
-  })
-    .then(async function (response) {
-      console.log(response, "response");
-      if (response.ok) {
-        await notificacao("sucesso", "Temporada criada com sucesso.");
-        closeModal("overlayCriarTemporada");
-        listarTemporadas();
-      } else {
-        const msgErro = await response.text();
-        await notificacao("alerta", msgErro || "Erro ao criar temporada.");
-      }
-    })
-    .catch(async function (erro) {
-      console.log(erro);
-      return notificacao("alerta", "Erro ao criar temporada.");
-    });
-
-  console.log(response, "respotas da api");
-}
-
 const graficoBarras = document.getElementById("grafico-barras");
 const graficoLinha = document.getElementById("grafico-linha");
+const dadosTemporadas = JSON.parse(sessionStorage.getItem("TODAS_TEMPORADAS"));
+const listaNomesTemp = [];
+const listaGols = [];
+const listaAssistencias = [];
+
+function listarDadosGrafico() {
+  for (let i = 0; i < dadosTemporadas.length; i++) {
+    let temporada = dadosTemporadas[i];
+    listaNomesTemp.push(temporada.nome);
+
+    let somaGols = 0;
+    let somaAssistencias = 0;
+
+    for (let j = 0; j < temporada.partidas.length; j++) {
+      let partida = temporada.partidas[j];
+      somaGols += partida.gols;
+      somaAssistencias += partida.assistencias;
+    }
+
+    listaGols.push(somaGols);
+    listaAssistencias.push(somaAssistencias);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  listarDadosGrafico();
+});
 
 new Chart(graficoBarras, {
   type: "bar",
   data: {
-    labels: [
-      "Temporada 2023",
-      "Temporada 2024",
-      "Temporada 2025",
-      "Temporada 2026",
-    ],
+    labels: listaNomesTemp,
     datasets: [
       {
         label: "Gols",
-        data: [3, 5, 9, 7],
+        data: listaGols,
         borderWidth: 1,
         backgroundColor: "#04724D",
         borderRadius: 6,
@@ -57,7 +43,7 @@ new Chart(graficoBarras, {
       },
       {
         label: "Assistências",
-        data: [5, 7, 10, 9],
+        data: listaAssistencias,
         borderWidth: 1,
         backgroundColor: "#1768AC",
         borderRadius: 6,
@@ -130,8 +116,4 @@ new Chart(graficoLinha, {
       },
     },
   },
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  listarTemporadas();
 });
