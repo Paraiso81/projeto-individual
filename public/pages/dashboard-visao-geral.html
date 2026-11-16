@@ -20,6 +20,7 @@
     <script src="../js/dashboard/temporada.js" defer></script>
     <script src="../js/dashboard/sidebar.js" defer></script>
     <script src="../js/dashboard/visao-geral.js" defer></script>
+    <script src="../js/dashboard/kpi-visao-geral.js" defer></script>
     <script src="../js/dashboard/modal.js" defer></script>
   </head>
   <body>
@@ -36,19 +37,7 @@
       <p class="text-sidebar">
         MINHAS TEMPORADAS <span id="qtdTemporada"></span>
       </p>
-      <div id="listaTemporada" class="container-temporada">
-        <!-- <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">Temporada 2026</p>
-          <span class="badge-ativa">Atual</span>
-        </a>
-
-        <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-azul"></span>
-          <p class="text-nome-temporada">Temporada 2025</p>
-          <span class="text-sidebar">29 jg</span>
-        </a> -->
-      </div>
+      <div id="listaTemporada" class="container-temporada"></div>
 
       <footer class="sidebar-footer">
         <div id="fotoPerfil" class="foto-perfil"></div>
@@ -76,7 +65,7 @@
           <article class="card-kpi">
             <div class="header-kpi">
               <span class="rotulo-kpi">Partidas registradas</span>
-              <span class="badge-kpi" id="kpiQtdTemporadas">4 temp.</span>
+              <span class="badge-kpi" id="kpiQtdTemporadas"></span>
             </div>
             <strong class="valor-kpi" id="kpiPartidas">86</strong>
             <p class="apoio-kpi">Total acumulado nas temporadas</p>
@@ -89,7 +78,7 @@
             </div>
             <strong class="valor-kpi" id="kpiGols">24</strong>
             <p class="apoio-kpi apoio-verde" id="apoioKpiGols">
-              +7 gols na temporada 2026
+              
             </p>
           </article>
 
@@ -100,7 +89,7 @@
             </div>
             <strong class="valor-kpi" id="kpiAssistencias">31</strong>
             <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias">
-              +5 na temporada 2026
+              
             </p>
           </article>
 
@@ -110,7 +99,7 @@
             </div>
             <strong class="valor-kpi" id="kpiMediaGols">0,28</strong>
             <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia">
-              Média G+A: 0,64 por jogo
+             
             </p>
           </article>
         </section>
