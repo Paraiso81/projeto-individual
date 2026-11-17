@@ -1,26 +1,37 @@
 const graficoBarras = document.getElementById("grafico-barras");
 const graficoLinha = document.getElementById("grafico-linha");
 const dadosTemporadas = JSON.parse(sessionStorage.getItem("TODAS_TEMPORADAS"));
+
 const listaNomesTemp = [];
 const listaGols = [];
 const listaAssistencias = [];
+const listaMediaGolsTemporada = [];
 
 function listarDadosGrafico() {
+  let somaGols = 0;
+  let somaAssistencias = 0;
+
+  let totalTemporadas = dadosTemporadas.length;
+  let totalPartidas = 0;
+  let golsTemporada = 0;
+
   for (let i = 0; i < dadosTemporadas.length; i++) {
     let temporada = dadosTemporadas[i];
     listaNomesTemp.push(temporada.nome);
 
-    let somaGols = 0;
-    let somaAssistencias = 0;
+    golsTemporada = 0;
 
     for (let j = 0; j < temporada.partidas.length; j++) {
       let partida = temporada.partidas[j];
       somaGols += partida.gols;
       somaAssistencias += partida.assistencias;
+      totalPartidas++;
+      golsTemporada += partida.gols;
     }
-
+    let calcMediaGolsTemporada = golsTemporada / totalTemporadas;
     listaGols.push(somaGols);
     listaAssistencias.push(somaAssistencias);
+    listaMediaGolsTemporada.push(calcMediaGolsTemporada);
   }
 }
 
@@ -75,16 +86,11 @@ new Chart(graficoBarras, {
 new Chart(graficoLinha, {
   type: "line",
   data: {
-    labels: [
-      "Temporada 2023",
-      "Temporada 2024",
-      "Temporada 2025",
-      "Temporada 2026",
-    ],
+    labels: listaNomesTemp,
     datasets: [
       {
         label: "Gols / jogo",
-        data: [0.18, 0.24, 0.31, 0.35],
+        data: listaMediaGolsTemporada,
         borderColor: "#04724D",
         backgroundColor: "#04724D",
         borderWidth: 2.5,
@@ -117,3 +123,51 @@ new Chart(graficoLinha, {
     },
   },
 });
+
+const graficoGolsAssistenciasTemporada = document.getElementById(
+  "sectionGraficoGolsAssistenciaTemporada",
+);
+const graficoMediaGolsTemporada = document.getElementById(
+  "sectionGraficoMediaGols",
+);
+
+const legendaGrafcoGolsAssistencias = document.getElementById(
+  "legendaGraficoGolsAssistencias",
+);
+const legendaGraficoMediaGols = document.getElementById(
+  "legendaGraficoMediaGols",
+);
+
+if (
+  listaNomesTemp.length == 0 ||
+  listaAssistencias.length == 0 ||
+  listaGols.length == 0
+) {
+  legendaGrafcoGolsAssistencias.innerHTML = ``;
+  graficoGolsAssistenciasTemporada.innerHTML = `
+            <div class="estado-vazio">
+            <div class="icone-estado-vazio">
+              <i class="fa-solid fa-info"></i>
+            </div>
+            <h2 class="titulo-estado-vazio">Sem dados</h2>
+            <p class="descricao-estado-vazio">
+              nenhum dado para ser exibido no gráfico
+            </p>
+          </div>
+  `;
+}
+
+if (listaNomesTemp.length == 0 || listaGols.length == 0) {
+  legendaGraficoMediaGols.innerHTML = ``;
+  graficoBarras.innerHTML = `
+    <div class="estado-vazio">
+      <div class="icone-estado-vazio">
+          <i class="fa-solid fa-info"></i>
+      </div>
+        <h2 class="titulo-estado-vazio">Sem dados</h2>
+        <p class="descricao-estado-vazio">
+          nenhum dado para ser exibido no gráfico
+        </p>
+    </div>
+  `;
+}

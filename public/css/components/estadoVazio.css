@@ -38,7 +38,6 @@
   line-height: 1.4;
 }
 
-/* Variante escura e compacta (ex: Sidebar) */
 .estado-vazio-escuro {
   padding: 18px 14px;
   background-color: rgba(30, 41, 59, 0.45);

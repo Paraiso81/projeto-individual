@@ -67,7 +67,7 @@
               <span class="rotulo-kpi">Partidas registradas</span>
               <span class="badge-kpi" id="kpiQtdTemporadas"></span>
             </div>
-            <strong class="valor-kpi" id="kpiPartidas">86</strong>
+            <strong class="valor-kpi" id="kpiPartidas">0</strong>
             <p class="apoio-kpi">Total acumulado nas temporadas</p>
           </article>
 
@@ -76,10 +76,8 @@
               <span class="rotulo-kpi">Gols marcados</span>
               <span class="dot dot-verde-escuro"></span>
             </div>
-            <strong class="valor-kpi" id="kpiGols">24</strong>
-            <p class="apoio-kpi apoio-verde" id="apoioKpiGols">
-              
-            </p>
+            <strong class="valor-kpi" id="kpiGols">0</strong>
+            <p class="apoio-kpi apoio-verde" id="apoioKpiGols"></p>
           </article>
 
           <article class="card-kpi">
@@ -87,34 +85,33 @@
               <span class="rotulo-kpi">Assistências</span>
               <span class="dot dot-azul"></span>
             </div>
-            <strong class="valor-kpi" id="kpiAssistencias">31</strong>
-            <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias">
-              
-            </p>
+            <strong class="valor-kpi" id="kpiAssistencias">0</strong>
+            <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias"></p>
           </article>
 
           <article class="card-kpi card-kpi-escuro">
             <div class="header-kpi">
               <span class="rotulo-kpi">Média de gols / partida</span>
             </div>
-            <strong class="valor-kpi" id="kpiMediaGols">0,28</strong>
-            <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia">
-             
-            </p>
+            <strong class="valor-kpi" id="kpiMediaGols">0</strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia"></p>
           </article>
         </section>
 
         <section class="section-grafico">
           <div class="header-grafico">
             <h2 class="titulo-grafico">Gols e assistências por temporada</h2>
-            <div class="legenda-grafico">
+            <div class="legenda-grafico" id="legendaGraficoGolsAssistencias">
               <div class="dot dot-verde-escuro"></div>
               <p class="text-sidebar">Gols</p>
               <div class="dot dot-azul"></div>
               <p class="text-sidebar">Assistências</p>
             </div>
           </div>
-          <div class="container-canvas">
+          <div
+            class="container-canvas"
+            id="sectionGraficoGolsAssistenciaTemporada"
+          >
             <canvas id="grafico-barras"></canvas>
           </div>
         </section>
@@ -122,11 +119,20 @@
         <section class="section-grafico">
           <div class="header-grafico">
             <h2 class="titulo-grafico">Média de gols por temporada</h2>
-            <div class="legenda-grafico">
+            <div class="legenda-grafico" id="legendaGraficoMediaGols">
               <p class="text-sidebar">Gols / jogo</p>
             </div>
           </div>
-          <div class="container-canvas">
+          <div class="estado-vazio">
+            <div class="icone-estado-vazio">
+              <i class="fa-solid fa-info"></i>
+            </div>
+            <h2 class="titulo-estado-vazio">Sem dados</h2>
+            <p class="descricao-estado-vazio">
+              nenhum dado para ser exibido no gráfico
+            </p>
+          </div>
+          <div class="container-canvas" id="sectionGraficoMediaGols">
             <canvas id="grafico-linha"></canvas>
           </div>
         </section>
