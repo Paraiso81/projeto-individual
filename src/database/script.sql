@@ -12,14 +12,14 @@ dt_atualizacao DATETIME
 
 CREATE TABLE temporada (
 id INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45),
+nome VARCHAR(45) NOT NULL,
 ano DATE,
 dt_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 dt_atualizacao DATETIME,
 fk_usuario INT NOT NULL,
 
-CONSTRAINT ck_fk_usuario 
-	FOREIGN KEY (fk_usuario) REFERENCES usuario (id)
+CONSTRAINT uq_temporada_nome_usuario UNIQUE (nome, fk_usuario),
+CONSTRAINT fk_temporada_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id)
 );
 
 
