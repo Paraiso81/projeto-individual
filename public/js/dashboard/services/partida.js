@@ -36,6 +36,9 @@ async function atualizarDadosTelaPartidas() {
   if (window.exibirDadosGrafico) {
     await window.exibirDadosGrafico();
   }
+  if (window.exibirMelhorPartida) {
+    await window.exibirMelhorPartida();
+  }
   if (window.exibirDadosTabelaPartida) {
     await window.exibirDadosTabelaPartida();
   }
