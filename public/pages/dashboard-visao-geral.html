@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/components/notificacao.css" />
+    <link rel="stylesheet" href="../css/components/estadoVazio.css" />
     <link rel="stylesheet" href="../css/components/sidebar.css" />
     <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
     <link rel="stylesheet" href="../css/components/modal.css" />
@@ -14,8 +16,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/dashboard/visao-geral.js" defer></script>
-    <script src="../js/dashboard/modal.js" defer></script>
+    <script src="../js/notificacao.js" defer></script>
+    <script src="../js/dashboard/services/temporada.js" defer></script>
+    <script src="../js/dashboard/components/sidebar.js" defer></script>
+    <script src="../js/dashboard/visao-geral/grafico-visao-geral.js" defer></script>
+    <script src="../js/dashboard/visao-geral/kpi-visao-geral.js" defer></script>
+    <script src="../js/dashboard/components/modal.js" defer></script>
   </head>
   <body>
     <aside class="sidebar">
@@ -29,29 +35,18 @@
       >
 
       <p class="text-sidebar">
-        MINHAS TEMPORADAS <span id="qtdTemporada">(4)</span>
+        MINHAS TEMPORADAS <span id="qtdTemporada"></span>
       </p>
-      <div class="container-temporada">
-        <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">Temporada 2026</p>
-          <span class="badge-ativa">Atual</span>
-        </a>
-
-        <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-azul"></span>
-          <p class="text-nome-temporada">Temporada 2025</p>
-          <span class="text-sidebar">29 jg</span>
-        </a>
-      </div>
+      <div id="listaTemporada" class="container-temporada"></div>
 
       <footer class="sidebar-footer">
-        <div class="foto-perfil">PP</div>
-        <h2 class="nome-usuario">Pedro Paraiso</h2>
-        <button class="btn-logout">Sair</button>
+        <div id="fotoPerfil" class="foto-perfil"></div>
+        <h2 id="userName" class="nome-usuario"></h2>
+        <button onclick="logout()" class="btn-logout">Sair</button>
       </footer>
     </aside>
     <main class="dashboard">
+      <div id="notificacao"></div>
       <header class="header-dashboard">
         <div class="titulo-pagina">
           <span class="kicker">VISÃO DE DESEMPENHO • TODAS AS TEMPORADAS</span>
@@ -70,9 +65,9 @@
           <article class="card-kpi">
             <div class="header-kpi">
               <span class="rotulo-kpi">Partidas registradas</span>
-              <span class="badge-kpi" id="kpiQtdTemporadas">4 temp.</span>
+              <span class="badge-kpi" id="kpiQtdTemporadas"></span>
             </div>
-            <strong class="valor-kpi" id="kpiPartidas">86</strong>
+            <strong class="valor-kpi" id="kpiPartidas">0</strong>
             <p class="apoio-kpi">Total acumulado nas temporadas</p>
           </article>
 
@@ -81,10 +76,8 @@
               <span class="rotulo-kpi">Gols marcados</span>
               <span class="dot dot-verde-escuro"></span>
             </div>
-            <strong class="valor-kpi" id="kpiGols">24</strong>
-            <p class="apoio-kpi apoio-verde" id="apoioKpiGols">
-              +7 gols na temporada 2026
-            </p>
+            <strong class="valor-kpi" id="kpiGols">0</strong>
+            <p class="apoio-kpi apoio-verde" id="apoioKpiGols"></p>
           </article>
 
           <article class="card-kpi">
@@ -92,34 +85,33 @@
               <span class="rotulo-kpi">Assistências</span>
               <span class="dot dot-azul"></span>
             </div>
-            <strong class="valor-kpi" id="kpiAssistencias">31</strong>
-            <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias">
-              +5 na temporada 2026
-            </p>
+            <strong class="valor-kpi" id="kpiAssistencias">0</strong>
+            <p class="apoio-kpi apoio-azul" id="apoioKpiAssistencias"></p>
           </article>
 
           <article class="card-kpi card-kpi-escuro">
             <div class="header-kpi">
               <span class="rotulo-kpi">Média de gols / partida</span>
             </div>
-            <strong class="valor-kpi" id="kpiMediaGols">0,28</strong>
-            <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia">
-              Média G+A: 0,64 por jogo
-            </p>
+            <strong class="valor-kpi" id="kpiMediaGols">0</strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioKpiMedia"></p>
           </article>
         </section>
 
         <section class="section-grafico">
           <div class="header-grafico">
             <h2 class="titulo-grafico">Gols e assistências por temporada</h2>
-            <div class="legenda-grafico">
+            <div class="legenda-grafico" id="legendaGraficoGolsAssistencias">
               <div class="dot dot-verde-escuro"></div>
               <p class="text-sidebar">Gols</p>
               <div class="dot dot-azul"></div>
               <p class="text-sidebar">Assistências</p>
             </div>
           </div>
-          <div class="container-canvas">
+          <div
+            class="container-canvas"
+            id="sectionGraficoGolsAssistenciaTemporada"
+          >
             <canvas id="grafico-barras"></canvas>
           </div>
         </section>
@@ -127,11 +119,20 @@
         <section class="section-grafico">
           <div class="header-grafico">
             <h2 class="titulo-grafico">Média de gols por temporada</h2>
-            <div class="legenda-grafico">
+            <div class="legenda-grafico" id="legendaGraficoMediaGols">
               <p class="text-sidebar">Gols / jogo</p>
             </div>
           </div>
-          <div class="container-canvas">
+          <div class="estado-vazio">
+            <div class="icone-estado-vazio">
+              <i class="fa-solid fa-info"></i>
+            </div>
+            <h2 class="titulo-estado-vazio">Sem dados</h2>
+            <p class="descricao-estado-vazio">
+              nenhum dado para ser exibido no gráfico
+            </p>
+          </div>
+          <div class="container-canvas" id="sectionGraficoMediaGols">
             <canvas id="grafico-linha"></canvas>
           </div>
         </section>
@@ -179,8 +180,16 @@
         <hr />
 
         <div class="footer-modal">
-          <button class="btn-cancelar">Cancelar</button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="closeModal('overlayCriarTemporada')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button
+            onclick="criarTemporada()"
+            class="btn-verde btn-criar-temporada"
+          >
             <i class="fa-solid fa-plus"></i>Criar temporada
           </button>
         </div>

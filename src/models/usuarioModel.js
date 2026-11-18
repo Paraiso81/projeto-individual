@@ -2,13 +2,13 @@ var database = require("../database/config.js");
 
 function cadastrar(nome, email, senha) {
   console.log("acessado o model user", nome, email, senha);
-  var sql = `INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)`;
+  var sql = `INSERT INTO usuario (nome, email, senha) VALUES (?, ?, SHA2(?, 256))`;
 
   return database.executar(sql, [nome, email, senha]);
 }
 
 function login(email, senha) {
-  var sql = `SELECT id, nome, email FROM usuario WHERE email = ? AND senha = ?`;
+  var sql = `SELECT id, nome, email FROM usuario WHERE email = ? AND senha = SHA2(?, 256)`;
 
   return database.executar(sql, [email, senha]);
 }

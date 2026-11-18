@@ -79,7 +79,7 @@ async function cadastrar() {
       console.log(response);
       if (response.ok) {
         console.log("Criamos a conta pae.");
-        notificao("sucesso", "Conta criada com sucesso.");
+        notificacao("sucesso", "Conta criada com sucesso.");
         setTimeout(() => {
           window.location.href = "login.html";
         }, 3000);
@@ -87,6 +87,6 @@ async function cadastrar() {
     })
     .catch(function (erro) {
       console.log(erro);
-      notificao("alerta", "Erro ao criar a conta.");
+      notificacao("alerta", "Erro ao criar a conta.");
     });
 }

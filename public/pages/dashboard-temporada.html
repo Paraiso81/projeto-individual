@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/components/notificacao.css" />
+    <link rel="stylesheet" href="../css/components/estadoVazio.css" />
     <link rel="stylesheet" href="../css/components/sidebar.css" />
     <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
     <link rel="stylesheet" href="../css/dashboard-temporada.css" />
@@ -16,8 +18,17 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/dashboard/temporada.js" defer></script>
-    <script src="../js/dashboard/modal.js" defer></script>
+    <script src="../js/notificacao.js" defer></script>
+    <script src="../js/formatarData.js" defer></script>
+    <script src="../js/dashboard/services/temporada.js" defer></script>
+    <script src="../js/dashboard/services/partida.js" defer></script>
+    <script src="../js/dashboard/temporada/header-temporada.js" defer></script>
+    <script src="../js/dashboard/temporada/kpi-temporada.js" defer></script>
+    <script src="../js/dashboard/temporada/grafico-temporada.js" defer></script>
+    <script src="../js/dashboard/temporada/destaque-temporada.js" defer></script>
+    <script src="../js/dashboard/temporada/tabela-partida.js" defer></script>
+    <script src="../js/dashboard/components/modal.js" defer></script>
+    <script src="../js/dashboard/components/sidebar.js" defer></script>
   </head>
   <body>
     <aside class="sidebar">
@@ -31,50 +42,34 @@
       >
 
       <p class="text-sidebar">
-        MINHAS TEMPORADAS <span id="qtdTemporada">(4)</span>
+        MINHAS TEMPORADAS <span id="qtdTemporada"></span>
       </p>
-      <div class="container-temporada">
-        <a
-          href="./dashboard-temporada.html"
-          class="linha-temporada linha-temporada-ativa"
-        >
-          <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">Temporada 2026</p>
-          <span class="badge-ativa">Atual</span>
-        </a>
-
-        <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-azul"></span>
-          <p class="text-nome-temporada">Temporada 2025</p>
-          <span class="text-sidebar">29 jg</span>
-        </a>
-      </div>
+      <div id="listaTemporada" class="container-temporada"></div>
 
       <footer class="sidebar-footer">
-        <div class="foto-perfil">PP</div>
-        <h2 class="nome-usuario">Pedro Paraiso</h2>
-        <button class="btn-logout">Sair</button>
+        <div id="fotoPerfil" class="foto-perfil"></div>
+        <h2 id="userName" class="nome-usuario"></h2>
+        <button onclick="logout()" class="btn-logout">Sair</button>
       </footer>
     </aside>
 
     <main class="dashboard">
+      <div id="notificacao"></div>
       <header class="header-dashboard">
         <div class="titulo-pagina">
           <p class="breadcrumb-temporada">
             <a href="./dashboard-visao-geral.html">Minhas temporadas</a> /
-            <span class="kicker" id="breadcrumbNomeTemporada"
-              >Temporada 2026</span
-            >
+            <span class="kicker" id="breadcrumbNomeTemporada"></span>
           </p>
           <div class="titulo-temporada-container">
-            <h1 id="nomeTemporadaTitulo">Temporada 2026</h1>
-            <span class="badge-kpi" id="anoTemporadaBadge">Ano: 2026</span>
+            <h1 id="nomeTemporadaTitulo"></h1>
+            <span class="badge-kpi" id="anoTemporadaBadge"></span>
           </div>
         </div>
 
         <div class="acoes-temporada">
           <button
-            onclick="abrirModal('overlayEditarTemporada')"
+            onclick="abrirModalEditarTemporada()"
             class="btn-editar-temporada"
           >
             Editar temporada
@@ -94,40 +89,32 @@
             <div class="header-kpi">
               <span class="rotulo-kpi">Partidas na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiPartidasTemporada">20</strong>
-            <p class="apoio-kpi" id="apoioUltimaPartida">
-              Último jogo em 15/10/2026
-            </p>
+            <strong class="valor-kpi" id="kpiPartidasTemporada"></strong>
+            <p class="apoio-kpi" id="apoioUltimaPartida"></p>
           </article>
 
           <article class="card-kpi">
             <div class="header-kpi">
               <span class="rotulo-kpi">Gols na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiGolsTemporada">7</strong>
-            <p class="apoio-kpi apoio-verde" id="apoioRecordeGols">
-              Recorde: 3 gols vs Camisa 10 FC
-            </p>
+            <strong class="valor-kpi" id="kpiGolsTemporada"></strong>
+            <p class="apoio-kpi apoio-verde" id="apoioRecordeGols"></p>
           </article>
 
           <article class="card-kpi">
             <div class="header-kpi">
               <span class="rotulo-kpi">Assistências na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiAssistenciasTemporada">9</strong>
-            <p class="apoio-kpi apoio-azul" id="apoioMediaAssistencias">
-              Média de 0,45 assist. / partida
-            </p>
+            <strong class="valor-kpi" id="kpiAssistenciasTemporada"></strong>
+            <p class="apoio-kpi apoio-azul" id="apoioMediaAssistencias"></p>
           </article>
 
           <article class="card-kpi card-kpi-escuro">
             <div class="header-kpi">
               <span class="rotulo-kpi">Média de gols na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiMediaGolsTemporada">0,35</strong>
-            <p class="apoio-kpi apoio-verde-claro" id="apoioParticipacoes">
-              16 participações diretas (G+A)
-            </p>
+            <strong class="valor-kpi" id="kpiMediaGolsTemporada"></strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioParticipacoes"></p>
           </article>
         </section>
 
@@ -193,97 +180,7 @@
                   <th>AÇÕES</th>
                 </tr>
               </thead>
-              <tbody id="tabelaPartidasBody">
-                <tr>
-                  <td class="col-data">15/10/2026</td>
-                  <td class="col-adversario">Camisa 10 FC</td>
-                  <td>
-                    <span class="badge-tabela badge-gols">3 gols</span>
-                  </td>
-                  <td>
-                    <span class="badge-tabela badge-assist">1 assist.</span>
-                  </td>
-                  <td class="col-participacao">4 G+A</td>
-                  <td class="col-acoes">
-                    <button class="btn-acao-editar">Editar</button>
-                    <button class="btn-acao-excluir">Excluir</button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="col-data">08/10/2026</td>
-                  <td class="col-adversario">Unidos da Vila</td>
-                  <td>
-                    <span class="badge-tabela badge-gols">1 gol</span>
-                  </td>
-                  <td>
-                    <span class="badge-tabela badge-assist">2 assist.</span>
-                  </td>
-                  <td class="col-participacao">3 G+A</td>
-                  <td class="col-acoes">
-                    <button class="btn-acao-editar">Editar</button>
-                    <button class="btn-acao-excluir">Excluir</button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="col-data">29/09/2026</td>
-                  <td class="col-adversario">Artilheiros FC</td>
-                  <td>
-                    <span class="badge-tabela badge-neutro">0 gols</span>
-                  </td>
-                  <td>
-                    <span class="badge-tabela badge-assist">1 assist.</span>
-                  </td>
-                  <td class="col-participacao">1 G+A</td>
-                  <td class="col-acoes">
-                    <button class="btn-acao-editar">Editar</button>
-                    <button class="btn-acao-excluir">Excluir</button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="col-data">21/09/2026</td>
-                  <td class="col-adversario">Lavínia Society</td>
-                  <td>
-                    <span class="badge-tabela badge-gols">2 gols</span>
-                  </td>
-                  <td>
-                    <span class="badge-tabela badge-assist">2 assist.</span>
-                  </td>
-                  <td class="col-participacao">4 G+A</td>
-                  <td class="col-acoes">
-                    <button class="btn-acao-editar">Editar</button>
-                    <button class="btn-acao-excluir">Excluir</button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="col-data">14/09/2026</td>
-                  <td class="col-adversario">Real São Bernardo</td>
-                  <td>
-                    <span class="badge-tabela badge-gols">1 gol</span>
-                  </td>
-                  <td>
-                    <span class="badge-tabela badge-neutro">0 assist.</span>
-                  </td>
-                  <td class="col-participacao">1 G+A</td>
-                  <td class="col-acoes">
-                    <button
-                      onclick="abrirModal('overlayEditarPartida')"
-                      class="btn-acao-editar"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      onclick="abrirModal('overlayDeletarPartida')"
-                      class="btn-acao-excluir"
-                    >
-                      Excluir
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody id="tabelaPartidasBody"></tbody>
             </table>
           </div>
         </section>
@@ -333,8 +230,16 @@
         <hr />
 
         <div class="footer-modal">
-          <button class="btn-cancelar">Cancelar</button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="closeModal('overlayEditarTemporada')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button
+            onclick="editarTemporada()"
+            class="btn-verde btn-criar-temporada"
+          >
             Salvar alterações
           </button>
         </div>
@@ -435,7 +340,12 @@
           >
             Cancelar
           </button>
-          <button class="btn-verde btn-criar-temporada">Salvar partida</button>
+          <button
+            class="btn-verde btn-criar-temporada"
+            onclick="criarPartida()"
+          >
+            Salvar partida
+          </button>
         </div>
       </article>
     </div>
@@ -459,14 +369,18 @@
         </div>
         <hr />
         <div class="container-input">
-          <label for="iptDataPartida">Data da partida *</label>
-          <input class="input input-date" id="iptDataPartida" type="date" />
+          <label for="iptDataPartidaEditar">Data da partida *</label>
+          <input
+            class="input input-date"
+            id="iptDataPartidaEditar"
+            type="date"
+          />
         </div>
         <div class="container-input">
-          <label for="iptAdversarioPartida">Nome do adversário *</label>
+          <label for="iptAdversarioPartidaEditar">Nome do adversário *</label>
           <input
             class="input"
-            id="iptAdversarioPartida"
+            id="iptAdversarioPartidaEditar"
             type="text"
             placeholder="Digite o nome do adversário."
           />
@@ -481,17 +395,19 @@
             <div class="box-contador">
               <button
                 type="button"
-                onclick="alterarContador('qtdGolsPartida', -1)"
+                onclick="alterarContador('qtdGolsPartidaEditar', -1)"
                 class="btn-contador btn-menos"
               >
                 <i class="fa-solid fa-minus"></i>
               </button>
-              <span id="qtdGolsPartida" class="valor-contador valor-gols"
+              <span
+                id="qtdGolsPartidaEditar"
+                class="valor-contador valor-gols"
                 >0</span
               >
               <button
                 type="button"
-                onclick="alterarContador('qtdGolsPartida', 1)"
+                onclick="alterarContador('qtdGolsPartidaEditar', 1)"
                 class="btn-contador btn-mais-gols"
               >
                 <i class="fa-solid fa-plus"></i>
@@ -507,19 +423,19 @@
             <div class="box-contador">
               <button
                 type="button"
-                onclick="alterarContador('qtdAssistenciasPartida', -1)"
+                onclick="alterarContador('qtdAssistenciasPartidaEditar', -1)"
                 class="btn-contador btn-menos"
               >
                 <i class="fa-solid fa-minus"></i>
               </button>
               <span
-                id="qtdAssistenciasPartida"
+                id="qtdAssistenciasPartidaEditar"
                 class="valor-contador valor-assist"
                 >0</span
               >
               <button
                 type="button"
-                onclick="alterarContador('qtdAssistenciasPartida', 1)"
+                onclick="alterarContador('qtdAssistenciasPartidaEditar', 1)"
                 class="btn-contador btn-mais-assist"
               >
                 <i class="fa-solid fa-plus"></i>
@@ -540,7 +456,10 @@
           >
             Cancelar
           </button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="editarPartida()"
+            class="btn-verde btn-criar-temporada"
+          >
             Salvar alterações
           </button>
         </div>
@@ -565,7 +484,7 @@
           <span class="text-sublinhado"
             >Tem certeza que deseja excluir a partida contra</span
           >
-          <p class="text-partida">
+          <p class="text-partida" id="textoPartidaDeletar">
             Camisa 10 FC (15/10/2026) - 3 gols e 1 assistência?
           </p>
         </div>
@@ -573,7 +492,7 @@
           <span class="text-partida text-vermelho text-bold"
             >Atenção: esta ação não poderá ser desfeita.</span
           >
-          <p class="text-vermelho text-descricao">
+          <p class="text-vermelho text-descricao" id="textoTemporadaDeletar">
             Os números deste jogo serão descontados da Temporada 2026.
           </p>
         </div>
@@ -586,7 +505,9 @@
           >
             Cancelar
           </button>
-          <button class="btn-excluir">Sim, excluir partida</button>
+          <button onclick="deletarPartida()" class="btn-excluir">
+            Sim, excluir partida
+          </button>
         </div>
       </article>
     </div>

@@ -51,3 +51,13 @@
   font-weight: 700;
   line-height: normal;
 }
+
+.btn-excluir:hover {
+  background-color: var(--cor-error-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.22);
+}
+
+.btn-excluir:active {
+  transform: translateY(0) scale(0.98);
+}
