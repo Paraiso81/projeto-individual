@@ -43,7 +43,8 @@ function partidasPorTemporada(temporadaId, usuarioId) {
   FROM partida p
     JOIN temporada t
   ON t.id = p.fk_temporada
-  WHERE t.fk_usuario = ? AND t.id = ?`;
+  WHERE t.fk_usuario = ? AND t.id = ?
+  ORDER BY dt_partida ASC;`;
 
   return database.executar(sql, [usuarioId, temporadaId]);
 }
