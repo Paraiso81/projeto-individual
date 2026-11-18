@@ -1,22 +1,29 @@
-const dataPartida = document.getElementById("iptDataPartida");
-const adversario = document.getElementById("iptAdversarioPartida");
-const gols = document.getElementById("qtdGolsPartida");
-const assistencias = document.getElementById("qtdAssistenciasPartida");
-
 window.abrirModal = (modalId) => {
   let modal = document.getElementById(modalId);
-
+  console.log(modal);
   modal.style.display = "block";
 };
 
 window.closeModal = (modalId) => {
   let modal = document.getElementById(modalId);
-  console.log(modal.id, "let modal");
   if (modal.id === "overlayCriarPartida") {
-    dataPartida.value = "";
-    adversario.value = "";
-    gols.innerText = 0;
-    assistencias.innerText = 0;
+    const campoData = document.querySelector(
+      "#overlayCriarPartida #iptDataPartida",
+    );
+    const campoAdversario = document.querySelector(
+      "#overlayCriarPartida #iptAdversarioPartida",
+    );
+    const campoGols = document.querySelector(
+      "#overlayCriarPartida #qtdGolsPartida",
+    );
+    const campoAssistencias = document.querySelector(
+      "#overlayCriarPartida #qtdAssistenciasPartida",
+    );
+
+    if (campoData) campoData.value = "";
+    if (campoAdversario) campoAdversario.value = "";
+    if (campoGols) campoGols.innerText = "0";
+    if (campoAssistencias) campoAssistencias.innerText = "0";
   }
 
   modal.style.display = "none";

@@ -1,6 +1,7 @@
 async function notificacao(tipo, msg) {
   console.log(tipo, msg);
   let divNotificacao = document.getElementById("notificacao");
+  if (!divNotificacao) return;
   divNotificacao.classList.remove("alerta", "sucesso");
   divNotificacao.classList.add("container-notificacao");
   divNotificacao.style.display = "flex";
