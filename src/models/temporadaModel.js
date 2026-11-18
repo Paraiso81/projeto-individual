@@ -92,7 +92,7 @@ async function buscarTemporada(temporadaId, usuarioId) {
   const nome = temporada[0].nome;
   const ano = temporada[0].ano;
 
-  return [{ id: id, nome: nome, ano: ano, partidas: [partidasTemporada] }];
+  return [{ id: id, nome: nome, ano: ano, partidas: partidasTemporada }];
 }
 
 async function atualizarTemporada(usuarioId, temporadaId, nome, ano) {
