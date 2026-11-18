@@ -1,5 +1,3 @@
-const temporadas = JSON.parse(sessionStorage.getItem("TODAS_TEMPORADAS"));
-
 const qtdTemporadas = document.getElementById("kpiQtdTemporadas");
 const qtdPartidas = document.getElementById("kpiPartidas");
 
@@ -12,9 +10,13 @@ const qtdAssistTempAtual = document.getElementById("apoioKpiAssistencias");
 const mediaGolsKpi = document.getElementById("kpiMediaGols");
 const GAporJogo = document.getElementById("apoioKpiMedia");
 
-function listarKpis() {
+function listarKpis(temporadas) {
+  const listaTemporadas = temporadas || [];
+
   qtdTemporadas.innerText =
-    temporadas.length == 0 ? "0 temp." : `${temporadas.length} temp.`;
+    listaTemporadas.length === 0
+      ? "0 temp."
+      : `${listaTemporadas.length} temp.`;
 
   let totalPartidas = 0;
   let totalGols = 0;
@@ -22,28 +24,34 @@ function listarKpis() {
   let totalAssistencias = 0;
   let totalAssistTempAtual = 0;
 
-  for (let i = 0; i < temporadas.length; i++) {
-    let temporada = temporadas[i];
-    totalPartidas += temporada.partidas.length;
+  for (let i = 0; i < listaTemporadas.length; i++) {
+    const temporada = listaTemporadas[i];
+    const partidas = temporada.partidas || [];
+    const ehTemporadaAtual = Number(temporada.ano) === anoAtual;
 
-    if (anoAtual == temporada.ano) {
-      totalGolsTempAtual = temporada.partidas.gols;
-      totalAssistTempAtual = temporada.partidas.assistencias;
-    }
+    totalPartidas += partidas.length;
 
-    for (let j = 0; j < temporada.partidas[j]; j++) {
-      let partida = temporada.partidas[j];
-      totalGols += partida.gols;
-      totalAssistencias += partida.assistencias;
+    for (let j = 0; j < partidas.length; j++) {
+      const partida = partidas[j];
+      const golsPartida = Number(partida.gols) || 0;
+      const assistPartida = Number(partida.assistencias) || 0;
+
+      totalGols += golsPartida;
+      totalAssistencias += assistPartida;
+
+      if (ehTemporadaAtual) {
+        totalGolsTempAtual += golsPartida;
+        totalAssistTempAtual += assistPartida;
+      }
     }
   }
 
   let mediaGols = 0;
   let mediaGA = 0;
 
-  if (gols > 0 && totalAssistencias > 0 && qtdPartidas > 0) {
-    mediaGols = (totalGols / qtdPartidas).Math.round(2);
-    mediaGA = ((totalGols + totalAssistencias) / qtdPartidas).Math.round(2);
+  if (totalPartidas > 0) {
+    mediaGols = totalGols / totalPartidas;
+    mediaGA = (totalGols + totalAssistencias) / totalPartidas;
   }
 
   qtdPartidas.innerText = totalPartidas;
@@ -51,17 +59,27 @@ function listarKpis() {
   qtdGolsTempAtual.innerText =
     totalGolsTempAtual > 0
       ? `+${totalGolsTempAtual} gol na temporada ${anoAtual}`
-      : "Nenhum gols registrado";
+      : "Nenhum gol registrado";
   qtdAssistencias.innerText = totalAssistencias;
   qtdAssistTempAtual.innerText =
     totalAssistTempAtual > 0
       ? `+${totalAssistTempAtual} na temporada ${anoAtual}`
       : "Nenhuma assistência registrada";
-  mediaGolsKpi.innerText = mediaGols > 0 ? `${mediaGols.replace(".", ",")}` : 0;
+  mediaGolsKpi.innerText =
+    mediaGols > 0 ? mediaGols.toFixed(2).replace(".", ",") : "0";
   GAporJogo.innerText =
-    GAporJogo > 0 ? `Média G+A: ${GAporJogo.replace(".", ",")} por jogo` : "Sem dados de GA";
+    mediaGA > 0
+      ? `Média G+A: ${mediaGA.toFixed(2).replace(".", ",")} por jogo`
+      : "Sem dados de GA";
+}
+
+async function atualizarDashboardVisaoGeral() {
+  const temporadas = await buscarTemporadas();
+  renderizarSidebarTemporadas(temporadas);
+  listarKpis(temporadas);
+  renderizarGraficosVisaoGeral(temporadas);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  listarKpis();
+  atualizarDashboardVisaoGeral();
 });
