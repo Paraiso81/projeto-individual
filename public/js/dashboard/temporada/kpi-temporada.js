@@ -46,13 +46,13 @@ async function exibirKpisTemporada() {
 
   const mediaAssistencias =
     totalPartidas > 0
-      ? (totalAssistencias / totalPartidas).toFixed(2).replace(".", ",")
+      ? (totalAssistencias / totalPartidas).toFixed(2)
       : "0,00";
 
   const mediaGols =
     totalPartidas > 0
-      ? (totalGols / totalPartidas).toFixed(2).replace(".", ",")
-      : "0,00";
+      ? (totalGols / totalPartidas).toFixed(2)
+      : "0.00";
 
   const somaParticipacoes =
     totalGols > 0 && totalAssistencias > 0
@@ -71,7 +71,7 @@ async function exibirKpisTemporada() {
   kpiAssistenciasTemporada.innerText = totalAssistencias;
   apoioMediaAssistencias.innerText = `Média de ${mediaAssistencias} assist. / partida`;
   kpiMediaGolsTemporada.innerText = mediaGols;
-  apoioParticipacoes.innerText = somaParticipacoes;
+  apoioParticipacoes.innerText = `${somaParticipacoes} participações diretas (G+A)`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
