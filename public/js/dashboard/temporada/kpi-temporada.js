@@ -44,13 +44,6 @@ async function exibirKpisTemporada() {
     totalPartidas++;
   }
 
-  // https://pt.stackoverflow.com/questions/6526/como-formatar-data-no-javascript
-  const formatter = new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-
   const mediaAssistencias =
     totalPartidas > 0
       ? (totalAssistencias / totalPartidas).toFixed(2).replace(".", ",")
@@ -68,7 +61,7 @@ async function exibirKpisTemporada() {
 
   kpiPartidasTemporada.innerText = totalPartidas;
   apoioUltimaPartida.innerText = dataUltimaPartida
-    ? `Última partida em: ${formatter.format(new Date(dataUltimaPartida))}`
+    ? `Última partida em: ${formatarData("default", dataUltimaPartida)}`
     : "Nenhuma partida registrada";
   kpiGolsTemporada.innerText = totalGols;
   apoioRecordeGols.innerText =

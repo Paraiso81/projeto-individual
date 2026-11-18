@@ -33,11 +33,6 @@ async function exibirDadosGrafico() {
   let totalGols = 0;
   let totalAssistencias = 0;
 
-  const formatter = new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-  });
-
   const inicio = partidas.length > 6 ? partidas.length - 6 : 0;
 
   for (let i = inicio; i < partidas.length; i++) {
@@ -45,7 +40,7 @@ async function exibirDadosGrafico() {
     const gols = Number(partida.gols) || 0;
     const assistencias = Number(partida.assistencias) || 0;
 
-    dataPartidas.push(formatter.format(new Date(partida.dt_partida)));
+    dataPartidas.push(formatarData("short", partida.dt_partida));
     golsPartidas.push(gols);
     assistenciasPartidas.push(assistencias);
 

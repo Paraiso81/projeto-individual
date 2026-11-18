@@ -17,10 +17,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/formatarData.js" defer></script>
     <script src="../js/dashboard/services/temporada.js" defer></script>
     <script src="../js/dashboard/temporada/header-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/kpi-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/grafico-temporada.js" defer></script>
+    <script src="../js/dashboard/temporada/tabela-partida.js" defer></script>
     <script src="../js/dashboard/components/modal.js" defer></script>
     <script src="../js/dashboard/components/sidebar.js" defer></script>
   </head>
@@ -98,20 +100,16 @@
             <div class="header-kpi">
               <span class="rotulo-kpi">Assistências na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiAssistenciasTemporada">9</strong>
-            <p class="apoio-kpi apoio-azul" id="apoioMediaAssistencias">
-              Média de 0,45 assist. / partida
-            </p>
+            <strong class="valor-kpi" id="kpiAssistenciasTemporada"></strong>
+            <p class="apoio-kpi apoio-azul" id="apoioMediaAssistencias"></p>
           </article>
 
           <article class="card-kpi card-kpi-escuro">
             <div class="header-kpi">
               <span class="rotulo-kpi">Média de gols na temporada</span>
             </div>
-            <strong class="valor-kpi" id="kpiMediaGolsTemporada">0,35</strong>
-            <p class="apoio-kpi apoio-verde-claro" id="apoioParticipacoes">
-              16 participações diretas (G+A)
-            </p>
+            <strong class="valor-kpi" id="kpiMediaGolsTemporada"></strong>
+            <p class="apoio-kpi apoio-verde-claro" id="apoioParticipacoes"></p>
           </article>
         </section>
 
