@@ -88,6 +88,9 @@
   flex-direction: column;
   flex-grow: 1;
   max-width: 100%;
+  max-height: 80%;
+  overflow-y: scroll;
+  overflow-x: hidden;
   gap: 4px;
 }
 
@@ -139,6 +142,8 @@
   opacity: 1;
 }
 .text-nome-temporada {
+  color: var(--cor-texto-claro-apoio);
+  font-size: var(--fs-nav);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
