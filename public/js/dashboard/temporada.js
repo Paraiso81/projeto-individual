@@ -65,3 +65,35 @@ async function buscarTodasTemporadas() {
     return [];
   }
 }
+
+// https://developer.mozilla.org/pt-BR/docs/Web/API/URLSearchParams
+
+const params = new URLSearchParams(window.location.search);
+
+async function buscarTemporada() {
+  const temporadaId = params.get("id");
+
+  if (temporadaId === undefined || temporadaId === null) {
+    return notificacao("alerta", "Erro ao identificar temporada.");
+  }
+
+  try {
+    const response = await fetch(`/temporadas/${usuarioId}/${temporadaId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const data = await response.json();
+    return data || [];
+  } catch (error) {
+    console.log(erro);
+    await notificacao("alerta", "Houve um problema ao carregar os dados.");
+    return [];
+  }
+}
