@@ -45,19 +45,12 @@ async function exibirKpisTemporada() {
   }
 
   const mediaAssistencias =
-    totalPartidas > 0
-      ? (totalAssistencias / totalPartidas).toFixed(2)
-      : "0,00";
+    totalPartidas > 0 ? (totalAssistencias / totalPartidas).toFixed(2) : "0,00";
 
   const mediaGols =
-    totalPartidas > 0
-      ? (totalGols / totalPartidas).toFixed(2)
-      : "0.00";
+    totalPartidas > 0 ? (totalGols / totalPartidas).toFixed(2) : "0,00";
 
-  const somaParticipacoes =
-    totalGols > 0 && totalAssistencias > 0
-      ? totalGols + totalAssistencias
-      : "Sem participações em gols";
+  const somaParticipacoes = totalGols + totalAssistencias;
 
   kpiPartidasTemporada.innerText = totalPartidas;
   apoioUltimaPartida.innerText = dataUltimaPartida
@@ -71,7 +64,10 @@ async function exibirKpisTemporada() {
   kpiAssistenciasTemporada.innerText = totalAssistencias;
   apoioMediaAssistencias.innerText = `Média de ${mediaAssistencias} assist. / partida`;
   kpiMediaGolsTemporada.innerText = mediaGols;
-  apoioParticipacoes.innerText = `${somaParticipacoes} participações diretas (G+A)`;
+  apoioParticipacoes.innerText =
+    somaParticipacoes > 0
+      ? `${somaParticipacoes} participações diretas (G+A)`
+      : "Sem participações em gols";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
