@@ -13,6 +13,8 @@
   min-width: 250px;
   max-width: 250px;
   gap: 12px;
+  animation: notificacao-animation 800ms cubic-bezier(0.36, 0, 0.66, -0.56) 0ms 1 normal
+    forwards;
 }
 
 .icon-notificacao {
@@ -42,4 +44,50 @@
 .sucesso {
   border: 1px solid var(--cor-verde-claro);
   box-shadow: -5px 5px 16px -1px var(--cor-verde-claro);
+}
+
+/* https://webcode.tools/css-generator/keyframe-animation/ */
+
+@keyframes notificacao-animation {
+  0% {
+    animation-timing-function: ease-in;
+    opacity: 0;
+    transform: translateX(250px);
+  }
+
+  38% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  55% {
+    animation-timing-function: ease-in;
+    transform: translateX(68px);
+  }
+
+  72% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
+
+  81% {
+    animation-timing-function: ease-in;
+    transform: translateX(32px);
+  }
+
+  90% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
+
+  95% {
+    animation-timing-function: ease-in;
+    transform: translateX(8px);
+  }
+
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateX(0);
+  }
 }
