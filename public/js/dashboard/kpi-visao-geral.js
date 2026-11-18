@@ -74,7 +74,7 @@ function listarKpis(temporadas) {
 }
 
 async function atualizarDashboardVisaoGeral() {
-  const temporadas = await buscarTemporadas();
+  const temporadas = await buscarTodasTemporadas();
   renderizarSidebarTemporadas(temporadas);
   listarKpis(temporadas);
   renderizarGraficosVisaoGeral(temporadas);

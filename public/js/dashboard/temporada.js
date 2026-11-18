@@ -38,7 +38,7 @@ async function criarTemporada() {
   }
 }
 
-async function buscarTemporadas() {
+async function buscarTodasTemporadas() {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
   if (!idUsuario) {

@@ -82,7 +82,7 @@ function renderizarSidebarTemporadas(temporadas) {
 }
 
 async function listarTemporadas() {
-  const temporadas = await buscarTemporadas();
+  const temporadas = await buscarTodasTemporadas();
   renderizarSidebarTemporadas(temporadas);
 }
 
