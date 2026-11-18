@@ -69,9 +69,10 @@ async function buscarTodasTemporadas() {
 // https://developer.mozilla.org/pt-BR/docs/Web/API/URLSearchParams
 
 const params = new URLSearchParams(window.location.search);
+const temporadaId = params.get("id");
 
 async function buscarTemporada() {
-  const temporadaId = params.get("id");
+  const usuarioId = sessionStorage.getItem("ID_USUARIO");
 
   if (temporadaId === undefined || temporadaId === null) {
     return notificacao("alerta", "Erro ao identificar temporada.");
@@ -90,8 +91,9 @@ async function buscarTemporada() {
     }
 
     const data = await response.json();
+    console.log(data);
     return data || [];
-  } catch (error) {
+  } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Houve um problema ao carregar os dados.");
     return [];

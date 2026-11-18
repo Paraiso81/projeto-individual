@@ -76,6 +76,7 @@ async function buscarTemporada(req, res) {
     .buscarTemporada(temporadaId, usuarioId)
     .then(function (response) {
       if (response.length > 0) {
+        console.log(response, "BuscarTemporada");
         res.status(200).json(response);
       } else {
         res.status(404).send("Temporada não encontrada.");
