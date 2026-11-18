@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard/temporada.js" defer></script>
     <script src="../js/dashboard/modal.js" defer></script>
+    <script src="../js/dashboard/sidebar.js" defer></script>
   </head>
   <body>
     <aside class="sidebar">
@@ -32,29 +33,14 @@
       >
 
       <p class="text-sidebar">
-        MINHAS TEMPORADAS <span id="qtdTemporada">(4)</span>
+        MINHAS TEMPORADAS <span id="qtdTemporada"></span>
       </p>
-      <div class="container-temporada">
-        <a
-          href="./dashboard-temporada.html"
-          class="linha-temporada linha-temporada-ativa"
-        >
-          <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">Temporada 2026</p>
-          <span class="badge-ativa">Atual</span>
-        </a>
-
-        <a href="./dashboard-temporada.html" class="linha-temporada">
-          <span class="dot dot-azul"></span>
-          <p class="text-nome-temporada">Temporada 2025</p>
-          <span class="text-sidebar">29 jg</span>
-        </a>
-      </div>
+      <div id="listaTemporada" class="container-temporada"></div>
 
       <footer class="sidebar-footer">
-        <div class="foto-perfil">PP</div>
-        <h2 class="nome-usuario">Pedro Paraiso</h2>
-        <button class="btn-logout">Sair</button>
+        <div id="fotoPerfil" class="foto-perfil"></div>
+        <h2 id="userName" class="nome-usuario"></h2>
+        <button onclick="logout()" class="btn-logout">Sair</button>
       </footer>
     </aside>
 
