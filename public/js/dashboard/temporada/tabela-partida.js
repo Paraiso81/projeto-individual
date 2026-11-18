@@ -46,7 +46,7 @@ async function exibirDadosTabelaPartida() {
         <td class="col-participacao">${participacao} G+A</td>
         <td class="col-acoes">
           <button
-            onclick="abrirModal('overlayEditarPartida', ${partida.id})"
+            onclick="abrirModalEditarPartida(${partida.id})"
             class="btn-acao-editar"
           >
             Editar

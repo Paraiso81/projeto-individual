@@ -360,14 +360,18 @@
         </div>
         <hr />
         <div class="container-input">
-          <label for="iptDataPartida">Data da partida *</label>
-          <input class="input input-date" id="iptDataPartida" type="date" />
+          <label for="iptDataPartidaEditar">Data da partida *</label>
+          <input
+            class="input input-date"
+            id="iptDataPartidaEditar"
+            type="date"
+          />
         </div>
         <div class="container-input">
-          <label for="iptAdversarioPartida">Nome do adversário *</label>
+          <label for="iptAdversarioPartidaEditar">Nome do adversário *</label>
           <input
             class="input"
-            id="iptAdversarioPartida"
+            id="iptAdversarioPartidaEditar"
             type="text"
             placeholder="Digite o nome do adversário."
           />
@@ -382,17 +386,19 @@
             <div class="box-contador">
               <button
                 type="button"
-                onclick="alterarContador('qtdGolsPartida', -1)"
+                onclick="alterarContador('qtdGolsPartidaEditar', -1)"
                 class="btn-contador btn-menos"
               >
                 <i class="fa-solid fa-minus"></i>
               </button>
-              <span id="qtdGolsPartida" class="valor-contador valor-gols"
+              <span
+                id="qtdGolsPartidaEditar"
+                class="valor-contador valor-gols"
                 >0</span
               >
               <button
                 type="button"
-                onclick="alterarContador('qtdGolsPartida', 1)"
+                onclick="alterarContador('qtdGolsPartidaEditar', 1)"
                 class="btn-contador btn-mais-gols"
               >
                 <i class="fa-solid fa-plus"></i>
@@ -408,19 +414,19 @@
             <div class="box-contador">
               <button
                 type="button"
-                onclick="alterarContador('qtdAssistenciasPartida', -1)"
+                onclick="alterarContador('qtdAssistenciasPartidaEditar', -1)"
                 class="btn-contador btn-menos"
               >
                 <i class="fa-solid fa-minus"></i>
               </button>
               <span
-                id="qtdAssistenciasPartida"
+                id="qtdAssistenciasPartidaEditar"
                 class="valor-contador valor-assist"
                 >0</span
               >
               <button
                 type="button"
-                onclick="alterarContador('qtdAssistenciasPartida', 1)"
+                onclick="alterarContador('qtdAssistenciasPartidaEditar', 1)"
                 class="btn-contador btn-mais-assist"
               >
                 <i class="fa-solid fa-plus"></i>
@@ -441,7 +447,10 @@
           >
             Cancelar
           </button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="editarPartida()"
+            class="btn-verde btn-criar-temporada"
+          >
             Salvar alterações
           </button>
         </div>

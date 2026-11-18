@@ -13,18 +13,28 @@ const qtdAssistenciasPartida = document.querySelector(
 );
 
 // Modal Editar Partida
-const dataPartidaEditar = document.querySelector(
-  "#overlayEditarPartida #iptDataPartida",
+const dataPartidaEditar = document.getElementById("iptDataPartidaEditar");
+const adversarioPartidaEditar = document.getElementById(
+  "iptAdversarioPartidaEditar",
 );
-const adversarioPartidaEditar = document.querySelector(
-  "#overlayEditarPartida #iptAdversarioPartida",
+const qtdGolsPartidaEditar = document.getElementById("qtdGolsPartidaEditar");
+const qtdAssistenciasPartidaEditar = document.getElementById(
+  "qtdAssistenciasPartidaEditar",
 );
-const qtdGolsPartidaEditar = document.querySelector(
-  "#overlayEditarPartida #qtdGolsPartida",
-);
-const qtdAssistenciasPartidaEditar = document.querySelector(
-  "#overlayEditarPartida #qtdAssistenciasPartida",
-);
+
+let partidaIdEdicao = null;
+
+async function atualizarDadosTelaPartidas() {
+  if (window.exibirKpisTemporada) {
+    await window.exibirKpisTemporada();
+  }
+  if (window.exibirDadosGrafico) {
+    await window.exibirDadosGrafico();
+  }
+  if (window.exibirDadosTabelaPartida) {
+    await window.exibirDadosTabelaPartida();
+  }
+}
 
 async function validarDadosPartida(
   dt_partida,
@@ -110,15 +120,7 @@ async function criarPartida() {
       qtdGolsPartida.innerText = "0";
       qtdAssistenciasPartida.innerText = "0";
 
-      if (window.exibirKpisTemporada) {
-        await window.exibirKpisTemporada();
-      }
-      if (window.exibirDadosGrafico) {
-        await window.exibirDadosGrafico();
-      }
-      if (window.exibirDadosTabelaPartida) {
-        await window.exibirDadosTabelaPartida();
-      }
+      await atualizarDadosTelaPartidas();
     } else {
       const msgErro = await response.text();
       await notificacao("alerta", msgErro || "Erro ao criar partida.");
@@ -126,5 +128,111 @@ async function criarPartida() {
   } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Erro ao criar partida.");
+  }
+}
+
+async function abrirModalEditarPartida(partidaId) {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario || !temporadaId || !partidaId) {
+    await notificacao("alerta", "Não foi possível identificar a partida.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `/partidas/${idUsuario}/${temporadaId}/${partidaId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      const msgErro = await response.text();
+      await notificacao(
+        "alerta",
+        msgErro || "Erro ao buscar dados da partida.",
+      );
+      return;
+    }
+
+    const dados = await response.json();
+    const partida = dados[0];
+
+    if (!partida) {
+      await notificacao("alerta", "Partida não encontrada.");
+      return;
+    }
+
+    partidaIdEdicao = partidaId;
+    dataPartidaEditar.value = formatarData("input", partida.dt_partida);
+    adversarioPartidaEditar.value = partida.adversario;
+    qtdGolsPartidaEditar.innerText = partida.gols;
+    qtdAssistenciasPartidaEditar.innerText = partida.assistencias;
+
+    abrirModal("overlayEditarPartida");
+  } catch (erro) {
+    console.log(erro);
+    await notificacao("alerta", "Erro ao carregar partida.");
+  }
+}
+
+async function editarPartida() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+  const dt_partida = dataPartidaEditar.value;
+  const adversario = adversarioPartidaEditar.value;
+  const gols = Number(qtdGolsPartidaEditar.innerText);
+  const assistencias = Number(qtdAssistenciasPartidaEditar.innerText);
+
+  if (!partidaIdEdicao) {
+    await notificacao("alerta", "Nenhuma partida selecionada para edição.");
+    return;
+  }
+
+  const ehValido = await validarDadosPartida(
+    dt_partida,
+    adversario,
+    gols,
+    assistencias,
+    idUsuario,
+    temporadaId,
+  );
+
+  if (!ehValido) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `/partidas/${idUsuario}/${temporadaId}/${partidaIdEdicao}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          dt_partida: dt_partida,
+          adversario: adversario,
+          gols: gols,
+          assistencias: assistencias,
+        }),
+      },
+    );
+
+    if (response.ok) {
+      closeModal("overlayEditarPartida");
+      partidaIdEdicao = null;
+      await notificacao("sucesso", "Partida atualizada com sucesso.");
+      await atualizarDadosTelaPartidas();
+    } else {
+      const msgErro = await response.text();
+      await notificacao("alerta", msgErro || "Erro ao atualizar partida.");
+    }
+  } catch (erro) {
+    console.log(erro);
+    await notificacao("alerta", "Erro ao atualizar partida.");
   }
 }

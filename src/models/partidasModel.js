@@ -39,7 +39,7 @@ function createPartida(
 }
 
 function partidasPorTemporada(temporadaId, usuarioId) {
-  var sql = `SELECT p.dt_partida, p.adversario, p.gols, p.assistencias 
+  var sql = `SELECT p.id, p.dt_partida, p.adversario, p.gols, p.assistencias 
   FROM partida p
     JOIN temporada t
   ON t.id = p.fk_temporada
