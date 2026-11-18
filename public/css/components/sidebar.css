@@ -89,9 +89,27 @@
   flex-grow: 1;
   max-width: 100%;
   max-height: 80%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   gap: 4px;
+}
+
+.container-temporada::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container-temporada::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.container-temporada::-webkit-scrollbar-thumb {
+  background-color: var(--cor-borda-escura);
+  border-radius: 999px;
+}
+
+.container-temporada::-webkit-scrollbar-thumb:hover {
+  background-color: var(--cor-texto-apoio);
 }
 
 .linha-temporada {
@@ -103,7 +121,6 @@
   color: var(--cor-texto-claro-apoio);
   font-size: var(--fs-nav);
   padding: 10px 12px;
-  margin: 0 -8px;
   border: 1px solid transparent;
   border-radius: var(--raio-botao);
   transition:
