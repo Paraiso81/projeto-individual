@@ -22,7 +22,12 @@ const qtdAssistenciasPartidaEditar = document.getElementById(
   "qtdAssistenciasPartidaEditar",
 );
 
+// Modal Deletar Partida
+const textoPartidaDeletar = document.getElementById("textoPartidaDeletar");
+const textoTemporadaDeletar = document.getElementById("textoTemporadaDeletar");
+
 let partidaIdEdicao = null;
+let partidaIdExclusao = null;
 
 async function atualizarDadosTelaPartidas() {
   if (window.exibirKpisTemporada) {
@@ -131,12 +136,12 @@ async function criarPartida() {
   }
 }
 
-async function abrirModalEditarPartida(partidaId) {
+async function buscarDadosPartida(partidaId) {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
   if (!idUsuario || !temporadaId || !partidaId) {
     await notificacao("alerta", "Não foi possível identificar a partida.");
-    return;
+    return null;
   }
 
   try {
@@ -156,7 +161,7 @@ async function abrirModalEditarPartida(partidaId) {
         "alerta",
         msgErro || "Erro ao buscar dados da partida.",
       );
-      return;
+      return null;
     }
 
     const dados = await response.json();
@@ -164,20 +169,30 @@ async function abrirModalEditarPartida(partidaId) {
 
     if (!partida) {
       await notificacao("alerta", "Partida não encontrada.");
-      return;
+      return null;
     }
 
-    partidaIdEdicao = partidaId;
-    dataPartidaEditar.value = formatarData("input", partida.dt_partida);
-    adversarioPartidaEditar.value = partida.adversario;
-    qtdGolsPartidaEditar.innerText = partida.gols;
-    qtdAssistenciasPartidaEditar.innerText = partida.assistencias;
-
-    abrirModal("overlayEditarPartida");
+    return partida;
   } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Erro ao carregar partida.");
+    return null;
   }
+}
+
+async function abrirModalEditarPartida(partidaId) {
+  const partida = await buscarDadosPartida(partidaId);
+  if (!partida) {
+    return;
+  }
+
+  partidaIdEdicao = partidaId;
+  dataPartidaEditar.value = formatarData("input", partida.dt_partida);
+  adversarioPartidaEditar.value = partida.adversario;
+  qtdGolsPartidaEditar.innerText = partida.gols;
+  qtdAssistenciasPartidaEditar.innerText = partida.assistencias;
+
+  abrirModal("overlayEditarPartida");
 }
 
 async function editarPartida() {
@@ -234,5 +249,57 @@ async function editarPartida() {
   } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Erro ao atualizar partida.");
+  }
+}
+
+async function abrirModalDeletarPartida(partidaId) {
+  const partida = await buscarDadosPartida(partidaId);
+  if (!partida) {
+    return;
+  }
+
+  partidaIdExclusao = partidaId;
+
+  const textoGol = partida.gols === 1 ? "gol" : "gols";
+  const textoAssist =
+    partida.assistencias === 1 ? "assistência" : "assistências";
+
+  textoPartidaDeletar.innerText = `${partida.adversario} (${formatarData("default", partida.dt_partida)}) - ${partida.gols} ${textoGol} e ${partida.assistencias} ${textoAssist}?`;
+  textoTemporadaDeletar.innerText = `Os números deste jogo serão descontados de ${partida.nome}.`;
+
+  abrirModal("overlayDeletarPartida");
+}
+
+async function deletarPartida() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario || !temporadaId || !partidaIdExclusao) {
+    await notificacao("alerta", "Nenhuma partida selecionada para exclusão.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `/partidas/${idUsuario}/${temporadaId}/${partidaIdExclusao}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (response.ok) {
+      closeModal("overlayDeletarPartida");
+      partidaIdExclusao = null;
+      await notificacao("sucesso", "Partida excluída com sucesso.");
+      await atualizarDadosTelaPartidas();
+    } else {
+      const msgErro = await response.text();
+      await notificacao("alerta", msgErro || "Erro ao excluir partida.");
+    }
+  } catch (erro) {
+    console.log(erro);
+    await notificacao("alerta", "Erro ao excluir partida.");
   }
 }

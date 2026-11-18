@@ -475,7 +475,7 @@
           <span class="text-sublinhado"
             >Tem certeza que deseja excluir a partida contra</span
           >
-          <p class="text-partida">
+          <p class="text-partida" id="textoPartidaDeletar">
             Camisa 10 FC (15/10/2026) - 3 gols e 1 assistência?
           </p>
         </div>
@@ -483,7 +483,7 @@
           <span class="text-partida text-vermelho text-bold"
             >Atenção: esta ação não poderá ser desfeita.</span
           >
-          <p class="text-vermelho text-descricao">
+          <p class="text-vermelho text-descricao" id="textoTemporadaDeletar">
             Os números deste jogo serão descontados da Temporada 2026.
           </p>
         </div>
@@ -496,7 +496,9 @@
           >
             Cancelar
           </button>
-          <button class="btn-excluir">Sim, excluir partida</button>
+          <button onclick="deletarPartida()" class="btn-excluir">
+            Sim, excluir partida
+          </button>
         </div>
       </article>
     </div>

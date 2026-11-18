@@ -52,7 +52,7 @@ async function exibirDadosTabelaPartida() {
             Editar
           </button>
           <button
-            onclick="abrirModal('overlayDeletarPartida', ${partida.id})"
+            onclick="abrirModalDeletarPartida(${partida.id})"
             class="btn-acao-excluir"
           >
             Excluir
