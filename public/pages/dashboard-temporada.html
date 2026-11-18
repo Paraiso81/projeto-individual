@@ -68,7 +68,7 @@
 
         <div class="acoes-temporada">
           <button
-            onclick="abrirModal('overlayEditarTemporada')"
+            onclick="abrirModalEditarTemporada()"
             class="btn-editar-temporada"
           >
             Editar temporada
@@ -229,8 +229,16 @@
         <hr />
 
         <div class="footer-modal">
-          <button class="btn-cancelar">Cancelar</button>
-          <button class="btn-verde btn-criar-temporada">
+          <button
+            onclick="closeModal('overlayEditarTemporada')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button
+            onclick="editarTemporada()"
+            class="btn-verde btn-criar-temporada"
+          >
             Salvar alterações
           </button>
         </div>

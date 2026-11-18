@@ -99,3 +99,73 @@ async function buscarTemporada() {
     return [];
   }
 }
+
+async function abrirModalEditarTemporada() {
+  const dadosTemporada = await buscarTemporada();
+  const temporada = dadosTemporada[0];
+
+  if (!temporada) {
+    await notificacao("alerta", "Temporada não encontrada.");
+    return;
+  }
+
+  nomeTemporada.value = temporada.nome;
+  anoTemporada.value = temporada.ano;
+
+  abrirModal("overlayEditarTemporada");
+}
+
+async function editarTemporada() {
+  const usuarioId = sessionStorage.getItem("ID_USUARIO");
+  const nome = nomeTemporada.value.trim();
+  const ano = anoTemporada.value.trim();
+
+  if (!usuarioId || !temporadaId) {
+    await notificacao("alerta", "Não foi possível identificar a temporada.");
+    return;
+  }
+
+  if (nome.length < 8) {
+    await notificacao(
+      "alerta",
+      "O nome da temporada precisa ter pelo menos 8 caracteres.",
+    );
+    return;
+  }
+
+  if (!ano || ano.length !== 4) {
+    await notificacao("alerta", "Informe um ano válido (ex: 2026).");
+    return;
+  }
+
+  try {
+    const response = await fetch(`/temporadas/${usuarioId}/${temporadaId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: nome,
+        ano: ano,
+      }),
+    });
+
+    if (response.ok) {
+      closeModal("overlayEditarTemporada");
+      await notificacao("sucesso", "Temporada atualizada com sucesso.");
+
+      if (window.exibirDadosHeader) {
+        await window.exibirDadosHeader();
+      }
+      if (window.listarTemporadas) {
+        await window.listarTemporadas();
+      }
+    } else {
+      const msgErro = await response.text();
+      await notificacao("alerta", msgErro || "Erro ao atualizar temporada.");
+    }
+  } catch (erro) {
+    console.log(erro);
+    await notificacao("alerta", "Erro ao atualizar temporada.");
+  }
+}
