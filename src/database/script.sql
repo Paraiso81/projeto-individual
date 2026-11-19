@@ -39,3 +39,5 @@ CONSTRAINT ck_fk_temporada
 SELECT * FROM usuario;
 SELECT * FROM partida;
 SELECT * FROM temporada;
+
+-- mysqldump -u individual -h localhost -p
