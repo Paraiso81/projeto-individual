@@ -6,13 +6,24 @@ const imagens = [
 const imgCarrossel = document.getElementById("carrossel-img");
 
 function carrossel() {
-  let ultimoValor = imagens.pop();
+  if (imgCarrossel.classList.contains("saindo")) return;
 
-  let inserirPrimeiroValor = imagens.unshift(ultimoValor);
-  console.log(inserirPrimeiroValor, "inserir valor");
-  console.log(imagens[0], "primeiro valor");
-  console.log(imagens[0].src, "url");
-  imgCarrossel.src = imagens[0].src;
+  imgCarrossel.classList.add("saindo");
+
+  // https://developer.mozilla.org/pt-BR/docs/Web/API/EventTarget/addEventListener
+  // https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventListener
+  
+  imgCarrossel.addEventListener(
+    "animationend",
+    () => {
+      let ultimoValor = imagens.pop();
+      imagens.unshift(ultimoValor);
+
+      imgCarrossel.src = imagens[0].src;
+      imgCarrossel.classList.remove("saindo");
+    },
+    { once: true },
+  );
 }
 
 setInterval(() => {
