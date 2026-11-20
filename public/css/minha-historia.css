@@ -63,3 +63,19 @@
 .legenda {
   max-width: 100%;
 }
+
+.img-carrossel {
+  animation: img-animation 1s linear 0s 1 normal backwards;
+}
+
+@keyframes img-animation {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

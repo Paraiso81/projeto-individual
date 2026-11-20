@@ -40,4 +40,4 @@ SELECT * FROM usuario;
 SELECT * FROM partida;
 SELECT * FROM temporada;
 
--- mysqldump -u individual -h localhost -p
+-- mysqldump -u individual -h localhost -p script < "C:\Users\03ram\OneDrive - SPTech School\pesquisa-inovacao\projeto-individual\docs\dump_19112026.sql"
