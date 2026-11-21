@@ -14,7 +14,8 @@ if (userName) {
   userName.innerText = `${primeiroNome} ${ultimoNome}`.trim();
 }
 if (fotoPerfil) {
-  fotoPerfil.innerText = primeiroNome.charAt(0) + ultimoNome.charAt(0);
+  fotoPerfil.innerText =
+    primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
 }
 
 window.logout = async () => {
@@ -42,16 +43,21 @@ function renderizarSidebarTemporadas(temporadas) {
 
   if (temporadas && temporadas.length > 0) {
     qtdTemporada.innerText = `(${temporadas.length})`;
+    const limite = 15;
 
     for (let i = 0; i < temporadas.length; i++) {
       const temporada = temporadas[i];
       const qtdPartidas = temporada.partidas ? temporada.partidas.length : 0;
-
+      const nomeFormatado =
+        temporada.nome.length > limite
+          ? `${temporada.nome.substring(0, limite)}...`
+          : temporada.nome;
+      console.log(nomeFormatado, "nome formatado");
       if (Number(temporada.ano) === anoAtual) {
         listaTemporada.innerHTML += `
         <a href="./dashboard-temporada.html?id=${temporada.id}" id="temporada${temporada.id}" class="linha-temporada">
           <span class="dot dot-verde"></span>
-          <p class="text-nome-temporada">${temporada.nome}</p>
+          <p class="text-nome-temporada" title="${temporada.nome}">${nomeFormatado}</p>
           <span class="badge-ativa">Atual</span>
         </a>
         `;
