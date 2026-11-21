@@ -16,10 +16,21 @@ async function createTemporada(req, res) {
   if (nome.length < 8)
     return res.status(400).send("Nome de temporada muito curto.");
 
+  const temporadaComMesmoNome = await temporadaModel.consultarTemporada(
+    undefined,
+    nome,
+    undefined,
+    usuarioId,
+  );
+
+  if (temporadaComMesmoNome.length > 0)
+    return res.status(403).send("Você já possui uma temporada com esse nome.");
+
   const temporadaExiste = await temporadaModel.consultarTemporada(
     undefined,
     undefined,
     ano,
+    usuarioId,
   );
 
   if (temporadaExiste.length > 0)

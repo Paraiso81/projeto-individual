@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/previa.css" />
     <link rel="stylesheet" href="./css/chamada-final.css" />
     <link rel="stylesheet" href="./css/footer.css" />
+    <script src="./js/page/carrossel.js" defer></script>
     <title>Minha Temorada</title>
   </head>
   <body>
@@ -51,8 +52,12 @@
         </p>
 
         <div class="hero-container">
-          <button class="btn-comecar-temporada">Começar minha temporada</button>
-          <button class="btn-tenho-conta">Já tenho conta</button>
+          <a href="./pages/cadastro.html" class="btn-comecar-temporada"
+            >Começar minha temporada</a
+          >
+          <a href="./pages/login.html" class="btn-tenho-conta"
+            >Já tenho conta</a
+          >
         </div>
       </section>
       <section id="historia" class="section-historia">
@@ -96,6 +101,8 @@
 
         <article class="container-foto">
           <img
+          class="img-carrossel"
+            id="carrossel-img"
             src="./assets/campo-lavinia.webp"
             alt="Campo do Lavínia São Bernardo do Campo"
           />
@@ -338,8 +345,12 @@
           </div>
 
           <div class="container-btn">
-            <button class="btn-criar-chamada-final">Criar conta</button>
-            <button class="btn-entrar-chamada-final">Entrar</button>
+            <a href="./pages/cadastro.html" class="btn-criar-chamada-final"
+              >Criar conta</a
+            >
+            <a href="./pages/login.html" class="btn-entrar-chamada-final"
+              >Entrar</a
+            >
           </div>
         </div>
       </section>
@@ -350,16 +361,16 @@
       <nav class="navbar-container-link">
         <ul>
           <ol>
-            Inicio
+            <a href="#inicio"> Inicio </a>
           </ol>
           <ol>
-            Minha Historia
+            <a href="#historia"> Minha história </a>
           </ol>
           <ol>
-            Como funciona
+            <a href="#como-funciona"> Como funciona </a>
           </ol>
           <ol>
-            Indicadores
+            <a href="#previa"> Indicadores </a>
           </ol>
         </ul>
       </nav>
