@@ -25,7 +25,10 @@
     <script src="../js/dashboard/temporada/header-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/kpi-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/grafico-temporada.js" defer></script>
-    <script src="../js/dashboard/temporada/destaque-temporada.js" defer></script>
+    <script
+      src="../js/dashboard/temporada/destaque-temporada.js"
+      defer
+    ></script>
     <script src="../js/dashboard/temporada/tabela-partida.js" defer></script>
     <script src="../js/dashboard/components/modal.js" defer></script>
     <script src="../js/dashboard/components/sidebar.js" defer></script>
@@ -75,7 +78,7 @@
             Editar temporada
           </button>
           <button
-            onclick="abrirModal('overlayCriarPartida')"
+            onclick="abrirModalCriarPartida()"
             class="btn-verde btn-nova-temporada"
           >
             <i class="fa-solid fa-plus"></i>Cadastrar partida
@@ -260,7 +263,12 @@
         <hr />
         <div class="container-input">
           <label for="iptDataPartida">Data da partida *</label>
-          <input class="input input-date" id="iptDataPartida" type="date" />
+          <input
+            max=""
+            class="input input-date"
+            id="iptDataPartida"
+            type="date"
+          />
         </div>
         <div class="container-input">
           <label for="iptAdversarioPartida">Nome do adversário *</label>
@@ -400,9 +408,7 @@
               >
                 <i class="fa-solid fa-minus"></i>
               </button>
-              <span
-                id="qtdGolsPartidaEditar"
-                class="valor-contador valor-gols"
+              <span id="qtdGolsPartidaEditar" class="valor-contador valor-gols"
                 >0</span
               >
               <button

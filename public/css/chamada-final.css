@@ -37,10 +37,20 @@
 }
 
 .btn-criar-chamada-final {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--raio-botao);
   padding: 14px 24px;
   background: var(--cor-turf-green);
   color: var(--cor-branco);
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background var(--transicao-padrao),
+    transform var(--transicao-padrao),
+    box-shadow var(--transicao-padrao);
 }
 
 .btn-criar-chamada-final:hover {
@@ -50,10 +60,21 @@
 }
 
 .btn-entrar-chamada-final {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--raio-botao);
   padding: 14px 22px;
   border: 1px solid var(--cor-borda-clara);
   background-color: var(--cor-branco);
+  color: var(--cor-ink-black);
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background-color var(--transicao-padrao),
+    border-color var(--transicao-padrao),
+    transform var(--transicao-padrao);
 }
 
 .btn-entrar-chamada-final:hover {

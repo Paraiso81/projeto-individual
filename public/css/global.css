@@ -47,6 +47,7 @@
   --fs-grafico: 12px; /* Sublegendas de KPI e eixos */
 
   --raio-botao: 8px;
+  --raio-notificacao: 10px;
   --raio-card: 12px;
   --raio-painel: 16px;
 }

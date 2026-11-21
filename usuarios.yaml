@@ -36,12 +36,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.LOCAL_URL }}/usuarios/login"
+  - url: "{{ _.PROD_URL }}/usuarios/login"
     name: login
     meta:
       id: req_cc666461f9c142d6bddf30a3f121a2dc
       created: 1793408873760
-      modified: 1793408950466
+      modified: 1795109698761
       isPrivate: false
       description: POST /usuarios/login
       sortKey: -1793408873760
@@ -120,7 +120,8 @@ environments:
   meta:
     id: env_cc57a43c3c184054881a648ea50139f83d05d4e0
     created: 1793401719806
-    modified: 1793405982070
+    modified: 1795109689388
     isPrivate: false
   data:
     LOCAL_URL: http://localhost:3333
+    PROD_URL: http://localhost:8080

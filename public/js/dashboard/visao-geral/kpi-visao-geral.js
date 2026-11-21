@@ -66,10 +66,10 @@ function listarKpis(temporadas) {
       ? `+${totalAssistTempAtual} na temporada ${anoAtual}`
       : "Nenhuma assistência registrada";
   mediaGolsKpi.innerText =
-    mediaGols > 0 ? mediaGols.toFixed(2).replace(".", ",") : "0";
+    mediaGols > 0 ? mediaGols.toFixed(2) : "0";
   GAporJogo.innerText =
     mediaGA > 0
-      ? `Média G+A: ${mediaGA.toFixed(2).replace(".", ",")} por jogo`
+      ? `Média G+A: ${mediaGA.toFixed(2)} por jogo`
       : "Sem dados de GA";
 }
 

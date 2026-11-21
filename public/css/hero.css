@@ -38,10 +38,14 @@
 .hero-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 14px;
 }
 
 .btn-comecar-temporada {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--raio-botao);
   padding: 15px 26px;
   background-color: var(--cor-turf-green);
@@ -49,7 +53,11 @@
   font-style: normal;
   font-size: var(--fs-card);
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.2;
+  transition:
+    background-color var(--transicao-padrao),
+    transform var(--transicao-padrao),
+    box-shadow var(--transicao-padrao);
 }
 
 .btn-comecar-temporada:hover {
@@ -59,11 +67,21 @@
 }
 
 .btn-tenho-conta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--raio-botao);
   padding: 15px 24px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.06);
   color: var(--cor-branco);
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background var(--transicao-padrao),
+    border-color var(--transicao-padrao),
+    transform var(--transicao-padrao);
 }
 
 .btn-tenho-conta:hover {

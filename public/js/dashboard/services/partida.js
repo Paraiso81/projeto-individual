@@ -44,6 +44,16 @@ async function atualizarDadosTelaPartidas() {
   }
 }
 
+async function defaultValoresDate(inputId) {
+  const dadosTemporada = await buscarTemporada();
+
+  let dataMax = `${dadosTemporada[0].ano}-12-31`;
+  let dataMin = `${dadosTemporada[0].ano}-01-01`;
+
+  inputId.min = dataMin;
+  inputId.max = dataMax;
+}
+
 async function validarDadosPartida(
   dt_partida,
   adversario,
@@ -81,6 +91,11 @@ async function validarDadosPartida(
   }
 
   return true;
+}
+
+async function abrirModalCriarPartida() {
+  await defaultValoresDate(dataPartida);
+  abrirModal("overlayCriarPartida");
 }
 
 async function criarPartida() {
@@ -188,6 +203,8 @@ async function abrirModalEditarPartida(partidaId) {
   if (!partida) {
     return;
   }
+
+  await defaultValoresDate(dataPartidaEditar);
 
   partidaIdEdicao = partidaId;
   dataPartidaEditar.value = formatarData("input", partida.dt_partida);

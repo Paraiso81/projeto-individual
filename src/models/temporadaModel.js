@@ -8,7 +8,7 @@ function createTemporada(nome, ano, usuarioId) {
   return database.executar(sql, [nome, usuarioId, ano]);
 }
 
-function consultarTemporada(id, nome, ano) {
+function consultarTemporada(id, nome, ano, usuarioId) {
   const campos = [];
   const valores = [];
 
@@ -27,8 +27,12 @@ function consultarTemporada(id, nome, ano) {
     valores.push(ano);
   }
 
-  var sql = `SELECT id, nome, ano, fk_usuario FROM temporada WHERE ${campos.join(",")}`;
+  if (usuarioId !== undefined) {
+    campos.push("fk_usuario = ?");
+    valores.push(usuarioId);
+  }
 
+  var sql = `SELECT id, nome, ano, fk_usuario FROM temporada WHERE ${campos.join(" AND ")}`;
   return database.executar(sql, valores);
 }
 
@@ -112,8 +116,9 @@ async function atualizarTemporada(usuarioId, temporadaId, nome, ano) {
   campos.push("dt_atualizacao = ?");
   valores.push(dt_atualizacao);
   valores.push(temporadaId);
+  valores.push(usuarioId);
 
-  var sql = `UPDATE temporada SET ${campos.join(",")} WHERE id = ?`;
+  var sql = `UPDATE temporada SET ${campos.join(", ")} WHERE id = ? AND fk_usuario = ?`;
 
   const update = await database.executar(sql, valores);
 
