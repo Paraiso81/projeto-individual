@@ -15,6 +15,38 @@ function carregarDadosPerfil() {
   }
 }
 
+async function salvarAlteracoesPerfil() {
+  const nome = iptNome.value.trim();
+
+  msgNome.style.display = "none";
+  msgNome.innerText = "";
+
+  const nomeValidado = await validacaoNome(nome);
+  if (nomeValidado.status === false) {
+    msgNome.style.display = "block";
+    msgNome.innerText = nomeValidado.msg;
+    setTimeout(() => {
+      msgNome.style.display = "none";
+    }, 3000);
+    return;
+  }
+
+  const nomeAtual = (sessionStorage.getItem("NOME") || "").trim();
+  if (nome === nomeAtual) {
+    await notificacao("alerta", "Nenhuma alteração foi feita no nome.");
+    return;
+  }
+
+  const usuarioAtualizado = await atualizarUsuario({ nome: nome });
+
+  if (usuarioAtualizado) {
+    iptNome.value = usuarioAtualizado.nome;
+    if (window.atualizarUsuarioSidebar) {
+      window.atualizarUsuarioSidebar();
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   carregarDadosPerfil();
 });
