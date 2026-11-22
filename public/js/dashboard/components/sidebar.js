@@ -18,19 +18,6 @@ if (fotoPerfil) {
     primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
 }
 
-window.logout = async () => {
-  let msgLogout = "Saindo da conta.";
-  await notificacao("sucesso", msgLogout);
-
-  sessionStorage.removeItem("ID_USUARIO");
-  sessionStorage.removeItem("NOME");
-  sessionStorage.removeItem("EMAIL");
-
-  setTimeout(() => {
-    window.location.href = "../../index.html";
-  }, 3000);
-};
-
 function renderizarSidebarTemporadas(temporadas) {
   const listaTemporada = document.getElementById("listaTemporada");
   const qtdTemporada = document.getElementById("qtdTemporada");
