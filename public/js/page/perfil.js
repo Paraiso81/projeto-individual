@@ -47,6 +47,24 @@ async function salvarAlteracoesPerfil() {
   }
 }
 
+async function confirmarExclusaoConta() {
+  const btnConfirmar = document.getElementById("btnConfirmarExcluirConta");
+  if (btnConfirmar) {
+    btnConfirmar.disabled = true;
+  }
+
+  const excluido = await deletarUsuario();
+
+  if (excluido) {
+    closeModal("overlayDeletarConta");
+    setTimeout(() => {
+      window.location.href = "../index.html";
+    }, 3000);
+  } else if (btnConfirmar) {
+    btnConfirmar.disabled = false;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   carregarDadosPerfil();
 });
