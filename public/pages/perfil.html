@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/components/estadoVazio.css" />
     <link rel="stylesheet" href="../css/components/sidebar.css" />
     <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
+    <link rel="stylesheet" href="../css/components/modal.css" />
+    <link rel="stylesheet" href="../css/components/modalAlerta.css" />
     <link rel="stylesheet" href="../css/perfil.css" />
     <title>Meu perfil - Minha temporada</title>
 
@@ -19,6 +21,7 @@
     <script src="../js/notificacao.js" defer></script>
     <script src="../js/services/usuario.js" defer></script>
     <script src="../js/services/temporada.js" defer></script>
+    <script src="../js/dashboard/components/modal.js" defer></script>
     <script src="../js/dashboard/components/sidebar.js" defer></script>
   </head>
   <body>
@@ -150,11 +153,62 @@
             <p class="aviso-irreversivel">Esta ação não pode ser desfeita.</p>
           </div>
 
-          <button id="btnExcluirConta" class="btn-excluir-conta">
+          <button
+            id="btnExcluirConta"
+            onclick="abrirModal('overlayDeletarConta')"
+            class="btn-excluir-conta"
+          >
             Excluir minha conta
           </button>
         </section>
       </div>
     </main>
+
+    <div id="overlayDeletarConta" class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <span class="icon-alerta"
+            ><i class="fa-solid fa-triangle-exclamation"></i
+          ></span>
+          <button
+            onclick="closeModal('overlayDeletarConta')"
+            class="btn-close"
+          >
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <h2>Excluir conta?</h2>
+        <div>
+          <span class="text-sublinhado"
+            >Tem certeza que deseja excluir permanentemente a sua conta?</span
+          >
+          <p class="text-partida">
+            Você perderá o acesso ao painel e a todo o seu histórico.
+          </p>
+        </div>
+        <div class="contaner-aviso">
+          <span class="text-partida text-vermelho text-bold"
+            >Atenção: esta ação não poderá ser desfeita.</span
+          >
+          <p class="text-vermelho text-descricao">
+            Todas as suas temporadas e partidas registradas serão removidas
+            permanentemente.
+          </p>
+        </div>
+        <hr />
+
+        <div class="footer-modal">
+          <button
+            onclick="closeModal('overlayDeletarConta')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button id="btnConfirmarExcluirConta" class="btn-excluir">
+            Sim, excluir conta
+          </button>
+        </div>
+      </article>
+    </div>
   </body>
 </html>
