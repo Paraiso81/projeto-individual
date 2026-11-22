@@ -114,12 +114,21 @@ button:active {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--cor-branco);
   font-family: var(--fonte-titulos);
   font-size: var(--fs-marca);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.logo-icone {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .btn-verde {
