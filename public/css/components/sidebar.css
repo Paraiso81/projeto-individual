@@ -193,7 +193,30 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 0 -8px;
+  border: 1px solid transparent;
+  border-radius: var(--raio-botao);
   color: var(--cor-texto-claro-apoio);
+  transition:
+    background-color var(--transicao-padrao),
+    border-color var(--transicao-padrao);
+}
+
+.sidebar-footer:hover,
+.sidebar-footer-ativo {
+  background-color: rgba(30, 41, 59, 1);
+  border-color: var(--cor-texto-escuro);
+}
+
+.link-perfil {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 
 .foto-perfil {
@@ -205,6 +228,7 @@
   font-weight: 700;
   font-style: normal;
   line-height: normal;
+  flex-shrink: 0;
 }
 .nome-usuario {
   color: var(--cor-branco);
@@ -212,11 +236,16 @@
   font-weight: 700;
   font-style: normal;
   line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-logout {
   background-color: transparent;
   color: var(--cor-texto-apoio);
+  font-size: var(--fs-grafico);
+  flex-shrink: 0;
 }
 
 .btn-logout:hover {
