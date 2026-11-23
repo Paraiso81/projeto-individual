@@ -1,35 +1,25 @@
 const usuarioId = sessionStorage.getItem("ID_USUARIO");
 const userName = document.getElementById("userName");
 const fotoPerfil = document.getElementById("fotoPerfil");
-
-const sessionNome = sessionStorage.getItem("NOME") || "";
 const anoAtual = new Date().getFullYear();
 
-const nomeSobreNome = sessionNome.trim().split(" ");
-const primeiroNome = nomeSobreNome[0] || "";
-const ultimoNome =
-  nomeSobreNome.length > 1 ? nomeSobreNome[nomeSobreNome.length - 1] : "";
+function atualizarUsuarioSidebar() {
+  const sessionNome = sessionStorage.getItem("NOME") || "";
+  const nomeSobreNome = sessionNome.trim().split(" ");
+  const primeiroNome = nomeSobreNome[0] || "";
+  const ultimoNome =
+    nomeSobreNome.length > 1 ? nomeSobreNome[nomeSobreNome.length - 1] : "";
 
-if (userName) {
-  userName.innerText = `${primeiroNome} ${ultimoNome}`.trim();
+  if (userName) {
+    userName.innerText = `${primeiroNome} ${ultimoNome}`.trim();
+  }
+  if (fotoPerfil) {
+    fotoPerfil.innerText =
+      primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
+  }
 }
-if (fotoPerfil) {
-  fotoPerfil.innerText =
-    primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
-}
 
-window.logout = async () => {
-  let msgLogout = "Saindo da conta.";
-  await notificacao("sucesso", msgLogout);
-
-  sessionStorage.removeItem("ID_USUARIO");
-  sessionStorage.removeItem("NOME");
-  sessionStorage.removeItem("EMAIL");
-
-  setTimeout(() => {
-    window.location.href = "../../index.html";
-  }, 3000);
-};
+atualizarUsuarioSidebar();
 
 function renderizarSidebarTemporadas(temporadas) {
   const listaTemporada = document.getElementById("listaTemporada");
