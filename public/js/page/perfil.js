@@ -15,7 +15,7 @@ function carregarDadosPerfil() {
   }
 }
 
-async function salvarAlteracoesPerfil() {
+async function salvarAlteracoesPerfil(btn) {
   const nome = iptNome.value.trim();
 
   msgNome.style.display = "none";
@@ -37,6 +37,7 @@ async function salvarAlteracoesPerfil() {
     return;
   }
 
+  buttonLoading(btn, true);
   const usuarioAtualizado = await atualizarUsuario({ nome: nome });
 
   if (usuarioAtualizado) {
@@ -45,6 +46,8 @@ async function salvarAlteracoesPerfil() {
       window.atualizarUsuarioSidebar();
     }
   }
+
+  buttonLoading(btn, false);
 }
 
 async function confirmarExclusaoConta() {

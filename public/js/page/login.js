@@ -4,7 +4,7 @@ let erroEmail = document.getElementById("msgEmail");
 let erroSenha = document.getElementById("msgSenha");
 let erroLogin = document.getElementById("msgLogin");
 
-async function login() {
+async function login(btn) {
   let email = iptEmail.value;
   let senha = iptSenha.value;
 
@@ -32,6 +32,7 @@ async function login() {
     erroSenha.innerText = "Por favor, preencha o campo de senha.";
     return;
   }
+  buttonLoading(btn, true);
 
   const usuario = await loginUsuario(email, senha);
 
@@ -40,6 +41,7 @@ async function login() {
       window.location = "../../pages/dashboard-visao-geral.html";
     }, 3000);
   } else {
+    buttonLoading(btn, false);
     erroLogin.style.display = "block";
     erroLogin.innerText = "Email ou senha inválido";
     setTimeout(() => {
