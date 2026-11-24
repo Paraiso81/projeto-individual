@@ -24,6 +24,7 @@
     <script src="../js/services/usuario.js" defer></script>
     <script src="../js/services/temporada.js" defer></script>
     <script src="../js/services/partida.js" defer></script>
+    <script src="../js/dashboard/temporada/partida.js" defer></script>
     <script src="../js/dashboard/temporada/header-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/kpi-temporada.js" defer></script>
     <script src="../js/dashboard/temporada/grafico-temporada.js" defer></script>
@@ -361,7 +362,7 @@
           </button>
           <button
             class="btn-verde btn-criar-temporada"
-            onclick="criarPartida()"
+            onclick="salvarNovaPartida()"
           >
             Salvar partida
           </button>
@@ -474,7 +475,7 @@
             Cancelar
           </button>
           <button
-            onclick="editarPartida()"
+            onclick="salvarEdicaoPartida()"
             class="btn-verde btn-criar-temporada"
           >
             Salvar alterações
@@ -522,7 +523,7 @@
           >
             Cancelar
           </button>
-          <button onclick="deletarPartida()" class="btn-excluir">
+          <button onclick="confirmarExclusaoPartida()" class="btn-excluir">
             Sim, excluir partida
           </button>
         </div>
