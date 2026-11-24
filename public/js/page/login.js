@@ -39,7 +39,7 @@ async function login(btn) {
   if (usuario) {
     setTimeout(() => {
       window.location = "../../pages/dashboard-visao-geral.html";
-    }, 5000);
+    }, 3000);
   } else {
     buttonLoading(btn, false);
     erroLogin.style.display = "block";

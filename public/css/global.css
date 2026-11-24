@@ -225,6 +225,8 @@ hr {
   text-align: left;
 }
 
+/* https://cssloaders.github.io/#circle  */
+
 .loading {
   width: 16px;
   height: 16px;

@@ -14,6 +14,7 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="../js/loading.js" defer></script>
     <script src="../js/notificacao.js" defer></script>
     <script src="../js/validacao/nome.js" defer></script>
     <script src="../js/validacao/email.js" defer></script>
@@ -26,10 +27,33 @@
     <aside>
       <header>
         <h1 class="logo">
-          <svg class="logo-icone" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M11.5 3A8.5 8.5 0 0 1 3 11.5" stroke="#5ED39B" stroke-width="2" stroke-linecap="round"/>
-            <path d="M3 16.5V3H16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M17 12.2V17H12.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            class="logo-icone"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M11.5 3A8.5 8.5 0 0 1 3 11.5"
+              stroke="#5ED39B"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 16.5V3H16.5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M17 12.2V17H12.2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <span>Minha temporada</span>
         </h1>
@@ -102,7 +126,7 @@
 
         <div id="msgLogin" class="erroGeral"></div>
         <button
-          onclick="cadastrar()"
+          onclick="cadastrar(this)"
           id="btn-cadastrar"
           class="btn-verde btn-cadastrar"
         >

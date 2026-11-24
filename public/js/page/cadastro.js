@@ -10,7 +10,7 @@ let msgEmail = document.getElementById("msgEmail");
 let msgSenha = document.getElementById("msgSenha");
 let msgConfirmaSenha = document.getElementById("msgConfirmaSenha");
 
-async function cadastrar() {
+async function cadastrar(btn) {
   let nome = iptNome.value;
   let email = iptEmail.value;
   let senha = iptSenha.value;
@@ -64,11 +64,14 @@ async function cadastrar() {
     return;
   }
 
+  buttonLoading(btn, true);
   const sucesso = await cadastrarUsuario(nome, email, senha);
 
   if (sucesso) {
     setTimeout(() => {
       window.location.href = "login.html";
     }, 3000);
+  } else {
+    buttonLoading(btn, false);
   }
 }
