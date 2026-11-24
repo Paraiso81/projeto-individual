@@ -18,6 +18,8 @@
       src="https://kit.fontawesome.com/79924d81b1.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="../js/loading.js" defer></script>
     <script src="../js/notificacao.js" defer></script>
     <script src="../js/validacao/nome.js" defer></script>
     <script src="../js/services/usuario.js" defer></script>
@@ -139,7 +141,7 @@
             </p>
             <button
               id="btnSalvarPerfil"
-              onclick="salvarAlteracoesPerfil()"
+              onclick="salvarAlteracoesPerfil(this)"
               class="btn-verde btn-salvar-perfil"
             >
               Salvar alterações
@@ -176,10 +178,7 @@
           <span class="icon-alerta"
             ><i class="fa-solid fa-triangle-exclamation"></i
           ></span>
-          <button
-            onclick="closeModal('overlayDeletarConta')"
-            class="btn-close"
-          >
+          <button onclick="closeModal('overlayDeletarConta')" class="btn-close">
             <i class="fa-solid fa-xmark icon-close"></i>
           </button>
         </div>
