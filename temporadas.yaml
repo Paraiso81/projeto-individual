@@ -36,12 +36,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.LOCAL_URL }}/temporadas/usuario/3"
+  - url: "{{ _.LOCAL_URL }}/temporadas/usuario/2"
     name: consultarPorUsuario
     meta:
       id: req_44efadbd5bbd4918a09cb5feea50959f
       created: 1793461474445
-      modified: 1793461526919
+      modified: 1795372195258
       isPrivate: false
       description: GET /temporadas/usuario/<usuarioId>
       sortKey: -1793461474445

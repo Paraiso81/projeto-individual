@@ -4,7 +4,7 @@ let erroEmail = document.getElementById("msgEmail");
 let erroSenha = document.getElementById("msgSenha");
 let erroLogin = document.getElementById("msgLogin");
 
-async function login() {
+async function login(btn) {
   let email = iptEmail.value;
   let senha = iptSenha.value;
 
@@ -32,45 +32,20 @@ async function login() {
     erroSenha.innerText = "Por favor, preencha o campo de senha.";
     return;
   }
+  buttonLoading(btn, true);
 
-  await fetch("/usuarios/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      senha: senha,
-    }),
-  }).then(async function (response) {
-    console.log("Fiz o fetch");
-    if (response.ok) {
-      let msgSucesso = "Login efetuado com sucesso.";
-      console.log(response);
+  const usuario = await loginUsuario(email, senha);
 
-      response.json().then((json) => {
-        console.log(JSON.stringify(json));
-        sessionStorage.ID_USUARIO = json.id;
-        sessionStorage.NOME = json.nome;
-        sessionStorage.EMAIL = json.email;
-      });
-      await notificacao("sucesso", msgSucesso);
-      setTimeout(() => {
-        window.location = "../../pages/dashboard-visao-geral.html";
-      }, 3000);
-    } else {
-      let msgErro = "Erro ao fazer login.";
-      
-      console.log("Houve um erro ao tentar realizar o login!");
-      erroLogin.style.display = "block";
-      erroLogin.innerText = "Email ou senha inválido";
-      await notificacao("alerta", msgErro);
-      setTimeout(() => {
-        erroLogin.style.display = "none";
-      }, 5000);
-      response.text().then((texto) => {
-        console.error(texto);
-      });
-    }
-  });
+  if (usuario) {
+    setTimeout(() => {
+      window.location = "../../pages/dashboard-visao-geral.html";
+    }, 3000);
+  } else {
+    buttonLoading(btn, false);
+    erroLogin.style.display = "block";
+    erroLogin.innerText = "Email ou senha inválido";
+    setTimeout(() => {
+      erroLogin.style.display = "none";
+    }, 5000);
+  }
 }

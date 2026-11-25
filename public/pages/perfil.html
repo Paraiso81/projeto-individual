@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/components/notificacao.css" />
+    <link rel="stylesheet" href="../css/components/estadoVazio.css" />
+    <link rel="stylesheet" href="../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard-visao-geral.css" />
+    <link rel="stylesheet" href="../css/components/modal.css" />
+    <link rel="stylesheet" href="../css/components/modalAlerta.css" />
+    <link rel="stylesheet" href="../css/perfil.css" />
+    <title>Meu perfil - Minha temporada</title>
+
+    <script
+      src="https://kit.fontawesome.com/79924d81b1.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../js/loading.js" defer></script>
+    <script src="../js/notificacao.js" defer></script>
+    <script src="../js/validacao/nome.js" defer></script>
+    <script src="../js/services/usuario.js" defer></script>
+    <script src="../js/services/temporada.js" defer></script>
+    <script src="../js/dashboard/components/modal.js" defer></script>
+    <script src="../js/dashboard/components/sidebar.js" defer></script>
+    <script src="../js/page/perfil.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <header>
+        <h1 class="logo">
+          <svg
+            class="logo-icone"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M11.5 3A8.5 8.5 0 0 1 3 11.5"
+              stroke="#5ED39B"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 16.5V3H16.5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M17 12.2V17H12.2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>Minha temporada</span>
+        </h1>
+      </header>
+      <hr />
+      <p class="text-sidebar">PAINEL DO JOGADOR</p>
+      <a href="./dashboard-visao-geral.html" class="link-visao-geral"
+        >Visão geral</a
+      >
+
+      <p class="text-sidebar">
+        MINHAS TEMPORADAS <span id="qtdTemporada"></span>
+      </p>
+      <div id="listaTemporada" class="container-temporada"></div>
+
+      <footer class="sidebar-footer sidebar-footer-ativo">
+        <a href="./perfil.html" class="link-perfil">
+          <div id="fotoPerfil" class="foto-perfil"></div>
+          <h2 id="userName" class="nome-usuario"></h2>
+        </a>
+        <button onclick="logout()" class="btn-logout">Sair</button>
+      </footer>
+    </aside>
+
+    <main class="dashboard">
+      <div id="notificacao"></div>
+      <header class="header-dashboard">
+        <div class="titulo-pagina">
+          <span class="kicker">MINHA CONTA • DADOS PESSOAIS</span>
+          <h1>Meu perfil</h1>
+        </div>
+      </header>
+
+      <div class="conteudo-dashboard conteudo-perfil">
+        <section class="card-perfil">
+          <div class="card-perfil-body">
+            <div class="header-card-perfil">
+              <h2 class="titulo-card-perfil">Dados do perfil</h2>
+              <p class="descricao-card-perfil">
+                Mantenha seu nome de perfil atualizado.
+              </p>
+            </div>
+
+            <div class="linha-campos-perfil">
+              <div class="container-input">
+                <label for="iptNome">Nome</label>
+                <input
+                  class="input"
+                  type="text"
+                  id="iptNome"
+                  placeholder="Como você quer ser chamado"
+                />
+                <p class="apoio-campo">
+                  É assim que seu nome aparece na plataforma.
+                </p>
+                <div id="msgNome" class="msgErro"></div>
+              </div>
+
+              <div class="container-input">
+                <div class="label-campo-topo">
+                  <label for="iptEmail">E-mail</label>
+                  <span class="rotulo-somente-leitura">Somente leitura</span>
+                </div>
+                <input
+                  class="input input-somente-leitura"
+                  type="email"
+                  id="iptEmail"
+                  readonly
+                />
+                <p class="apoio-campo">
+                  O e-mail vinculado à sua conta não pode ser alterado aqui.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-card-perfil">
+            <p class="apoio-campo">
+              As alterações serão aplicadas ao seu perfil.
+            </p>
+            <button
+              id="btnSalvarPerfil"
+              onclick="salvarAlteracoesPerfil(this)"
+              class="btn-verde btn-salvar-perfil"
+            >
+              Salvar alterações
+            </button>
+          </div>
+        </section>
+
+        <section class="card-perfil card-excluir-conta">
+          <div class="info-excluir-conta">
+            <h2 class="titulo-card-perfil titulo-excluir-conta">
+              Excluir conta
+            </h2>
+            <p class="descricao-excluir-conta">
+              Ao excluir sua conta, todas as suas temporadas e partidas serão
+              removidas permanentemente.
+            </p>
+            <p class="aviso-irreversivel">Esta ação não pode ser desfeita.</p>
+          </div>
+
+          <button
+            id="btnExcluirConta"
+            onclick="abrirModal('overlayDeletarConta')"
+            class="btn-excluir-conta"
+          >
+            Excluir minha conta
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <div id="overlayDeletarConta" class="overlay">
+      <article class="modal">
+        <div class="modal-header">
+          <span class="icon-alerta"
+            ><i class="fa-solid fa-triangle-exclamation"></i
+          ></span>
+          <button onclick="closeModal('overlayDeletarConta')" class="btn-close">
+            <i class="fa-solid fa-xmark icon-close"></i>
+          </button>
+        </div>
+        <h2>Excluir conta?</h2>
+        <div>
+          <span class="text-sublinhado"
+            >Tem certeza que deseja excluir permanentemente a sua conta?</span
+          >
+          <p class="text-partida">
+            Você perderá o acesso ao painel e a todo o seu histórico.
+          </p>
+        </div>
+        <div class="contaner-aviso">
+          <span class="text-partida text-vermelho text-bold"
+            >Atenção: esta ação não poderá ser desfeita.</span
+          >
+          <p class="text-vermelho text-descricao">
+            Todas as suas temporadas e partidas registradas serão removidas
+            permanentemente.
+          </p>
+        </div>
+        <hr />
+
+        <div class="footer-modal">
+          <button
+            onclick="closeModal('overlayDeletarConta')"
+            class="btn-cancelar"
+          >
+            Cancelar
+          </button>
+          <button
+            id="btnConfirmarExcluirConta"
+            onclick="confirmarExclusaoConta()"
+            class="btn-excluir"
+          >
+            Sim, excluir conta
+          </button>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>

@@ -113,13 +113,28 @@ button:active {
   transform: scale(0.98);
 }
 
+button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--cor-branco);
   font-family: var(--fonte-titulos);
   font-size: var(--fs-marca);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.logo-icone {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .btn-verde {
@@ -208,4 +223,27 @@ hr {
   border-radius: var(--raio-botao, 8px);
   line-height: 1.4;
   text-align: left;
+}
+
+/* https://cssloaders.github.io/#circle  */
+
+.loading {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--cor-branco);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  animation: rotation 0.8s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

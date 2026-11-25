@@ -47,6 +47,10 @@ async function atualizarDadosTelaPartidas() {
 async function defaultValoresDate(inputId) {
   const dadosTemporada = await buscarTemporada();
 
+  if (!dadosTemporada || !dadosTemporada[0]) {
+    return;
+  }
+
   let dataMax = `${dadosTemporada[0].ano}-12-31`;
   let dataMin = `${dadosTemporada[0].ano}-01-01`;
 
@@ -98,7 +102,7 @@ async function abrirModalCriarPartida() {
   abrirModal("overlayCriarPartida");
 }
 
-async function criarPartida() {
+async function salvarNovaPartida() {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
   const dt_partida = dataPartida.value;
   const adversario = adversarioPartida.value;
@@ -118,88 +122,34 @@ async function criarPartida() {
     return;
   }
 
-  try {
-    const response = await fetch("/partidas/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        usuarioId: idUsuario,
-        temporadaId: temporadaId,
-        dt_partida: dt_partida,
-        adversario: adversario,
-        gols: gols,
-        assistencias: assistencias,
-      }),
-    });
+  const criada = await cadastrarPartida(
+    temporadaId,
+    dt_partida,
+    adversario,
+    gols,
+    assistencias,
+  );
 
-    if (response.ok) {
-      closeModal("overlayCriarPartida");
-      await notificacao("sucesso", "Partida criada com sucesso.");
+  if (criada) {
+    closeModal("overlayCriarPartida");
+    dataPartida.value = "";
+    adversarioPartida.value = "";
+    qtdGolsPartida.innerText = "0";
+    qtdAssistenciasPartida.innerText = "0";
 
-      dataPartida.value = "";
-      adversarioPartida.value = "";
-      qtdGolsPartida.innerText = "0";
-      qtdAssistenciasPartida.innerText = "0";
-
-      await atualizarDadosTelaPartidas();
-    } else {
-      const msgErro = await response.text();
-      await notificacao("alerta", msgErro || "Erro ao criar partida.");
-    }
-  } catch (erro) {
-    console.log(erro);
-    await notificacao("alerta", "Erro ao criar partida.");
-  }
-}
-
-async function buscarDadosPartida(partidaId) {
-  const idUsuario = sessionStorage.getItem("ID_USUARIO");
-
-  if (!idUsuario || !temporadaId || !partidaId) {
-    await notificacao("alerta", "Não foi possível identificar a partida.");
-    return null;
-  }
-
-  try {
-    const response = await fetch(
-      `/partidas/${idUsuario}/${temporadaId}/${partidaId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
-    if (!response.ok) {
-      const msgErro = await response.text();
-      await notificacao(
-        "alerta",
-        msgErro || "Erro ao buscar dados da partida.",
-      );
-      return null;
-    }
-
-    const dados = await response.json();
-    const partida = dados[0];
-
-    if (!partida) {
-      await notificacao("alerta", "Partida não encontrada.");
-      return null;
-    }
-
-    return partida;
-  } catch (erro) {
-    console.log(erro);
-    await notificacao("alerta", "Erro ao carregar partida.");
-    return null;
+    await atualizarDadosTelaPartidas();
   }
 }
 
 async function abrirModalEditarPartida(partidaId) {
-  const partida = await buscarDadosPartida(partidaId);
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario || !temporadaId || !partidaId) {
+    await notificacao("alerta", "Não foi possível identificar a partida.");
+    return;
+  }
+
+  const partida = await buscarPartida(temporadaId, partidaId);
   if (!partida) {
     return;
   }
@@ -215,7 +165,7 @@ async function abrirModalEditarPartida(partidaId) {
   abrirModal("overlayEditarPartida");
 }
 
-async function editarPartida() {
+async function salvarEdicaoPartida() {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
   const dt_partida = dataPartidaEditar.value;
   const adversario = adversarioPartidaEditar.value;
@@ -240,40 +190,33 @@ async function editarPartida() {
     return;
   }
 
-  try {
-    const response = await fetch(
-      `/partidas/${idUsuario}/${temporadaId}/${partidaIdEdicao}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          dt_partida: dt_partida,
-          adversario: adversario,
-          gols: gols,
-          assistencias: assistencias,
-        }),
-      },
-    );
+  const partidaAtualizada = await atualizarPartida(
+    temporadaId,
+    partidaIdEdicao,
+    {
+      dt_partida: dt_partida,
+      adversario: adversario,
+      gols: gols,
+      assistencias: assistencias,
+    },
+  );
 
-    if (response.ok) {
-      closeModal("overlayEditarPartida");
-      partidaIdEdicao = null;
-      await notificacao("sucesso", "Partida atualizada com sucesso.");
-      await atualizarDadosTelaPartidas();
-    } else {
-      const msgErro = await response.text();
-      await notificacao("alerta", msgErro || "Erro ao atualizar partida.");
-    }
-  } catch (erro) {
-    console.log(erro);
-    await notificacao("alerta", "Erro ao atualizar partida.");
+  if (partidaAtualizada) {
+    closeModal("overlayEditarPartida");
+    partidaIdEdicao = null;
+    await atualizarDadosTelaPartidas();
   }
 }
 
 async function abrirModalDeletarPartida(partidaId) {
-  const partida = await buscarDadosPartida(partidaId);
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario || !temporadaId || !partidaId) {
+    await notificacao("alerta", "Não foi possível identificar a partida.");
+    return;
+  }
+
+  const partida = await buscarPartida(temporadaId, partidaId);
   if (!partida) {
     return;
   }
@@ -290,7 +233,7 @@ async function abrirModalDeletarPartida(partidaId) {
   abrirModal("overlayDeletarPartida");
 }
 
-async function deletarPartida() {
+async function confirmarExclusaoPartida() {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
   if (!idUsuario || !temporadaId || !partidaIdExclusao) {
@@ -298,28 +241,11 @@ async function deletarPartida() {
     return;
   }
 
-  try {
-    const response = await fetch(
-      `/partidas/${idUsuario}/${temporadaId}/${partidaIdExclusao}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+  const excluida = await deletarPartida(temporadaId, partidaIdExclusao);
 
-    if (response.ok) {
-      closeModal("overlayDeletarPartida");
-      partidaIdExclusao = null;
-      await notificacao("sucesso", "Partida excluída com sucesso.");
-      await atualizarDadosTelaPartidas();
-    } else {
-      const msgErro = await response.text();
-      await notificacao("alerta", msgErro || "Erro ao excluir partida.");
-    }
-  } catch (erro) {
-    console.log(erro);
-    await notificacao("alerta", "Erro ao excluir partida.");
+  if (excluida) {
+    closeModal("overlayDeletarPartida");
+    partidaIdExclusao = null;
+    await atualizarDadosTelaPartidas();
   }
 }

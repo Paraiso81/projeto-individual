@@ -1,35 +1,25 @@
 const usuarioId = sessionStorage.getItem("ID_USUARIO");
 const userName = document.getElementById("userName");
 const fotoPerfil = document.getElementById("fotoPerfil");
-
-const sessionNome = sessionStorage.getItem("NOME") || "";
 const anoAtual = new Date().getFullYear();
 
-const nomeSobreNome = sessionNome.trim().split(" ");
-const primeiroNome = nomeSobreNome[0] || "";
-const ultimoNome =
-  nomeSobreNome.length > 1 ? nomeSobreNome[nomeSobreNome.length - 1] : "";
+function atualizarUsuarioSidebar() {
+  const sessionNome = sessionStorage.getItem("NOME") || "";
+  const nomeSobreNome = sessionNome.trim().split(" ");
+  const primeiroNome = nomeSobreNome[0] || "";
+  const ultimoNome =
+    nomeSobreNome.length > 1 ? nomeSobreNome[nomeSobreNome.length - 1] : "";
 
-if (userName) {
-  userName.innerText = `${primeiroNome} ${ultimoNome}`.trim();
+  if (userName) {
+    userName.innerText = `${primeiroNome} ${ultimoNome}`.trim();
+  }
+  if (fotoPerfil) {
+    fotoPerfil.innerText =
+      primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
+  }
 }
-if (fotoPerfil) {
-  fotoPerfil.innerText =
-    primeiroNome.charAt(0).toUpperCase() + ultimoNome.charAt(0).toUpperCase();
-}
 
-window.logout = async () => {
-  let msgLogout = "Saindo da conta.";
-  await notificacao("sucesso", msgLogout);
-
-  sessionStorage.removeItem("ID_USUARIO");
-  sessionStorage.removeItem("NOME");
-  sessionStorage.removeItem("EMAIL");
-
-  setTimeout(() => {
-    window.location.href = "../../index.html";
-  }, 3000);
-};
+atualizarUsuarioSidebar();
 
 function renderizarSidebarTemporadas(temporadas) {
   const listaTemporada = document.getElementById("listaTemporada");
@@ -50,6 +40,7 @@ function renderizarSidebarTemporadas(temporadas) {
       const qtdPartidas = temporada.partidas ? temporada.partidas.length : 0;
       const nomeFormatado =
         temporada.nome.length > limite
+        
           ? `${temporada.nome.substring(0, limite)}...`
           : temporada.nome;
       console.log(nomeFormatado, "nome formatado");
@@ -65,7 +56,7 @@ function renderizarSidebarTemporadas(temporadas) {
         listaTemporada.innerHTML += `
         <a href="./dashboard-temporada.html?id=${temporada.id}" id="temporada${temporada.id}" class="linha-temporada">
           <span class="dot dot-azul"></span>
-          <p class="text-nome-temporada">${temporada.nome}</p>
+          <p class="text-nome-temporada" title="${temporada.nome}">${nomeFormatado}</p>
           <span class="text-sidebar">${qtdPartidas} jg</span>
         </a>
         `;

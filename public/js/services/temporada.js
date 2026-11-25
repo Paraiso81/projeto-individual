@@ -1,10 +1,10 @@
-const nomeTemporada = document.getElementById("iptNomeTemporada");
-const anoTemporada = document.getElementById("iptAnoTemporada");
-
-async function criarTemporada() {
+async function cadastrarTemporada(nome, ano) {
   const idUsuario = sessionStorage.getItem("ID_USUARIO");
-  const nome = nomeTemporada.value;
-  const ano = anoTemporada.value;
+
+  if (!idUsuario) {
+    await notificacao("alerta", "Não foi possível identificar o usuário.");
+    return false;
+  }
 
   try {
     const response = await fetch("/temporadas/", {
@@ -21,20 +21,16 @@ async function criarTemporada() {
 
     if (response.ok) {
       await notificacao("sucesso", "Temporada criada com sucesso.");
-      closeModal("overlayCriarTemporada");
-
-      if (window.atualizarDashboardVisaoGeral) {
-        await window.atualizarDashboardVisaoGeral();
-      } else if (window.listarTemporadas) {
-        await window.listarTemporadas();
-      }
+      return true;
     } else {
       const msgErro = await response.text();
       await notificacao("alerta", msgErro || "Erro ao criar temporada.");
+      return false;
     }
   } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Erro ao criar temporada.");
+    return false;
   }
 }
 
@@ -66,20 +62,18 @@ async function buscarTodasTemporadas() {
   }
 }
 
-// https://developer.mozilla.org/pt-BR/docs/Web/API/URLSearchParams
-
-const params = new URLSearchParams(window.location.search);
-const temporadaId = params.get("id");
-
-async function buscarTemporada() {
+async function buscarTemporada(id) {
   const usuarioId = sessionStorage.getItem("ID_USUARIO");
+  const idTemporada =
+    id || new URLSearchParams(window.location.search).get("id");
 
-  if (temporadaId === undefined || temporadaId === null) {
-    return notificacao("alerta", "Erro ao identificar temporada.");
+  if (!usuarioId || !idTemporada) {
+    await notificacao("alerta", "Erro ao identificar temporada.");
+    return [];
   }
 
   try {
-    const response = await fetch(`/temporadas/${usuarioId}/${temporadaId}`, {
+    const response = await fetch(`/temporadas/${usuarioId}/${idTemporada}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +85,6 @@ async function buscarTemporada() {
     }
 
     const data = await response.json();
-    console.log(data);
     return data || [];
   } catch (erro) {
     console.log(erro);
@@ -100,42 +93,12 @@ async function buscarTemporada() {
   }
 }
 
-async function abrirModalEditarTemporada() {
-  const dadosTemporada = await buscarTemporada();
-  const temporada = dadosTemporada[0];
-
-  if (!temporada) {
-    await notificacao("alerta", "Temporada não encontrada.");
-    return;
-  }
-
-  nomeTemporada.value = temporada.nome;
-  anoTemporada.value = temporada.ano;
-
-  abrirModal("overlayEditarTemporada");
-}
-
-async function editarTemporada() {
+async function atualizarTemporada(temporadaId, dados) {
   const usuarioId = sessionStorage.getItem("ID_USUARIO");
-  const nome = nomeTemporada.value.trim();
-  const ano = anoTemporada.value.trim();
 
   if (!usuarioId || !temporadaId) {
     await notificacao("alerta", "Não foi possível identificar a temporada.");
-    return;
-  }
-
-  if (nome.length < 8) {
-    await notificacao(
-      "alerta",
-      "O nome da temporada precisa ter pelo menos 8 caracteres.",
-    );
-    return;
-  }
-
-  if (!ano || ano.length !== 4) {
-    await notificacao("alerta", "Informe um ano válido (ex: 2026).");
-    return;
+    return null;
   }
 
   try {
@@ -144,28 +107,21 @@ async function editarTemporada() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        nome: nome,
-        ano: ano,
-      }),
+      body: JSON.stringify(dados),
     });
 
     if (response.ok) {
-      closeModal("overlayEditarTemporada");
+      const data = await response.json();
       await notificacao("sucesso", "Temporada atualizada com sucesso.");
-
-      if (window.exibirDadosHeader) {
-        await window.exibirDadosHeader();
-      }
-      if (window.listarTemporadas) {
-        await window.listarTemporadas();
-      }
+      return data;
     } else {
       const msgErro = await response.text();
       await notificacao("alerta", msgErro || "Erro ao atualizar temporada.");
+      return null;
     }
   } catch (erro) {
     console.log(erro);
     await notificacao("alerta", "Erro ao atualizar temporada.");
+    return null;
   }
 }

@@ -10,7 +10,7 @@ let msgEmail = document.getElementById("msgEmail");
 let msgSenha = document.getElementById("msgSenha");
 let msgConfirmaSenha = document.getElementById("msgConfirmaSenha");
 
-async function cadastrar() {
+async function cadastrar(btn) {
   let nome = iptNome.value;
   let email = iptEmail.value;
   let senha = iptSenha.value;
@@ -55,7 +55,7 @@ async function cadastrar() {
     confirmarSenhaValidada.status == false
   ) {
     setTimeout(() => {
-      console.log()
+      console.log();
       msgNome.style.display = "none";
       msgEmail.style.display = "none";
       msgSenha.style.display = "none";
@@ -64,29 +64,14 @@ async function cadastrar() {
     return;
   }
 
-  await fetch("/usuarios/cadastrar", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      nome: nome,
-      email: email,
-      senha: senha,
-    }),
-  })
-    .then(function (response) {
-      console.log(response);
-      if (response.ok) {
-        console.log("Criamos a conta pae.");
-        notificacao("sucesso", "Conta criada com sucesso.");
-        setTimeout(() => {
-          window.location.href = "login.html";
-        }, 3000);
-      }
-    })
-    .catch(function (erro) {
-      console.log(erro);
-      notificacao("alerta", "Erro ao criar a conta.");
-    });
+  buttonLoading(btn, true);
+  const sucesso = await cadastrarUsuario(nome, email, senha);
+
+  if (sucesso) {
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 3000);
+  } else {
+    buttonLoading(btn, false);
+  }
 }
