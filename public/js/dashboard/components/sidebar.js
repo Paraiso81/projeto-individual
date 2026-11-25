@@ -34,13 +34,13 @@ function renderizarSidebarTemporadas(temporadas) {
   if (temporadas && temporadas.length > 0) {
     qtdTemporada.innerText = `(${temporadas.length})`;
     const limite = 15;
-
-    for (let i = 0; i < temporadas.length; i++) {
-      const temporada = temporadas[i];
+    const temporadaOrdenada = temporadas.sort((a, b) => b.ano - a.ano);
+    console.log(temporadaOrdenada, "ordenação")
+    for (let i = 0; i < temporadaOrdenada.length; i++) {
+      const temporada = temporadaOrdenada[i];
       const qtdPartidas = temporada.partidas ? temporada.partidas.length : 0;
       const nomeFormatado =
         temporada.nome.length > limite
-        
           ? `${temporada.nome.substring(0, limite)}...`
           : temporada.nome;
       console.log(nomeFormatado, "nome formatado");
